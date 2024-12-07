@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: 'Seagram';
+    src: url('/fonts/Seagram tfb.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  body {
+    font-family: 'Seagram', sans-serif;
+  }
+
+  #preloader .progress-bar {
+    width: 200px;
+    height: 2px;
+  }
+  
+  #preloader .progress {
+    transition: width 0.3s ease-out;
+  }
