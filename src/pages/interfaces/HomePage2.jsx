@@ -22,7 +22,7 @@ const HomePage2 = () => {
     let loadedCount = 0;
 
     for (let i = 1; i <= frames.maxIndex; i++) {
-        const imageUrl = `/src/assets/frames1/frame_${i.toString().padStart(4, '0')}.png`;
+        const imageUrl = `/src/assets/frames1_jpeg/frame_${i.toString().padStart(4, '0')}.png`;
         const img = new Image();
       img.src = imageUrl;
 
