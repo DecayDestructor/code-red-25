@@ -10,7 +10,7 @@ const HomePage2 = () => {
   const [imagesLoaded, setImagesLoaded] = useState(0);
   const [frames, setFrames] = useState({
     currentIndex: 0,
-    maxIndex: 253,
+    maxIndex: 240,
   });
   const [preloaderVisible, setPreloaderVisible] = useState(true);
   const canvasRef = useRef(null);
@@ -22,7 +22,7 @@ const HomePage2 = () => {
     let loadedCount = 0;
 
     for (let i = 1; i <= frames.maxIndex; i++) {
-        const imageUrl = `/src/assets/hui/frame_${i.toString().padStart(4, '0')}.jpeg`;
+        const imageUrl = `/src/assets/frames1/frame_${i.toString().padStart(4, '0')}.png`;
         const img = new Image();
       img.src = imageUrl;
 

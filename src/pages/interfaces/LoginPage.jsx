@@ -1,14 +1,59 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';  // Import useNavigate
 
-const LoginPage = () => {
+const SignupPage = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
+    
+    const navigate = useNavigate();  // Initialize useNavigate
 
-    const handleLogin = (e) => {
+    const handleSignup = (e) => {
         e.preventDefault();
-        // Add login logic here
-        console.log('Login attempted', { username, password });
+        setError('');
+        setSuccess('');
+
+        // Validate input
+        if (!username.trim()) {
+            setError('Username is required');
+            return;
+        }
+
+        if (password.length < 6) {
+            setError('Password must be at least 6 characters long');
+            return;
+        }
+
+        // Check if user already exists
+        const existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
+        const userExists = existingUsers.some(user => user.username === username);
+
+        if (userExists) {
+            setError('Username already exists');
+            return;
+        }
+
+        // Save new user
+        const newUser = { username, password };
+        const updatedUsers = [...existingUsers, newUser];
+
+        try {
+            localStorage.setItem('users', JSON.stringify(updatedUsers));
+            setSuccess('User successfully registered!');
+
+            // Clear form
+            setUsername('');
+            setPassword('');
+
+            // Redirect to the layout page after successful signup
+            navigate('/layout');  // Adjust the path based on your routing setup
+
+        } catch (err) {
+            setError('Failed to save user. Please try again.');
+            console.error('Signup error:', err);
+        }
     };
 
     return (
@@ -16,21 +61,33 @@ const LoginPage = () => {
             <img
                 src="/src/assets/interfaces/Login Background.jpg"
                 alt="Background"
-                className='object-cover w-full h-full'
+                className='object-cover w-full h-full absolute z-0'
             />
-            <div className='w-[450px] h-[550px] bottom-16 absolute flex justify-center items-center rounded-3xl bg-slate-[#232B3E] bg-opacity-5 backdrop-filter backdrop-blur-[5px] border-[1px]'>
+            <div className='w-[450px] h-[550px] bottom-16 absolute z-10 flex justify-center items-center rounded-3xl bg-slate-[#232B3E] bg-opacity-5 backdrop-filter backdrop-blur-[5px] border-[1px]'>
                 <div className='border-b-[1px] top-0 absolute w-full h-20 flex items-center justify-center text-3xl text-white tracking-widest'>
-                    Login
+                    Signup
                 </div>
                 <form 
-                    onSubmit={handleLogin} 
+                    onSubmit={handleSignup} 
                     className='flex items-center justify-center flex-col p-6 w-[21rem]'
                 >
+                    {/* Error/Success Messages */}
+                    {error && (
+                        <div className='w-full text-red-500 text-center mb-4'>
+                            {error}
+                        </div>
+                    )}
+                    {success && (
+                        <div className='w-full text-green-500 text-center mb-4'>
+                            {success}
+                        </div>
+                    )}
+
                     {/* Username input with icon */}
                     <div className='w-full flex items-center relative mb-16'>
                         <input
                             type="text"
-                            placeholder="Enter Your Username"
+                            placeholder="Choose Your Username"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
                             required
@@ -48,7 +105,7 @@ const LoginPage = () => {
                     <div className='w-full flex items-center relative mb-8'>
                         <input
                             type={showPassword ? "text" : "password"}
-                            placeholder="Enter Your Password"
+                            placeholder="Create Your Password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
@@ -70,12 +127,12 @@ const LoginPage = () => {
                         </div>
                     </div>
 
-                    {/* Login Button */}
+                    {/* Signup Button */}
                     <button 
                         type="submit"
                         className='w-52 h-16 mt-8 top-8 relative flex justify-center items-center rounded-xl text-3xl bg-black text-white bg-opacity-55 backdrop-filter backdrop-blur-[3px] border-[1px] hover:bg-opacity-75 transition-all duration-300'
                     >
-                        Submit
+                        Signup
                     </button>
                 </form>
             </div>
@@ -83,4 +140,4 @@ const LoginPage = () => {
     );
 };
 
-export default LoginPage;
+export default SignupPage;
