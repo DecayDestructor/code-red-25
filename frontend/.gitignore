@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+src\assets\framesWithAd_png
+src\assets\framesWithoutAd_png
