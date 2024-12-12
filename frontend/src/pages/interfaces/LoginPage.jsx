@@ -48,7 +48,7 @@ const SignupPage = () => {
             setPassword('');
 
             // Redirect to the layout page after successful signup
-            navigate('/layout');  // Adjust the path based on your routing setup
+            navigate('/testlevel');  // Adjust the path based on your routing setup
 
         } catch (err) {
             setError('Failed to save user. Please try again.');
@@ -59,7 +59,7 @@ const SignupPage = () => {
     return (
         <div className='flex justify-center items-center h-screen relative'>
             <img
-                src="/src/assets/interfaces/Login Background.jpg"
+                src="/src/assets/interfaces/LoginPage Background.jpg"
                 alt="Background"
                 className='object-cover w-full h-full absolute z-0'
             />

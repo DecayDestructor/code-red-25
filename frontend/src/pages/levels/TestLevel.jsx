@@ -1,5 +1,5 @@
 import React from 'react';
-import LayoutPage from './LayoutPage';
+import LayoutPage from '../interfaces/LayoutPage';
 
 const TestLevel = () => {
     return (
