@@ -25,3 +25,4 @@ dist-ssr
 
 src\assets\framesWithAd_png
 src\assets\framesWithoutAd_png
+.env
