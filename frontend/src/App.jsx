@@ -11,7 +11,7 @@ import LoginPage from './pages/interfaces/LoginPage';
 import Level_1 from './pages/levels/Level_1';
 // import Backstory_Level_1A from './pages/backstory/Backstory_Level_1A';
 // import Dialogues_Level_1A from './pages/dialogues/Dialogues_Level_1A';
-// import Level_1A from './pages/levels/Level_1A';
+import Level_1A from './pages/levels/Level_1A';
 // import Level_2 from './pages/levels/Level_2';
 // import Backstory_Level_3 from './pages/backstory/Backstory_Level_3';
 // import Level_3 from './pages/levels/Level_3';
@@ -46,9 +46,9 @@ const App = () => {
         <Route path="/backstory_level_1_3" element={<Backstory_Level_1_3 />} /> */}
         <Route path="/level_1" element={<Level_1 />} />
         {/* <Route path="/backstory_level_1A" element={<Backstory_Level_1A />} />
-        <Route path="/dialogues_level_1A" element={<Dialogues_Level_1A />} />
+        <Route path="/dialogues_level_1A" element={<Dialogues_Level_1A />} /> */}
         <Route path="/level_1A" element={<Level_1A />} />
-        <Route path="/level_2" element={<Level_2 />} />
+        {/* <Route path="/level_2" element={<Level_2 />} />
         <Route path="/backstory_level_3" element={<Backstory_Level_3 />} />
         <Route path="/level_3" element={<Level_3 />} />
         <Route path="/backstory_level_4" element={<Backstory_Level_4 />} />
@@ -67,6 +67,7 @@ const App = () => {
         <Route path="/level_7_1A" element={<Level_7_1A />} />
         <Route path="/level_7_1B" element={<Level_7_1B />} />
         <Route path="/level_7_3" element={<Level_7_3 />} />
+        <Route path="/level_7_4" element={<Level_7_4 />} /> */}
         <Route path="/level_7_4" element={<Level_7_4 />} /> */}
       </Routes>
     </Router>
