@@ -68,7 +68,7 @@ const App = () => {
         <Route path="/level_7_1B" element={<Level_7_1B />} />
         <Route path="/level_7_3" element={<Level_7_3 />} />
         <Route path="/level_7_4" element={<Level_7_4 />} /> */}
-        <Route path="/level_7_4" element={<Level_7_4 />} /> */}
+        {/* <Route path="/level_7_4" element={<Level_7_4 />} />  */}
       </Routes>
     </Router>
   )
