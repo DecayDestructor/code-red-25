@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import LayoutPage from '../interfaces/LayoutPage';
 
 const CombinedComponent = () => {
     const [isTypingComplete, setIsTypingComplete] = useState(false);
@@ -7,7 +8,7 @@ const CombinedComponent = () => {
     const [userInput, setUserInput] = useState("");
     const [resultMessage, setResultMessage] = useState("");
 
-    const typingSpeed = 4;
+    const typingSpeed = 40;
     const correctTranslation = "COLOSSALAS";
 
     // Typewriter effect for backstory text
@@ -55,6 +56,7 @@ const CombinedComponent = () => {
                 alt="Background"
                 className="object-cover w-full h-full absolute z-0"
             />
+            <LayoutPage />
 
             {!isNextClicked ? (
                 // Typewriter effect section

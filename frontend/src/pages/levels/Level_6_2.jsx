@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import LayoutPage from '../interfaces/LayoutPage';
 
 const BackstoryLevelComponent = () => {
     const [isTypingComplete, setIsTypingComplete] = useState(false);
@@ -76,6 +77,7 @@ const BackstoryLevelComponent = () => {
                 alt="Background"
                 className="object-cover w-full h-full absolute z-0"
             />
+            <LayoutPage />
 
             {!isNextClicked ? (
                 // Typewriter effect section

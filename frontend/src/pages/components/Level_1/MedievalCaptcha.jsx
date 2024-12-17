@@ -5,13 +5,13 @@ import { useTimer } from 'react-timer-hook';
 const MedievalCaptcha = () => {
   // Define medieval equipment categories with specific keywords
   const equipmentCategories = [
-    { 
-      name: 'Defensive Equipment', 
+    {
+      name: 'Defensive Equipment',
       keywords: ['medieval shield', 'knight armor', 'medieval helmet'],
       description: 'Identify medieval defensive gear used by warriors'
     },
-    { 
-      name: 'Weapons', 
+    {
+      name: 'Weapons',
       keywords: ['medieval sword', 'battle axe', 'medieval spear'],
       description: 'Select authentic medieval combat weapons'
     },
@@ -25,7 +25,7 @@ const MedievalCaptcha = () => {
 
   // Keywords for non-medieval images to create confusion
   const wrongKeywords = [
-    'bottle', 'bicycle', 'water', 'beach', 'ball', 
+    'bottle', 'bicycle', 'water', 'beach', 'ball',
     'mountain', 'tree', 'road', 'sky', 'car'
   ];
 
@@ -43,9 +43,9 @@ const MedievalCaptcha = () => {
   // Timer setup for the 20-second challenge
   const time = new Date();
   time.setSeconds(time.getSeconds() + 20);
-  const { seconds, pause } = useTimer({ 
-    expiryTimestamp: time, 
-    onExpire: () => setCaptchaStatus('Not solved in 20') 
+  const { seconds, pause } = useTimer({
+    expiryTimestamp: time,
+    onExpire: () => setCaptchaStatus('Not solved in 20')
   });
 
   // Fetch images from Pexels for a specific keyword
@@ -103,7 +103,7 @@ const MedievalCaptcha = () => {
             index: index + 1,
             isCorrect: true
           };
-        } 
+        }
         // Incorrect indices get random everyday object images
         else {
           const wrongKeyword = wrongKeywords[Math.floor(Math.random() * wrongKeywords.length)];
@@ -125,7 +125,7 @@ const MedievalCaptcha = () => {
     const newSelectedImages = selectedImages.includes(image.index)
       ? selectedImages.filter(idx => idx !== image.index)
       : [...selectedImages, image.index];
-    
+
     setSelectedImages(newSelectedImages);
   };
 
@@ -133,12 +133,12 @@ const MedievalCaptcha = () => {
   const verifyCaptcha = () => {
     // Check if selected images match correct indexes
     const isCorrect = selectedImages.sort().join(',') === correctIndexes.sort().join(',');
-    
+
     if (isCorrect) {
       // Calculate time taken
       const remainingTime = seconds;
       const timeDiff = 20 - remainingTime;
-      
+
       // Pause the timer
       pause();
 
@@ -166,12 +166,18 @@ const MedievalCaptcha = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4 bg-[url('medieval-background.jpg')]">
-      <div className="bg-stone-200 p-6 rounded-xl shadow-2xl border-4 border-stone-400 max-w-md w-full">
+    <div className="flex justify-center items-center flex-col h-screen relative">
+      {/* Background Image */}
+      <img
+        src="src/assets/levels/Level_1A.png"
+        alt="Background"
+        className="object-cover w-full h-full absolute z-0"
+      />
+      <div className="relative bg-stone-200 p-6 rounded-xl shadow-2xl border-4 border-stone-400 max-w-md w-full">
         <h2 className="text-2xl font-bold text-center mb-4 text-stone-800">
           Medieval Warrior Challenge
         </h2>
-        
+
         {selectedCategory && (
           <div className="text-center mb-4">
             <p className="text-lg font-semibold text-stone-700">
@@ -185,19 +191,19 @@ const MedievalCaptcha = () => {
 
         <div className="grid grid-cols-3 gap-4 mb-4">
           {images.map((image) => (
-            <div 
-              key={image.index} 
+            <div
+              key={image.index}
               onClick={() => handleImageSelect(image)}
               className={`
                 border-4 cursor-pointer transition-all duration-300
-                ${selectedImages.includes(image.index) 
-                  ? 'border-green-500' 
+                ${selectedImages.includes(image.index)
+                  ? 'border-green-500'
                   : 'border-stone-300 hover:border-stone-500'}
               `}
             >
-              <img 
-                src={image.url} 
-                alt={`Image ${image.index}`} 
+              <img
+                src={image.url}
+                alt={`Image ${image.index}`}
                 className="w-full h-32 object-cover"
               />
             </div>
@@ -205,13 +211,13 @@ const MedievalCaptcha = () => {
         </div>
 
         <div className="flex justify-center space-x-4">
-          <button 
+          <button
             onClick={verifyCaptcha}
             className="bg-stone-700 text-white px-6 py-2 rounded hover:bg-stone-900 transition"
           >
             Verify Selection
           </button>
-          <button 
+          <button
             onClick={initializeCaptcha}
             className="bg-stone-500 text-white px-6 py-2 rounded hover:bg-stone-600 transition"
           >
@@ -222,10 +228,9 @@ const MedievalCaptcha = () => {
         {captchaStatus && (
           <div className={`
             mt-4 text-center font-bold p-2 rounded
-            ${
-              captchaStatus.includes('Solved') 
-                ? 'bg-green-200 text-green-800' 
-                : 'bg-red-200 text-red-800'
+            ${captchaStatus.includes('Solved')
+              ? 'bg-green-200 text-green-800'
+              : 'bg-red-200 text-red-800'
             }
           `}>
             {captchaStatus}

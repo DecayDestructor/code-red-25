@@ -5,10 +5,8 @@ import MedievalCaptcha from '../components/Level_1/MedievalCaptcha';
 const Level1 = () => {
     return (
         <div>
-            {/* <LayoutPage> */}
-                <MedievalCaptcha />
-            {/* </LayoutPage> */}
-
+            <LayoutPage />
+            <MedievalCaptcha />
         </div>
     );
 }
