@@ -20,7 +20,7 @@ import Backstory_Level_4 from './pages/backstory/Backstory_Level_4';
 // import Dialogues_Level_4A from './pages/dialogues/Dialogues_Level_4A'; // Soham Bhosale
 import Level_4A from './pages/levels/Level_4A';
 import Backstory_Level_5A from './pages/backstory/Backstory_Level_5A';
-// import Level_5_1 from './pages/levels/Level_5_1'; // Soham Bhosale
+import Level_5_1 from './pages/levels/Level_5_1';
 import Backstory_Level_5B from './pages/backstory/Backstory_Level_5B';
 // import Options_Level_5B from './pages/options/Options_Level_5B'; // Koi toh karlo
 // import Level_5_2A from './pages/levels/Level_5_2A'; // Tattva Jain
@@ -56,7 +56,7 @@ const App = () => {
         {/* <Route path="/dialogues_level_4A" element={<Dialogues_Level_4A />} /> */}
         <Route path="/level_4A" element={<Level_4A />} />
         <Route path="/backstory_level_5A" element={<Backstory_Level_5A />} />
-        {/* <Route path="/level_5_1" element={<Level_5_1 />} /> */}
+        <Route path="/level_5_1" element={<Level_5_1 />} />
         <Route path="/backstory_level_5B" element={<Backstory_Level_5B />} />
         {/* <Route path="/options_level_5B" element={<Options_Level_5B />} /> */}
         {/* <Route path="/level_5_2A" element={<Level_5_2A />} /> */}
