@@ -8,7 +8,7 @@ const Backstory_1 = () => {
 
     // Replace all newline characters with spaces
     const sourceText = `  The last of titans fall prey to the rays of sunlight. Just a step before the land of demons lies the final stronghold. But Gavin’s army just cannot outmatch the sheer strength of the final army (As Malakaroth calls it). To defeat them one enters a room that has a detonator to destroy the fortress. or take help from Raven; Raven is the descendant of elitos army who were slained by Malakaroth after he failed to capture the city of Azgardos. Raven is now the sole survivor of elitos. You can also approach Raven to burn the whole stronghold using special fuel crafted by elitos army when they burned the villages protected by the gods to the ground.`;
-    const typingSpeed = 4;
+    const typingSpeed = 3;
 
     useEffect(() => {
         let index = 0;

@@ -10,7 +10,7 @@ const CombinedComponent = () => {
     const [resultMessage, setResultMessage] = useState("");
 
     const navigate = useNavigate(); // Initialize navigate
-    const typingSpeed = 4;
+    const typingSpeed = 3;
     const correctTranslation = "ICHORFONIAS";
 
     // Typewriter effect for backstory text

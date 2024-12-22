@@ -10,7 +10,7 @@ const Level7_1 = () => {
     const [isCorrect, setIsCorrect] = useState(false);
 
     const sourceText = `  Gavin stood before the locked box, heart pounding. Inside lay Ichorfonias, the heart of Malakaroth's power-an invention born of pride, cruelty, and dark magic. Created by an ex-servant of Hephaestus, it was a living testament to obsession, a machine so intricate it held the very soul of its maker. Destroying it wasn't just ending a creation—it was crushing Malakaroth's reign and stripping him of his most deadly weapon. The key to his downfall lay within this box. The puzzle was maddening, but Gavin's determination burned brighter. He had to act quickly—solve the riddle, break the lock, and destroy Ichorfonias before it was too late. The moment that lock clicked open, victory would be his, and the tyrant's reign would end. Ichorfonias's op code read– To find the slope, a path you tread, By my rule, the curve is read. One mark, one change, the tale's creation—`;
-    const typingSpeed = 20;
+    const typingSpeed = 3;
 
     const navigate = useNavigate();
 

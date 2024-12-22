@@ -10,7 +10,7 @@ const CombinedComponent = () => {
     const [resultMessage, setResultMessage] = useState("");
     const navigate = useNavigate();
 
-    const typingSpeed = 40;
+    const typingSpeed = 3;
     const correctTranslation = "BETRAYAL";
 
     // Typewriter effect for backstory text

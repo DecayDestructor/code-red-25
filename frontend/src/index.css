@@ -3,21 +3,28 @@
 @tailwind utilities;
 
 @font-face {
-    font-family: 'Seagram';
-    src: url('/src/assets/fonts/Seagram tfb.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-  }
+  font-family: 'Seagram';
+  src: url('/src/assets/fonts/Seagram tfb.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 
-  body {
-    font-family: 'Seagram', sans-serif;
-  }
+@font-face {
+  font-family: 'MedievalSharp';
+  src: url('/src/assets/fonts/MedievalSharp-Book.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 
-  #preloader .progress-bar {
-    width: 200px;
-    height: 2px;
-  }
-  
-  #preloader .progress {
-    transition: width 0.3s ease-out;
-  }
+body {
+  font-family: 'MedievalSharp', sans-serif;
+}
+
+#preloader .progress-bar {
+  width: 200px;
+  height: 2px;
+}
+
+#preloader .progress {
+  transition: width 0.3s ease-out;
+}

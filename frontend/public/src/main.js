@@ -18,11 +18,13 @@ async function main() {
   k.scene("final-exit", () => {
     setBackgroundColor(k, "#20214a");
     k.add(
-      makeNotificationBox(
-        k,
-        "You escaped the factory!\n The End. Thanks for playing!"
-      )
+      makeNotificationBox(k, "Press Enter to proceed.")
     );
+
+    k.onKeyPress("enter", () => {
+      // Redirect to the backstory page
+      window.location.href = "./backstory_level_5b";
+    });
   });
 }
 
@@ -35,7 +37,6 @@ k.scene("intro", () => {
     )
   );
   k.onKeyPress("enter", () => {
-    // makes audio will be enabled before the game starts
     const context = new AudioContext();
     context.resume();
     k.go("room1", { exitName: null });

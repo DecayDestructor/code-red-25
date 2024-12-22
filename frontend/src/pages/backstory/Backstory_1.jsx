@@ -8,7 +8,7 @@ const Backstory_1 = () => {
 
     // Replace all newline characters with spaces
     const sourceText = `  A battlefield is staged between the army of Demons and the gods. Malakaroth has set up an ambush that the gods are not aware about; something that the best of the martial texts haven't ever documented as there have been no survivors to this strategy. Gods fall prey to hordes of demon attacking them; as if a hurricane of scythes slashing through the battlefield. Last of the gods die with only few demigods.`;
-    const typingSpeed = 40;
+    const typingSpeed = 3;
 
     useEffect(() => {
         let index = 0;

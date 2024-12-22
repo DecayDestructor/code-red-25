@@ -8,7 +8,7 @@ const CombinedComponent = () => {
     const [userInput, setUserInput] = useState("");
     const [resultMessage, setResultMessage] = useState("");
 
-    const typingSpeed = 40;
+    const typingSpeed = 3;
     const correctTranslation = "COLOSSALAS";
 
     // Typewriter effect for backstory text

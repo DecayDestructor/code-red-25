@@ -8,7 +8,7 @@ const Backstory_2 = () => {
 
     // Replace all newline characters with spaces
     const sourceText = `  Gavin is the prince of a bloodline whose descendants are the last of the gods. In the past 500 years, ever since the demons won against the gods in the War of Azgardos, Gavin’s predecessors (demigods) have always tried to ambush one of the major demon strongholds across the entire continent of Kravaros; the Argzak fort, which initially used to be the Palace of the Gods. Each time his predecessors tried to invade Argzak and defeat the Demon Lord Malakaroth (one of the two strongest demons to ever exist), they were utterly defeated and killed. 5 centuries of efforts later, Gavin is the next in line and the one to invade Argzak now. He has already given birth to an infant who also carries the blood of gods. This way, Gavin can fight fearlessly knowing that the gods’ blood is still preserved if he dies. Demigods are stronger than humans and similarly, Gavin is strongest in his army of the Alfred Clan and the one to fight Malakaroth once they invade fort Argzak.`;
-    const typingSpeed = 40;
+    const typingSpeed = 3;
 
     useEffect(() => {
         let index = 0;

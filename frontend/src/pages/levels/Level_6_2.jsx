@@ -10,7 +10,7 @@ const BackstoryLevelComponent = () => {
     const [resultMessage, setResultMessage] = useState("");
     const navigate = useNavigate();
 
-    const typingSpeed = 4;
+    const typingSpeed = 3;
     const correctTranslations = ["ssd", "secondary storage", "hard drive"];
 
     // First text passage

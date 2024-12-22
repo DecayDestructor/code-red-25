@@ -18,7 +18,7 @@ const Backstory_Level_1_3 = () => {
     If not, then there will be a blood shower...`;
 
     const [currentPassage, setCurrentPassage] = useState(firstPassage);
-    const typingSpeed = 40;
+    const typingSpeed = 3;
 
     useEffect(() => {
         setText("");

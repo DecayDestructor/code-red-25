@@ -10,11 +10,11 @@ const Level_2 = () => {
     const [resultMessage, setResultMessage] = useState("");
 
     const navigate = useNavigate(); // Initialize navigate
-    const typingSpeed = 40;
+    const typingSpeed = 3;
     const correctTranslations = ["sgz", "tki", "378"];
 
     // Typewriter effect for backstory text
-    const sourceText = `  The reverse world has always been the place where gods dispose of some of the most horrid creatures known to have stepped in this universe. They get teleported to the reverse world of Azgardos in catacombs which is very far from Arthur’s grave. There resides a map secretly protected by a serpent. The map is protected by the descendants of the underworld. Time runs unpredictably fast in the reverse world; so this time DON’T BE SLOW.`;
+    const sourceText = `  Then once Gavin is teleported to the Catacombs of Ehmest, he finds a seal on Arthur’s grave. The seal hold the characters #&* . Valek tells Gavin that he remembers seeing such a seal where weird characters are engraved on a board and mapped to regular human language letters as their keys. `;
 
     useEffect(() => {
         let index = 0;

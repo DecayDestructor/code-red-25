@@ -10,7 +10,7 @@ const Level_1A = () => {
     const [resultMessage, setResultMessage] = useState("");
 
     const navigate = useNavigate(); // Initialize navigate
-    const typingSpeed = 40;
+    const typingSpeed = 3;
     const correctTranslation = "KBGSLM";
 
     // Typewriter effect for backstory text
