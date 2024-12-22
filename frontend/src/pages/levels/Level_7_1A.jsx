@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import LayoutPage from '../interfaces/LayoutPage';
 
 const CombinedComponent = () => {
@@ -8,6 +9,7 @@ const CombinedComponent = () => {
     const [userInput, setUserInput] = useState("");
     const [resultMessage, setResultMessage] = useState("");
 
+    const navigate = useNavigate(); // Initialize navigate
     const typingSpeed = 4;
     const correctTranslation = "ICHORFONIAS";
 
@@ -35,7 +37,7 @@ const CombinedComponent = () => {
         if (userInput.trim().toUpperCase() === correctTranslation) {
             setResultMessage("Correct! Well done!");
             setTimeout(() => {
-                window.location.href = "/level_7_1b";
+                navigate("/level_7_1b");
             }, 1500);
         } else {
             setResultMessage("Incorrect. Try again!");

@@ -43,7 +43,7 @@ const Backstory_1 = () => {
                 </h1>
                 {isTypingComplete && (
                     <button
-                        onClick={() => navigate("/level_5_1")}
+                        onClick={() => navigate("/options_level_5b")}
                         className="absolute bottom-[-4rem] right-0 px-6 py-3 bg-white bg-opacity-50 text-2xl tracking-wide rounded-lg hover:bg-opacity-80 transition-transform transform hover:scale-105"
                     >
                         Next

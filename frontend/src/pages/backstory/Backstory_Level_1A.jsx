@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Backstory_Level_1_2 = () => {
+const Backstory_Level_1A = () => {
     const [text, setText] = useState("");
     const [isTypingComplete, setIsTypingComplete] = useState(false);
     const navigate = useNavigate();
@@ -54,4 +54,4 @@ const Backstory_Level_1_2 = () => {
     );
 };
 
-export default Backstory_Level_1_2;
+export default Backstory_Level_1A;

@@ -15,7 +15,7 @@ const Backstory_Level_1_3 = () => {
     If you try to catch me,
     You'll never last.
     Only 20th second of your life has power
-    If not, then there will be a blood show...`;
+    If not, then there will be a blood shower...`;
 
     const [currentPassage, setCurrentPassage] = useState(firstPassage);
     const typingSpeed = 40;
@@ -53,7 +53,7 @@ const Backstory_Level_1_3 = () => {
         <div className="flex justify-center items-center flex-col h-screen relative">
             {/* Background Image */}
             <img
-                src="src/assets/backstory/Backstory.png"
+                src="src/assets/backstory/Backstory_Level_1_3.png"
                 alt="Background"
                 className="object-cover w-full h-full absolute z-0"
             />

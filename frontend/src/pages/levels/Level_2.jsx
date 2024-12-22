@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import LayoutPage from '../interfaces/LayoutPage';
 
-const CombinedComponent = () => {
+const Level_2 = () => {
     const [isTypingComplete, setIsTypingComplete] = useState(false);
     const [isNextClicked, setIsNextClicked] = useState(false);
     const [text, setText] = useState("");
     const [userInput, setUserInput] = useState("");
     const [resultMessage, setResultMessage] = useState("");
 
+    const navigate = useNavigate(); // Initialize navigate
     const typingSpeed = 40;
     const correctTranslations = ["sgz", "tki", "378"];
 
@@ -36,7 +38,7 @@ const CombinedComponent = () => {
         if (correctTranslations.includes(userInput.trim().toLowerCase())) {
             setResultMessage("Correct! Well done!");
             setTimeout(() => {
-                window.location.href = "/backstory_level_3";
+                navigate("/backstory_level_3");
             }, 1500);
         } else {
             setResultMessage("Incorrect. Try again!");
@@ -104,4 +106,4 @@ const CombinedComponent = () => {
     );
 };
 
-export default CombinedComponent;
+export default Level_2;
