@@ -54,7 +54,7 @@ const CombinedComponent = () => {
         <div className="flex justify-center items-center flex-col h-screen relative">
             {/* Background Image */}
             <img
-                src="src/assets/levels/Level_1A.png"
+                src="src/assets/levels/Level_7_1A.png"
                 alt="Background"
                 className="object-cover w-full h-full absolute z-0"
             />

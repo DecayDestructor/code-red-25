@@ -6,7 +6,6 @@ import Common from '../Common'
 const HomePage = lazy(() => import('./pages/interfaces/HomePage'))
 const LoginPage = lazy(() => import('./pages/interfaces/LoginPage'))
 const Backstory_1 = lazy(() => import('./pages/backstory/Backstory_1'))
-const Backstory_2 = lazy(() => import('./pages/backstory/Backstory_2'))
 const Backstory_Level_1_1 = lazy(() =>
   import('./pages/backstory/Backstory_Level_1_1')
 )
@@ -62,7 +61,6 @@ const App = () => {
           <Route index element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/backstory_1" element={<Backstory_1 />} />
-          <Route path="/backstory_2" element={<Backstory_2 />} />
           <Route
             path="/backstory_level_1_1"
             element={<Backstory_Level_1_1 />}

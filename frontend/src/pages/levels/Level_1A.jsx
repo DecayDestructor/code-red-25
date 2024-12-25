@@ -11,7 +11,7 @@ const Level_1A = () => {
 
     const navigate = useNavigate(); // Initialize navigate
     const typingSpeed = 3;
-    const correctTranslation = "KBGSLM";
+    const correctTranslation = "KBGSLM RH HOLD";
 
     // Typewriter effect for backstory text
     const sourceText = `  To calm the creature down, one has to use a language unknown to many. A chatbox appears to talk to the creature.`;

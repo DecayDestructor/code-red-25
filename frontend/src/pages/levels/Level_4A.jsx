@@ -14,7 +14,11 @@ const CombinedComponent = () => {
     const correctTranslation = "BETRAYAL";
 
     // Typewriter effect for backstory text
-    const sourceText = `  -... . - .-. .- -.-- .- .-..`;
+    const sourceText = `  Symbols that dance, a rhythmic beat,
+Hermes’ whispers, swift and fleet.
+A code of light, a tapping sound,
+Messages sent where none are around.
+`;
 
     useEffect(() => {
         let index = 0;
@@ -54,7 +58,7 @@ const CombinedComponent = () => {
         <div className="flex justify-center items-center flex-col h-screen relative">
             {/* Background Image */}
             <img
-                src="src/assets/levels/Level_1A.png"
+                src="src/assets/levels/Level_4A.png"
                 alt="Background"
                 className="object-cover w-full h-full absolute z-0"
             />
@@ -63,7 +67,7 @@ const CombinedComponent = () => {
             {!isNextClicked ? (
                 // Typewriter effect section
                 <div className="relative bg-white bg-opacity-50 p-6 rounded-lg max-w-3xl z-10">
-                    <h1 className="text-2xl tracking-wide">
+                    <h1 className="text-2xl tracking-wide whitespace-pre-line text-center">
                         {text}
                         {!isTypingComplete && <span className="animate-pulse">|</span>}
                     </h1>

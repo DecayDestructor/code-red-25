@@ -73,7 +73,7 @@ const BackstoryLevelComponent = () => {
         <div className="flex justify-center items-center flex-col h-screen relative">
             {/* Background Image */}
             <img
-                src="src/assets/backstory/Backstory.png"
+                src="src/assets/levels/level_6_2.png"
                 alt="Background"
                 className="object-cover w-full h-full absolute z-0"
             />
