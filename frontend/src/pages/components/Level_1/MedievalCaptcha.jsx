@@ -6,15 +6,16 @@ const MedievalCaptcha = () => {
   // Define medieval equipment categories with specific keywords
   const equipmentCategories = [
     {
-      name: 'Defensive Equipment',
-      keywords: ['medieval shield', 'knight armor', 'medieval helmet'],
-      description: 'Identify medieval defensive gear used by warriors'
+      "name": "Defensive Equipment",
+      "keywords": ["medieval shield",'visor', "medieval helmet", "chainmail", "greaves", "Battle Ready"],
+      "description": "Identify medieval defensive gear used by warriors"
     },
     {
-      name: 'Weapons',
-      keywords: ['medieval sword', 'battle axe', 'medieval spear'],
-      description: 'Select authentic medieval combat weapons'
-    },
+      "name": "Weapons",
+      "keywords": ["katana", "battle axe", "armor design", "hammer","blade","dagger","roman battle" ],
+      "description": "Select authentic medieval combat weapons"
+    }
+    
     // Add more if you like Mantri and Urunkar
     // { 
     //   name: 'Battle Implements', 
@@ -86,39 +87,49 @@ const MedievalCaptcha = () => {
     // Generate unique indexes for correct images
     const correctIdxs = [];
     while (correctIdxs.length < count) {
-      const idx = Math.floor(Math.random() * 9) + 1;
-      if (!correctIdxs.includes(idx)) correctIdxs.push(idx);
+        const idx = Math.floor(Math.random() * 9) + 1;
+        if (!correctIdxs.includes(idx)) correctIdxs.push(idx);
     }
+    console.log(correctIdxs);
     setCorrectIndexes(correctIdxs);
+
+    // Keep track of used keyword indices to avoid repetition
+    const usedKeywordIndices = new Set();
 
     // Fetch images for all grid positions
     const finalImages = await Promise.all(
-      Array(9).fill().map(async (_, index) => {
-        // Correct indices get medieval category images
-        if (correctIdxs.includes(index + 1)) {
-          const medievalKeyword = category.keywords[Math.floor(Math.random() * category.keywords.length)];
-          const medievalImages = await fetchPexelsImages(medievalKeyword);
-          return {
-            url: medievalImages[0]?.src.medium || '',
-            index: index + 1,
-            isCorrect: true
-          };
-        }
-        // Incorrect indices get random everyday object images
-        else {
-          const wrongKeyword = wrongKeywords[Math.floor(Math.random() * wrongKeywords.length)];
-          const wrongImages = await fetchPexelsImages(wrongKeyword);
-          return {
-            url: wrongImages[0]?.src.medium || '',
-            index: index + 1,
-            isCorrect: false
-          };
-        }
-      })
+        Array(9).fill().map(async (_, index) => {
+            if (correctIdxs.includes(index + 1)) {
+                // Find a unique medieval keyword
+                let rand;
+                do {
+                    rand = Math.floor(Math.random() * category.keywords.length);
+                } while (usedKeywordIndices.has(rand));
+                usedKeywordIndices.add(rand);
+
+                const medievalKeyword = category.keywords[rand];
+                const medievalImages = await fetchPexelsImages(medievalKeyword);
+                console.log("Checking", index + 1, medievalKeyword, rand);
+                return {
+                    url: medievalImages[0]?.src.medium || '',
+                    index: index + 1,
+                    isCorrect: true
+                };
+            } else {
+                const wrongKeyword = wrongKeywords[Math.floor(Math.random() * wrongKeywords.length)];
+                const wrongImages = await fetchPexelsImages(wrongKeyword);
+                return {
+                    url: wrongImages[Math.floor(Math.random() * wrongImages.length)]?.src.medium || '',
+                    index: index + 1,
+                    isCorrect: false
+                };
+            }
+        })
     );
 
     setImages(finalImages);
-  };
+};
+
 
   // Handle image selection in the grid
   const handleImageSelect = (image) => {
@@ -147,11 +158,11 @@ const MedievalCaptcha = () => {
       if (remainingTime > 0) {
         // Solved within 20 seconds
         setCaptchaStatus(`Solved in ${timeDiff} seconds`);
-        setTimeTaken(timeDiff);
+        // setTimeTaken(timeDiff);
       } else {
         // Solved after 20 seconds
         setCaptchaStatus('Solved after 20 seconds');
-        setTimeTaken(20);
+        // setTimeTaken(20);
       }
     } else {
       // Wrong selection
@@ -174,18 +185,18 @@ const MedievalCaptcha = () => {
         className="object-cover w-full h-full absolute z-0"
       />
       <div className="relative bg-stone-200 p-6 rounded-xl shadow-2xl border-4 border-stone-400 max-w-md w-full">
-        <h2 className="text-2xl font-bold text-center mb-4 text-stone-800">
+        {/* <h2 className="text-2xl font-bold text-center mb-4 text-stone-800">
           Medieval Warrior Challenge
-        </h2>
+        </h2> */}
 
         {selectedCategory && (
           <div className="text-center mb-4">
             <p className="text-lg font-semibold text-stone-700">
               {selectedCategory.description}
             </p>
-            <p className="text-sm text-stone-600">
+            {/* <p className="text-sm text-stone-600">
               Time Remaining: {seconds} seconds
-            </p>
+            </p> */}
           </div>
         )}
 
