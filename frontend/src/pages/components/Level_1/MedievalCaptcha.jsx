@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useTimer } from 'react-timer-hook';
+import { useNavigate } from 'react-router-dom';
 
 const MedievalCaptcha = () => {
+  const navigate = useNavigate();
   // Define medieval equipment categories with specific keywords
   const equipmentCategories = [
     {
@@ -144,32 +146,28 @@ const MedievalCaptcha = () => {
   const verifyCaptcha = () => {
     // Check if selected images match correct indexes
     const isCorrect = selectedImages.sort().join(',') === correctIndexes.sort().join(',');
-
+    
     if (isCorrect) {
       // Calculate time taken
-      const remainingTime = seconds;
-      const timeDiff = 20 - remainingTime;
+      const timeElapsed = 20 - seconds;
+      pause(); // Pause the timer
 
-      // Pause the timer
-      pause();
-
-      // Set status based on time taken
-      // TODO : Urunkar navigate to the appropriate level after success
-      if (remainingTime > 0) {
-        // Solved within 20 seconds
-        setCaptchaStatus(`Solved in ${timeDiff} seconds`);
-        // setTimeTaken(timeDiff);
+      if (timeElapsed >= 19 && timeElapsed <= 21) {
+        setCaptchaStatus('Solved within target timeframe');
+        setTimeout(() => {
+          navigate("/page1");
+        }, 1500);
       } else {
-        // Solved after 20 seconds
-        setCaptchaStatus('Solved after 20 seconds');
-        // setTimeTaken(20);
+        setCaptchaStatus('Solved outside target timeframe');
+        setTimeout(() => {
+          navigate("/page2");
+        }, 1500);
       }
     } else {
       // Wrong selection
       setCaptchaStatus('Wrong');
     }
   };
-
 
   // Initialize captcha on component mount
   useEffect(() => {
