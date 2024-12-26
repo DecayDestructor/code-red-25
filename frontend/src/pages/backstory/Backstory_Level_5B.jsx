@@ -31,7 +31,7 @@ const Backstory_1 = () => {
         <div className="flex justify-center items-center flex-col h-screen relative">
             {/* Background Image */}
             <img
-                src="src/assets/backstory/Backstory_1.png"
+                src="src/assets/backstory/Backstory.png"
                 alt="Background"
                 className="object-cover w-full h-full absolute z-0"
             />

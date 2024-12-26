@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import LayoutPage from '../interfaces/LayoutPage';
 
 const CombinedComponent = () => {
@@ -35,7 +36,7 @@ const CombinedComponent = () => {
         if (userInput.trim().toUpperCase() === correctTranslation) {
             setResultMessage("Correct! Well done!");
             setTimeout(() => {
-                window.location.href = "/backstory_level_4";
+                navigate("/backstory_level_4");
             }, 1500);
         } else {
             setResultMessage("Incorrect. Try again!");
@@ -52,7 +53,7 @@ const CombinedComponent = () => {
         <div className="flex justify-center items-center flex-col h-screen relative">
             {/* Background Image */}
             <img
-                src="src/assets/levels/Level_1A.png"
+                src="src/assets/levels/Level_3.png"
                 alt="Background"
                 className="object-cover w-full h-full absolute z-0"
             />
