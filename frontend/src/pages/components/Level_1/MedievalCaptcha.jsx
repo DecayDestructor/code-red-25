@@ -92,7 +92,7 @@ const MedievalCaptcha = () => {
       const idx = Math.floor(Math.random() * 9) + 1;
       if (!correctIdxs.includes(idx)) correctIdxs.push(idx);
     }
-    console.log(correctIdxs);
+    // console.log(correctIdxs);
     setCorrectIndexes(correctIdxs);
 
     // Keep track of used keyword indices to avoid repetition
@@ -111,7 +111,7 @@ const MedievalCaptcha = () => {
 
           const medievalKeyword = category.keywords[rand];
           const medievalImages = await fetchPexelsImages(medievalKeyword);
-          console.log("Checking", index + 1, medievalKeyword, rand);
+          // console.log("Checking", index + 1, medievalKeyword, rand);
           return {
             url: medievalImages[0]?.src.medium || '',
             index: index + 1,
