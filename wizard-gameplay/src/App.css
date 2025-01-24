@@ -40,3 +40,18 @@
 .read-the-docs {
   color: #888;
 } */
+
+
+
+.imageContainer{
+  font-family: "Pirata One", serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-repeat: no-repeat; /* Avoid tiling the image */
+  background-position: center; /* Center the image */
+  background-size: 100% 100%; /* Stretch to fit both width and height */
+  width: 100vw;
+}
