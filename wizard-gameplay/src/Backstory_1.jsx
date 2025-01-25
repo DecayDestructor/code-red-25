@@ -78,6 +78,7 @@ const Backstory_1 = () => {
         backgroundSize: "cover",
         backgroundPosition: "center",
         height: "100vh",
+        transition: "background-image 0.8s ease-in-out",
       }}
     >
       <div className="boundary flex justify-center items-center  m-0 bg-no-repeat bg-center bg-cover ">

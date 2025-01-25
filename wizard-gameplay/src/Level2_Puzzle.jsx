@@ -5,12 +5,12 @@ import Orb from "./assets/orb8.png"
 
 const Level2_Puzzle = () => {
 
-    const [sliderValues, setSliderValues] = useState([5, 5, 5]); // Default mid-point
+    const [sliderValues, setSliderValues] = useState([8, 8, 8]); // Default mid-point
     const [activeOrb, setActiveOrb] = useState(null);
     const [solved, setSolved] = useState(false);
     const navigate = useNavigate();
     
-    const targetPositions = [2, 8, 5];
+    const targetPositions = [3, 12, 15];
     
     const handleSliderChange = (index, value) => {
       const newValues = [...sliderValues];
@@ -87,7 +87,7 @@ const Level2_Puzzle = () => {
                   <input
                     type="range"
                     min="0"
-                    max="10"
+                    max="15"
                     step="1" // Precise increments
                     value={sliderValues[index]}
                     onChange={(e) =>

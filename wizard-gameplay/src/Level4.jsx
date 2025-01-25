@@ -55,9 +55,7 @@ const Level4 = () => {
       setDisplayedText("");
       setCurrentIndex(0);
       setCurrentTextIndex(currentTextIndex - 1);
-    } else {
-      navigate("/");
-    }
+    } 
   };
 
   const handleSubmitAnswer = () => {
@@ -80,6 +78,7 @@ const Level4 = () => {
         backgroundSize: "cover",
         backgroundPosition: "center",
         height: "100vh",
+        transition: "background-image 0.8s ease-in-out",
       }}
     >
       {!showQuestion ? (

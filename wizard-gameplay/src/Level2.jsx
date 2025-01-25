@@ -60,9 +60,7 @@ const Level2 = () => {
       setDisplayedText("");
       setCurrentIndex(0);
       setCurrentTextIndex(currentTextIndex - 1);
-    } else {
-      navigate("/level2");
-    }
+    } 
   };
 
 
@@ -74,6 +72,7 @@ const Level2 = () => {
         backgroundSize: "cover",
         backgroundPosition: "center",
         height: "100vh",
+        transition: "background-image 0.8s ease-in-out",
       }}
     >
       {!showQuestion ? (
