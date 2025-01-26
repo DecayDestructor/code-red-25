@@ -45,10 +45,10 @@ const MedievalCaptcha = () => {
 
   // Timer setup for the 20-second challenge
   const time = new Date();
-  time.setSeconds(time.getSeconds() + 20);
+  time.setSeconds(time.getSeconds() + 10);
   const { seconds, pause } = useTimer({
     expiryTimestamp: time,
-    onExpire: () => setCaptchaStatus('Not solved in 20')
+    onExpire: () => setCaptchaStatus('Not solved in 10')
   });
 
   // Fetch images from Pexels for a specific keyword
