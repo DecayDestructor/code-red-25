@@ -9,6 +9,8 @@ const Level7_1 = () => {
   const [defeatedMalevoryx , setDefeatedMalevoryx] = useState(false)
   const [blurPx, setBlurPx] = useState(3);
   const [finalCommand, setFinalCommand] = useState("Find me out");
+  const [commandHistory, setCommandHistory] = useState([]);
+  const [historyIndex, setHistoryIndex] = useState(-1);
 
   const HOSTNAME = `eryndor@kravaros-arcane-forge:~$`;
   const HOSTNAME_HTML = `<span style="margin-left:1rem; font-weight:bold; color:oklch(.508 .118 165.612);">${HOSTNAME}</span>`;
@@ -97,7 +99,9 @@ const Level7_1 = () => {
         // console.log(textRef.current.value);
         let command = textRef.current.value;
         command = command.trim();
-
+        setCommandHistory((prev) => [...prev, command]);
+        setHistoryIndex(-1);
+        
         contentRef.current.innerHTML += `<br>${HOSTNAME_HTML} ${textRef.current.value} `;
         textRef.current.value = "";
 
@@ -147,7 +151,7 @@ const Level7_1 = () => {
             }
           }
         } else if(command.startsWith(command_names[6])){
-          if(!isSudo || !foundPassword){
+          if(!isSudo || !foundPassword || blurPx != 0 || finalCommand !== "set death --[NAME]"){
             contentRef.current.innerHTML += commands[6].textIfPasswordNotAddedAndNotSudo;
           } else {
             const name= command_split[2]
@@ -172,8 +176,21 @@ const Level7_1 = () => {
           }
         }else {
             contentRef.current.innerHTML += `<br> <span style="margin-left:1rem;"> Invalid command </span> <br>`
-        }
+        } 
+    } else if (event.key === "ArrowUp") {
+      console.log(commandHistory , historyIndex);
       
+      if (commandHistory.length > 0) {
+        const newIndex = historyIndex === -1 ? commandHistory.length - 1 : Math.max(0, historyIndex - 1);
+        setHistoryIndex(newIndex);
+        textRef.current.value = commandHistory[newIndex];
+      }
+    } else if (event.key === "ArrowDown") {
+      if (commandHistory.length > 0) {
+        const newIndex = historyIndex === -1 ? -1 : Math.min(commandHistory.length - 1, historyIndex + 1);
+        setHistoryIndex(newIndex);
+        textRef.current.value = newIndex === -1 ? "" : commandHistory[newIndex];
+      }
     }
   };
 
