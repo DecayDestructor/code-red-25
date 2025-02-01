@@ -7,20 +7,23 @@ const YourComponent = () => {
   const link = "https://docs.google.com/document/d/1sjiGhP8IMtobg1o5iGfNM1JxFcf6kcijlh2LtyCz0B8/edit?usp=sharing";
   window.link = link;
 
-  const checkAnswer = () => {
+  const ans = '!EdocNeddih77@Sna';
+
+  const checkAnswer = (e) => {
+    e.preventDefault();  // Prevent form submission from refreshing the page
+
     if (answer.length === 0) {
-      alert("Empty")
+      alert("Empty");
       return;
     }
 
-    if (answer === 'spell') {
-      alert("correct")
-      navigate('/level_7_4')
-    }
-    else {
+    if (answer === ans) {
+      alert("correct");
+      navigate('/level_7_4');  // Navigate to level_7_4 on correct answer
+    } else {
       alert("incorrect");
     }
-  }
+  };
 
   return (
     <div className="relative flex flex-col items-center justify-center h-screen text-white">
@@ -39,29 +42,28 @@ const YourComponent = () => {
         </p>
 
         {
-          /*
-            Add the clue to the link here
-            Link is a global variable in window object 
-            Clue to that is in the anchor tag at line 51
-          */
+          // Add the clue to the link here
+          // Link is a global variable in window object
+          // Clue to that is in the anchor tag at line 51
         }
 
-        <input
-          type="text"
-          placeholder="Enter Your Spell"
-          value={answer}
-          onChange={(e) => setAnswer(e.target.value)}
-          required
-          aria-label="Spell"
-          className="w-full pb-2 rounded-none border-b-[1px] border-gray-200 text-white bg-transparent focus:outline-none focus:border-blue-500 tracking-wider placeholder:text-white mb-8"
-        />
+        <form onSubmit={checkAnswer}>
+          <input
+            type="text"
+            placeholder="Enter Your Spell"
+            value={answer}
+            onChange={(e) => setAnswer(e.target.value)}
+            required
+            aria-label="Spell"
+            className="w-full pb-2 rounded-none border-b-[1px] border-gray-200 text-white bg-transparent focus:outline-none focus:border-blue-500 tracking-wider placeholder:text-white mb-8"
+          />
 
-        <button
-          onClick={checkAnswer}
-          className="mt-4 px-8 py-3 text-lg font-semibold text-indigo-700 bg-white rounded-lg shadow-lg hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-indigo-300 transition-all duration-300"
-        >
-          Attack
-        </button>
+          <input
+            type="submit"
+            className="mt-4 px-8 py-3 text-lg font-semibold text-indigo-700 bg-white rounded-lg shadow-lg hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-indigo-300 transition-all duration-300"
+            value="Attack"
+          />
+        </form>
       </div>
       <a href={"link"} hidden />
     </div>
