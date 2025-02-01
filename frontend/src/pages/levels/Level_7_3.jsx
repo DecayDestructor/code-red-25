@@ -1,18 +1,69 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const YourComponent = () => {
   const navigate = useNavigate();
+  const [answer, setAnswer] = useState('');
+  const link = "https://docs.google.com/document/d/1sjiGhP8IMtobg1o5iGfNM1JxFcf6kcijlh2LtyCz0B8/edit?usp=sharing";
+  window.link = link;
+
+  const checkAnswer = () => {
+    if (answer.length === 0) {
+      alert("Empty")
+      return;
+    }
+
+    if (answer === 'spell') {
+      alert("correct")
+      navigate('/level_7_4')
+    }
+    else {
+      alert("incorrect");
+    }
+  }
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
-      <h1 className="text-2xl font-bold mb-6">Your Current Page</h1>
-      <button
-        onClick={() => navigate('/level_7_4')}
-        className="px-6 py-2 text-white bg-blue-500 hover:bg-blue-600 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-300"
-      >
-        Next
-      </button>
+    <div className="relative flex flex-col items-center justify-center h-screen text-white">
+      <img
+        src="/src/assets/levels/Level_7_3.png"
+        alt="Background"
+        className="object-cover w-full h-full absolute z-0"
+      />
+
+      <div className="relative z-10 text-center p-8 rounded-lg m-8">
+        <h1 className="text-4xl font-extrabold mb-4 text-white drop-shadow-lg">
+          Your Current Page
+        </h1>
+        <p className="text-lg font-medium mb-8 text-gray-200 drop-shadow-md">
+          Welcome! Click below to proceed to the next level.
+        </p>
+
+        {
+          /*
+            Add the clue to the link here
+            Link is a global variable in window object 
+            Clue to that is in the anchor tag at line 51
+          */
+        }
+
+        <input
+          type="text"
+          placeholder="Enter Your Spell"
+          value={answer}
+          onChange={(e) => setAnswer(e.target.value)}
+          required
+          aria-label="Spell"
+          className="w-full pb-2 rounded-none border-b-[1px] border-gray-200 text-white bg-transparent focus:outline-none focus:border-blue-500 tracking-wider placeholder:text-white mb-8"
+        />
+
+        <button
+          onClick={checkAnswer}
+          className="mt-4 px-8 py-3 text-lg font-semibold text-indigo-700 bg-white rounded-lg shadow-lg hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-indigo-300 transition-all duration-300"
+        >
+          Attack
+        </button>
+      </div>
+      <a href={"link"} hidden />
     </div>
   );
 };

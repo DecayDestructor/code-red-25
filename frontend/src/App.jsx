@@ -49,9 +49,9 @@ const Options_Level_7A = lazy(() =>
   import('./pages/options/Options_Level_7A') // Anyone
 )
 const Level_7_1A = lazy(() => import('./pages/levels/Level_7_1A'))
-const Level_7_1B = lazy(() => import('./pages/levels/Level_7_1B')) // Sanyogeeta Pradhan - RGB remaining
-const Level_7_3 = lazy(() => import('./pages/levels/Level_7_3')) // Vinisha Bhagwani
-const Level_7_4 = lazy(() => import('./pages/levels/Level_7_4')) // Vinisha Bhagwani
+const Level_7_1B = lazy(() => import('./pages/levels/Level_7_1B'))
+const Level_7_3 = lazy(() => import('./pages/levels/Level_7_3'))
+const Level_7_4 = lazy(() => import('./pages/levels/Level_7_4'))
 
 const App = () => {
   return (
@@ -96,7 +96,7 @@ const App = () => {
           />
           <Route path="/level_7_1B" element={<Level_7_1B />} />
           <Route path="/level_7_3" element={<Level_7_3 />} />
-        <Route path="/level_7_4" element={<Level_7_4 />} />
+          <Route path="/level_7_4" element={<Level_7_4 />} />
         </Route>
       </Routes>
     </Router>

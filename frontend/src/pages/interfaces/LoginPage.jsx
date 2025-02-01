@@ -60,7 +60,7 @@ const SignupPage = () => {
         alt="Background"
         className="object-cover w-full h-full absolute z-0"
       />
-      <div className="w-[450px] h-[550px] bottom-16 absolute z-10 flex justify-center items-center rounded-3xl bg-slate-[#232B3E] bg-opacity-5 backdrop-filter backdrop-blur-[5px] border-[1px]">
+      <div className="w-[450px] h-[65%] bottom-16 absolute z-10 flex justify-center items-center rounded-3xl bg-slate-[#232B3E] bg-opacity-5 backdrop-filter backdrop-blur-[5px] border-[1px]">
         <div className="border-b-[1px] top-0 absolute w-full h-20 flex items-center justify-center text-3xl text-white tracking-widest">
           Signup
         </div>
@@ -94,7 +94,7 @@ const SignupPage = () => {
             />
           </div>
 
-          <div className="w-full flex items-center relative mb-8">
+          <div className="w-full flex items-center relative mb-2">
             <input
               type={showPassword ? 'text' : 'password'}
               placeholder="Enter Your Password"
@@ -122,7 +122,7 @@ const SignupPage = () => {
 
           <button
             type="submit"
-            className="w-52 h-16 mt-8 top-8 relative flex justify-center items-center rounded-xl text-3xl bg-black text-white bg-opacity-55 backdrop-filter backdrop-blur-[3px] border-[1px] hover:bg-opacity-75 transition-all duration-300"
+            className="w-52 h-16 mt-5 top-8 relative flex justify-center items-center rounded-xl text-3xl bg-black text-white bg-opacity-55 backdrop-filter backdrop-blur-[3px] border-[1px] hover:bg-opacity-75 transition-all duration-300"
           >
             Signup
           </button>

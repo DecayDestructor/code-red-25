@@ -8,6 +8,7 @@ const CombinedComponent = () => {
     const [text, setText] = useState("");
     const [userInput, setUserInput] = useState("");
     const [resultMessage, setResultMessage] = useState("");
+    const navigate = useNavigate();
 
     const typingSpeed = 3;
     const correctTranslation = "COLOSSALAS";

@@ -45,10 +45,10 @@ const MedievalCaptcha = () => {
 
   // Timer setup for the 20-second challenge
   const time = new Date();
-  time.setSeconds(time.getSeconds() + 20);
+  time.setSeconds(time.getSeconds() + 10);
   const { seconds, pause } = useTimer({
     expiryTimestamp: time,
-    onExpire: () => setCaptchaStatus('Not solved in 20')
+    onExpire: () => setCaptchaStatus('Not solved in 10')
   });
 
   // Fetch images from Pexels for a specific keyword
@@ -83,7 +83,8 @@ const MedievalCaptcha = () => {
     setSelectedCategory(category);
 
     // Determine number of correct images to select (3-6)
-    const count = Math.floor(Math.random() * 4) + 3;
+    const count = //Math.floor(Math.random() * 4) + 
+    3;
     setTargetCount(count);
 
     // Generate unique indexes for correct images
@@ -152,7 +153,7 @@ const MedievalCaptcha = () => {
       const timeElapsed = 20 - seconds;
       pause(); // Pause the timer
 
-      if (timeElapsed >= 19 && timeElapsed <= 21) {
+      if (timeElapsed >= 18 && timeElapsed <= 22) {
         setCaptchaStatus('Solved within target timeframe');
         setTimeout(() => {
           navigate("/page1");
@@ -182,7 +183,7 @@ const MedievalCaptcha = () => {
         alt="Background"
         className="object-cover w-full h-full absolute z-0"
       />
-      <div className="relative bg-gradient-to-b from-stone-800 to-stone-900 p-6 rounded-2xl shadow-[0_0_50px_rgba(255,69,0,0.3)] border-4 border-amber-700 max-w-sm w-full ">
+      <div className="relative bg-gradient-to-b from-stone-800 to-stone-900 p-6 rounded-2xl shadow-[0_0_50px_rgba(255,69,0,0.3)] border-4 border-amber-700 max-w-sm w-full mt-4 mb-4">
         {selectedCategory && (
           <div className="text-center mb-4">
             <p className="text-lg font-medieval text-amber-500 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
