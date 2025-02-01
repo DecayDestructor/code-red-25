@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import level2_2 from './assets/level2_2.webp';
-import level2_1 from './assets/level2_1.webp'; 
+import level2_2 from '../../assets/level2_2.webp';
+import level2_1 from '../../assets/level2_1.webp'; 
 
 import { useNavigate } from "react-router-dom";
 import Level2_Puzzle from "./Level2_Puzzle";

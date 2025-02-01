@@ -1,16 +1,12 @@
 import { useState, useEffect } from "react";
-import level3_1 from './assets/level3_1.webp'; 
-import level3_2 from './assets/level3_2.webp'; // Ensure the correct image path
+import level4_2 from '../../assets/level4_1.webp';
+import level4_1 from '../../assets/level4_1.webp'; 
 import { useNavigate } from "react-router-dom";
 
-const Level3 = () => {
+const Level4 = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const level3_texts = [
-    "As you step into the chamber, the air is filled with faint whispers—a symphony of voices merging, overlapping, and fading into silence." +
-    "In the center, a large crystalline sphere hovers, glowing faintly with pulsing light. This is the Core of Echoes, an artifact that preserves fragments of memories from those who have attempted the trial before you.",
-
-    "The Core speaks in riddles, presenting a challenge steeped in logic:" + 
-    "“Within me lies a fractured sequence, a pattern obscured by noise and repetition. Decode the echoes, and the truth shall be revealed.”",   
+  const level4_texts = [
+    "“To find the Wizard's Legacy, seek the market where ownable digital treasures are traded. The biggest marketplace will reveal the key to unlock the artifact. ‘Cassandra’ , some call the treasure… seek his, and give us his address…”"   
   ];
 
 
@@ -18,34 +14,33 @@ const Level3 = () => {
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [backgroundImage, setBackgroundImage] = useState(level3_1);
+  const [backgroundImage, setBackgroundImage] = useState(level4_1);
   const [showQuestion, setShowQuestion] = useState(false);
-  const [answer1, setAnswer1] = useState("");
-  const [answer2, setAnswer2] = useState("");
+  const [answer, setAnswer] = useState("");
   const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
   const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (currentTextIndex >= 2) {
-      setBackgroundImage(level3_2);
+    if (currentTextIndex >= 2 && currentTextIndex < 4) {
+      setBackgroundImage(level4_2);
     } else {
-      setBackgroundImage(level3_1);
+      setBackgroundImage(level4_1);
     }
 
-    if (currentIndex < level3_texts[currentTextIndex]?.length) {
+    if (currentIndex < level4_texts[currentTextIndex]?.length) {
       const timeout = setTimeout(() => {
-        const char = level3_texts[currentTextIndex][currentIndex];
+        const char = level4_texts[currentTextIndex][currentIndex];
         setDisplayedText((prev) => prev + char);
         setCurrentIndex(currentIndex + 1);
       }, 20);
 
       return () => clearTimeout(timeout);
     }
-  }, [currentIndex, level3_texts, currentTextIndex]);
+  }, [currentIndex, level4_texts, currentTextIndex]);
 
   const handleNext = () => {
-    if (currentTextIndex + 1 < level3_texts.length) {
+    if (currentTextIndex + 1 < level4_texts.length) {
       setDisplayedText("");
       setCurrentIndex(0);
       setCurrentTextIndex(currentTextIndex + 1);
@@ -64,14 +59,12 @@ const Level3 = () => {
   };
 
   const handleSubmitAnswer = () => {
-    const correctAnswer1 = 312211;
-    const correctAnswer2 = 13112221// Adjust based on your logic
-    const userAnswer1 =  answer1;
-    const userAnswer2 =  answer2;
+    const correctAnswer = "0x2804CDF61b998278124118f1E2C291bd0aD70833"; // Adjust based on your logic
+    const userAnswer = answer;
 
-    if (userAnswer1 == correctAnswer1 && userAnswer2 == correctAnswer2) {
+    if (userAnswer >= correctAnswer - 1 && userAnswer <= correctAnswer + 1) {
       setIsAnswerCorrect(true);
-      navigate("/level4");
+      navigate("/level5");
     } else {
       setShowError(true);
     }
@@ -115,7 +108,7 @@ const Level3 = () => {
         </>
       ) : (
         <div className=" boundary">
-            <div className="heading"> LEvel 3</div>
+            <div className="heading">Level 4</div>
             <div
               className="font-serif text-container"
               style={{ fontFamily: "'Pirata One', cursive" }}
@@ -124,20 +117,10 @@ const Level3 = () => {
             </div>
           <input
             type="text"
-            value={answer1}
-            className="answer answer-container"
+            value={answer}
+            className="answer w-3/4 answer-container"
             onChange={(e) => {
-              setAnswer1(e.target.value);
-              setShowError(false);
-            }}
-            placeholder="Enter your answer here"
-          />
-          <input
-            type="text"
-            value={answer2}
-            className="answer answer-container"
-            onChange={(e) => {
-              setAnswer2(e.target.value);
+              setAnswer(e.target.value);
               setShowError(false);
             }}
             placeholder="Enter your answer here"
@@ -166,4 +149,4 @@ const Level3 = () => {
   );
 };
 
-export default Level3;
+export default Level4;

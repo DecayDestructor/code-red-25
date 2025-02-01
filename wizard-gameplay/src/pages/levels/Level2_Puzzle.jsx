@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import Orb from "./assets/orb8.png"
+import Orb from "../../assets/orb8.png"
 
 const Level2_Puzzle = () => {
 

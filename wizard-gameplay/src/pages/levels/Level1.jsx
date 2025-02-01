@@ -1,12 +1,29 @@
 import { useState, useEffect } from "react";
-import level4_2 from './assets/level4_1.webp';
-import level4_1 from './assets/level4_1.webp'; 
+import level1_2 from '../../assets/level1_2.webp';
+import level1_1 from '../../assets/level1_1.webp'; 
+import level1_3 from '../../assets/level1_3.webp'; // Ensure the correct image path
 import { useNavigate } from "react-router-dom";
 
-const Level4 = () => {
+const Level1 = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const level4_texts = [
-    "“To find the Wizard's Legacy, seek the market where ownable digital treasures are traded. The biggest marketplace will reveal the key to unlock the artifact. ‘Cassandra’ , some call the treasure… seek his, and give us his address…”"   
+  const level1_texts = [
+    "Eryndor’s have to find all of the pieces of Malakaroth’s soul to disable Malakaroth’s invincibility once and for all." + 
+    "Eryndor’s first mission is to seek the Infernal Blade, the Ebon Relic representing Wrath." + 
+    "Mount Draemora, a dormant volcano reawakened by Malevoryx's dark magic, is now a chaotic inferno of molten rivers, ash storms, and unpredictable eruptions." + 
+    "The Infernal Blade lies embedded in the Obsidian Altar, deep within the volcano’s core, radiating anger and violence.",
+
+    "The blade corrupts the environment, twisting creatures into mindless berserkers and magnifying rage in anyone who approaches." + 
+    "For Eryndor, whose heart still smolders with anger over his shattered past, the relic’s influence is a personal and dangerous test.",
+
+    "To reach the Obsidian Altar where the Infernal Blade resides, Eryndor encounters a massive Magma Flow Regulator, an ancient mechanical system designed by the Fire-Kin engineers to stabilize Mount Draemora." + 
+    "The Regulator is corrupted by Malevoryx's influence, causing a chaotic magma surge that blocks access to the altar and threatens to collapse the entire structure.",
+
+    "The system must be repaired and optimized to control the magma flow, opening a safe path to the altar." +
+    "However, the system's logic is highly complex, designed to test both intelligence and composure under pressure.",
+
+    "“Ah, a challenger approaches! If you seek passage through these hallowed gates, you must solve a riddle of transformation and balance. Only those with keen minds and steady resolve may proceed.”",
+    "First, take this phrase and let it dance forward through the cycles of letters, shifting each one with the rhythm of seven steps. The spaces between words are sacred and shall remain untouched. When you have completed this transformation, you will hold a phrase of power in your grasp.",
+    "But your task is not yet done. Each symbol in this new phrase carries its own weight, a value intrinsic to its nature. Ignore the voids between words, and instead, focus on the letters and convert them to numbers in the most obvious way possible. Find the balance—the average weight—of the entire phrase you have crafted."   
   ];
 
 
@@ -14,7 +31,7 @@ const Level4 = () => {
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [backgroundImage, setBackgroundImage] = useState(level4_1);
+  const [backgroundImage, setBackgroundImage] = useState(level1_1);
   const [showQuestion, setShowQuestion] = useState(false);
   const [answer, setAnswer] = useState("");
   const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
@@ -23,24 +40,26 @@ const Level4 = () => {
 
   useEffect(() => {
     if (currentTextIndex >= 2 && currentTextIndex < 4) {
-      setBackgroundImage(level4_2);
+      setBackgroundImage(level1_2);
+    } else if(currentTextIndex >= 4){ 
+      setBackgroundImage(level1_3);
     } else {
-      setBackgroundImage(level4_1);
+      setBackgroundImage(level1_1);
     }
 
-    if (currentIndex < level4_texts[currentTextIndex]?.length) {
+    if (currentIndex < level1_texts[currentTextIndex]?.length) {
       const timeout = setTimeout(() => {
-        const char = level4_texts[currentTextIndex][currentIndex];
+        const char = level1_texts[currentTextIndex][currentIndex];
         setDisplayedText((prev) => prev + char);
         setCurrentIndex(currentIndex + 1);
       }, 20);
 
       return () => clearTimeout(timeout);
     }
-  }, [currentIndex, level4_texts, currentTextIndex]);
+  }, [currentIndex, level1_texts, currentTextIndex]);
 
   const handleNext = () => {
-    if (currentTextIndex + 1 < level4_texts.length) {
+    if (currentTextIndex + 1 < level1_texts.length) {
       setDisplayedText("");
       setCurrentIndex(0);
       setCurrentTextIndex(currentTextIndex + 1);
@@ -55,16 +74,16 @@ const Level4 = () => {
       setDisplayedText("");
       setCurrentIndex(0);
       setCurrentTextIndex(currentTextIndex - 1);
-    } 
+    }  
   };
 
   const handleSubmitAnswer = () => {
-    const correctAnswer = "0x2804CDF61b998278124118f1E2C291bd0aD70833"; // Adjust based on your logic
-    const userAnswer = answer;
+    const correctAnswer = 79.5; // Adjust based on your logic
+    const userAnswer = parseFloat(answer);
 
     if (userAnswer >= correctAnswer - 1 && userAnswer <= correctAnswer + 1) {
       setIsAnswerCorrect(true);
-      navigate("/level5");
+      navigate("/level2");
     } else {
       setShowError(true);
     }
@@ -75,7 +94,7 @@ const Level4 = () => {
       className="flex justify-center items-center flex-col imageContainer"
       style={{
         backgroundImage: `url(${backgroundImage})`,
-        backgroundSize: "cover",
+        backgroundSize: "fit",
         backgroundPosition: "center",
         height: "100vh",
         transition: "background-image 0.8s ease-in-out",
@@ -108,17 +127,12 @@ const Level4 = () => {
         </>
       ) : (
         <div className=" boundary">
-            <div className="heading">Level 4</div>
-            <div
-              className="font-serif text-container"
-              style={{ fontFamily: "'Pirata One', cursive" }}
-            >
-              {displayedText}
-            </div>
+            <div className="heading"> CRYPTOGRAPHY IS FUN</div>
+            
           <input
             type="text"
             value={answer}
-            className="answer w-3/4 answer-container"
+            className="answer answer-container"
             onChange={(e) => {
               setAnswer(e.target.value);
               setShowError(false);
@@ -149,4 +163,4 @@ const Level4 = () => {
   );
 };
 
-export default Level4;
+export default Level1;

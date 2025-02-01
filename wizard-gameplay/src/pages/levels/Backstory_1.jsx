@@ -1,7 +1,7 @@
 /// Backstory_1.js
 import { useState, useEffect } from "react";
-import backstoryImage1 from './assets/backstory1_1.webp';
-import backstoryImage2 from './assets/backstory1_2.webp'; // Ensure the correct image path
+import backstoryImage1 from '../../assets/backstory1_1.webp';
+import backstoryImage2 from '../../assets/backstory1_2.webp'; // Ensure the correct image path
 import { useNavigate } from "react-router-dom";
 
 const Backstory_1 = () => {
