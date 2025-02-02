@@ -8,7 +8,7 @@ const Level5_2 = () => {
 
   const handleOption1Click = () => {
     setTimeout(() => {
-      navigate("/level_4A");
+      navigate("/backstory_level_4A");
     }, 500);
   };
 

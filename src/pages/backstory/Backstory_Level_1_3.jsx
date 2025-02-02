@@ -7,14 +7,14 @@ const Backstory_Level_1_3 = () => {
     const navigate = useNavigate();
 
     // First text passage
-    const firstPassage = `  Gavin enters the dungeon and to his surprise on the wall shone a saying in bright golden ichor (God's blood); He was not fast enough, he died.. Now you will too. Gavin, unafraid steps ahead in pitch darkness only to collide with another wooden door. The door says again in golden ichor; "Too Slow; TOO SLOW!... There resides Rhaegan, a majestic dragon carefully crafted by the demons by using ancient hybridisation techniques that hates slow people like YOU! Only the first five warriors have ever gotten past, can it be you?`;
+    const firstPassage = `  You enter the dungeon, and to your astonishment, a message glows on the wall, written in bright golden ichor-God's blood: "He was not fast enough. He died. Now you will too." Undeterred, you press forward into the pitch darkness, only to collide with a heavy wooden door. Again, glowing golden ichor etches a sinister message: "Too Slow; TOO SLOW! There resides Rhaegan, a majestic dragon, forged by demons through ancient hybridization techniques. It loathes slow, feeble intruders like YOU! Only five warriors have ever made it past. Will you be the sixth?" The challenge lies ahead—time to prove your worth.`;
 
     // Second text passage
     const secondPassage = `  I'm quick as a wink, 
     I'm gone in a flash,
     If you try to catch me,
     You'll never last.
-    Only 20th second of your life has power
+    Only 10th second of your life has power
     If not, then there will be a blood shower...`;
 
     const [currentPassage, setCurrentPassage] = useState(firstPassage);

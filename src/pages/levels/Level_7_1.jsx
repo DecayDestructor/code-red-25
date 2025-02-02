@@ -3,34 +3,12 @@ import { useNavigate } from "react-router-dom";
 import LayoutPage from "../interfaces/LayoutPage";
 
 const Level7_1 = () => {
-    const [text, setText] = useState("");
     const [buttonsState, setButtonsState] = useState(Array(9).fill("0"));
     const targetPattern = "110011011";
-    const [isTypingComplete, setIsTypingComplete] = useState(false);
     const [isCorrect, setIsCorrect] = useState(false);
-    const [submitted, setSubmitted] = useState(false); 
-
-    const sourceText = `  Gavin stood before the locked box, heart pounding. Inside lay Ichorfonias, the heart of Malakaroth's power-an invention born of pride, cruelty, and dark magic. Created by an ex-servant of Hephaestus, it was a living testament to obsession, a machine so intricate it held the very soul of its maker. Destroying it wasn't just ending a creation—it was crushing Malakaroth's reign and stripping him of his most deadly weapon. The key to his downfall lay within this box. The puzzle was maddening, but Gavin's determination burned brighter. He had to act quickly—solve the riddle, break the lock, and destroy Ichorfonias before it was too late. The moment that lock clicked open, victory would be his, and the tyrant's reign would end. Ichorfonias's op code read– To find the slope, a path you tread, By my rule, the curve is read. One mark, one change, the tale's creation—`;
-    const typingSpeed = 3;
+    const [submitted, setSubmitted] = useState(false);
 
     const navigate = useNavigate();
-
-    useEffect(() => {
-        let index = 0;
-
-        const interval = setInterval(() => {
-            if (index < sourceText.length) {
-                setText((prev) => prev + (sourceText[index] || ""));
-                index++;
-            } else {
-                clearInterval(interval);
-                setIsTypingComplete(true);
-                document.getElementById("middle-text").classList.remove("hidden");
-            }
-        }, typingSpeed);
-
-        return () => clearInterval(interval);
-    }, []);
 
     const handleButtonClick = (index) => {
         const newState = [...buttonsState];
@@ -66,14 +44,7 @@ const Level7_1 = () => {
             <LayoutPage />
 
             <div className="relative bg-gray-700 bg-opacity-70 w-11/12 max-w-4xl p-5 rounded-lg border-4 border-yellow-600 shadow-lg flex flex-col items-center">
-                <div className="bg-red-800 bg-opacity-80 w-full p-3 rounded-md border-4 border-white shadow-md">
-                    <p id="source-text" className="text-white text-lg font-bold text-center">
-                        {text}
-                        {!isTypingComplete && <span className="animate-pulse">|</span>}
-                    </p>
-                </div>
-
-                <div id="middle-text" className="bg-red-800 bg-opacity-80 w-1/3 p-3 mt-5 rounded-md border-4 border-white shadow-md hidden">
+                <div id="middle-text" className="bg-red-800 bg-opacity-80 w-1/3 p-3 mt-5 rounded-md border-4 border-white shadow-md">
                     <p className="text-white text-lg font-bold text-center">x<sup>5</sup>, e<sup>x</sup>, x<sup>2</sup></p>
                 </div>
 

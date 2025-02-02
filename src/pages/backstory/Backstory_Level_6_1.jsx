@@ -7,10 +7,13 @@ const Backstory_Level_1_3 = () => {
     const navigate = useNavigate();
 
     // First text passage
-    const firstPassage = `  A battlefield is staged between the army of Demons and the gods. Malakaroth has set up an ambush that the gods are not aware about; something that the best of the martial texts haven't ever documented as there have been no survivors to this strategy. Gods fall prey to hordes of demon attacking them; as if a hurricane of scythes slashing through the battlefield. Last of the gods die with only few demigods.`;
+    const firstPassage = `  Malakaroth was not only known for his ruthless cunning but also for his terrifying creations—devices that could confine the enemies with deadly precision. These instruments weren't just tools, but cursed mechanisms that trapped their victims in webs of black magic, leaving no way out. His war room, hidden deep within the palace, held the answers to how these mysterious traps were set in motion, and Gavin's mission was to uncover the mystery and find the coordinates to reach it before it was too late. But with each step deeper into the palace, the danger grew, and he couldn't shake the feeling that something—or someone—was watching him. What could help him in this endeavor? Perhaps the answer lies in an ancient riddle.`;
 
     // Second text passage
-    const secondPassage = `  Gavin, prince of a divine bloodline, descends from the last of the gods. For 500 years since the demons' victory in the War of Azgardos, his predecessors-demigods-have attempted and failed to reclaim Argzak, the former Palace of the Gods, now a demon stronghold ruled by Malakaroth, one of the two mightiest demons. Each effort ended in death. Now, Gavin is next in line. With an infant born to preserve the gods' bloodline, he fights fearlessly, leading the Alfred Clan as their strongest warrior. You are Gavin, the last hope of the gods. The blood of gods runs through your veins. This is your moment. The war ends with you-victory or nothing. You are Gavin, the one who will shatter the demons' reign and lead your people to glory!`;
+    const secondPassage = `  In steel halls, whispers of logic I weave, 
+    A language born where bright ideas cleave. 
+    From ancient roots, I rise, simple and strong, 
+    Guiding the coder's hand, all night long.`;
 
     const [currentPassage, setCurrentPassage] = useState(firstPassage);
     const typingSpeed = 3;
@@ -40,7 +43,7 @@ const Backstory_Level_1_3 = () => {
             setCurrentPassage(secondPassage);
         } else {
             // If showing the second passage, navigate to the next level
-            navigate("/backstory_level_1_1");
+            navigate("/level_6_1");
         }
     };
 
@@ -48,13 +51,13 @@ const Backstory_Level_1_3 = () => {
         <div className="flex justify-center items-center flex-col h-screen relative">
             {/* Background Image */}
             <img
-                src="src/assets/backstory/Backstory_1.png"
+                src="src/assets/backstory/Backstory.png"
                 alt="Background"
                 className="object-cover w-full h-full absolute z-0"
             />
             {/* Text Container */}
             <div className="relative bg-white bg-opacity-70 p-6 rounded-lg w-[48%] z-10 h-[66%]">
-                <h1 className={`text-2xl tracking-wide whitespace-pre-line`}>
+                <h1 className={`text-2xl tracking-wide whitespace-pre-line ${currentPassage === secondPassage ? 'text-center' : ''}`}>
                     {text}
                     {!isTypingComplete && <span className="animate-pulse">|</span>}
                 </h1>

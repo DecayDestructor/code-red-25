@@ -23,7 +23,7 @@ async function main() {
 
     k.onKeyPress("enter", () => {
       // Redirect to the backstory page
-      window.location.href = "./level_6_1";
+      window.location.href = "./backstory_level_6_1";
     });
   });
 }

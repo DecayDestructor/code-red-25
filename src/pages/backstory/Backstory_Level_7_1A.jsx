@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Backstory_Level_1_2 = () => {
+const Backstory_1 = () => {
     const [text, setText] = useState("");
     const [isTypingComplete, setIsTypingComplete] = useState(false);
-    const navigate = useNavigate();
 
-    // Replace all newline characters with spaces
-    const sourceText = `  The grave opens, revealing Arthur's legendary sword and a torch. As you grasp the torch, you're transported to the desolate plains of Azzgardos. To begin your assault, you must conquer the land of Titans at the borders of Kravaros. These monstrous beings, bound only to bloodshed, are nearly invincible—except to the rays of the sun, which can scorch them to death.Malakaroth, their dark master, has cast a spell of eternal darkness over Kravaros to shield them. Your only hope of defeating the Titans is to break this spell and restore the suns light.`;
+    const sourceText = `  With a resolute breath, Gavin knew hesitation was over. The engineer's pleas lingered, but trusting anyone linked to Malakaroth was too dangerous. Ichorfonias had to be destroyed—its annihilation was the key to ending Malakaroth's reign. Victory was near but required a bomb to obliterate the dark lord's greatest weapon. Yet, one final piece remained: Arthur's sword, which could only strike if the target's name was spoken aloud. Ichorfonias. There was no turning back—solving this would end Malakaroth's reign and shatter his pride.`;
     const typingSpeed = 3;
 
     useEffect(() => {
@@ -15,7 +13,6 @@ const Backstory_Level_1_2 = () => {
 
         const interval = setInterval(() => {
             if (index < sourceText.length) {
-                // Append the next character if it exists
                 setText((prev) => prev + (sourceText[index] || ""));
                 index++;
             } else {
@@ -43,7 +40,7 @@ const Backstory_Level_1_2 = () => {
                 </h1>
                 {isTypingComplete && (
                     <button
-                        onClick={() => navigate("/level_3")}
+                    onClick={() => (window.location.href = "/105_99_104_111_114_102_111_110_105_97_115")}
                         className="absolute bottom-[-4rem] right-0 px-6 py-3 bg-white bg-opacity-70 text-2xl tracking-wide rounded-lg hover:bg-opacity-90 transition-transform transform hover:scale-105"
                     >
                         Next
@@ -54,4 +51,4 @@ const Backstory_Level_1_2 = () => {
     );
 };
 
-export default Backstory_Level_1_2;
+export default Backstory_1;

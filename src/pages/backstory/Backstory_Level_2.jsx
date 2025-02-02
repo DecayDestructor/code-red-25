@@ -2,25 +2,29 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Backstory_Level_1_1 = () => {
-    const [text, setText] = useState("");
     const [isTypingComplete, setIsTypingComplete] = useState(false);
-    const navigate = useNavigate();
+    const [isNextClicked, setIsNextClicked] = useState(false);
+    const [text, setText] = useState("");
+    const [showSpecialChars, setShowSpecialChars] = useState(false);
 
-    // Replace all newline characters with spaces
-    const sourceText = `  Very few ores when crafted with utter perfection under the guidance of a specific design can create a weapon that can injure and kill demons. Other than gods, no one possesses such weapons. Arthur, was one of the very few demigods that had survived and escaped the wrath of battle of Azzgardos. From the later remains of the destruction caused in the battlefield, Arthur had managed to salvage the remaining bits of specially crafted weapons created by Haephastus himself. This sword was later restored under full moon to create what many refer to as Arthur's sword.`;
+    const navigate = useNavigate();
     const typingSpeed = 3;
+
+    const sourceText = `  In the eerie catacombs of Ehmest, formed from the fallen of Azzgardos, silence weighs heavily, broken only by your footsteps. At a narrow corridor's end, a dead end reveals a grave marked by an intricate seal of cryptic, familiar symbols. Valek's final words linger: "The answer is right at your fingertips," before vanishing, leaving Gavin alone with the seal's glow...`;
 
     useEffect(() => {
         let index = 0;
 
         const interval = setInterval(() => {
             if (index < sourceText.length) {
-                // Append the next character if it exists
                 setText((prev) => prev + (sourceText[index] || ""));
                 index++;
             } else {
                 clearInterval(interval);
-                setIsTypingComplete(true);
+                setShowSpecialChars(true);
+                setTimeout(() => {
+                    setIsTypingComplete(true);
+                }, 500);
             }
         }, typingSpeed);
 
@@ -29,21 +33,27 @@ const Backstory_Level_1_1 = () => {
 
     return (
         <div className="flex justify-center items-center flex-col h-screen relative">
-            {/* Background Image */}
             <img
                 src="src/assets/backstory/Backstory.png"
                 alt="Background"
                 className="object-cover w-full h-full absolute z-0"
             />
-            {/* Text Container */}
             <div className="relative bg-white bg-opacity-70 p-6 rounded-lg w-[48%] z-10 h-[66%]">
-                <h1 className="text-2xl tracking-wide">
-                    {text}
-                    {!isTypingComplete && <span className="animate-pulse">|</span>}
-                </h1>
+                <div className="flex flex-col items-center">
+                    <h1 className="text-2xl tracking-wide mb-4">
+                        {text}
+                        {!showSpecialChars && <span className="animate-pulse">|</span>}
+                    </h1>
+                    <div className="text-4xl font-bold mt-6">
+                        {showSpecialChars && "#&*"}
+                        {showSpecialChars && !isTypingComplete && (
+                            <span className="animate-pulse">|</span>
+                        )}
+                    </div>
+                </div>
                 {isTypingComplete && (
                     <button
-                        onClick={() => navigate("/backstory_level_1_2")}
+                        onClick={() => navigate("/level_2")}
                         className="absolute bottom-[-4rem] right-0 px-6 py-3 bg-white bg-opacity-70 text-2xl tracking-wide rounded-lg hover:bg-opacity-90 transition-transform transform hover:scale-105"
                     >
                         Next

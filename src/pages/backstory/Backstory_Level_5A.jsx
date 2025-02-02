@@ -4,9 +4,7 @@ import { useNavigate } from "react-router-dom";
 const Backstory_1 = () => {
     const [text, setText] = useState("");
     const [isTypingComplete, setIsTypingComplete] = useState(false);
-    const navigate = useNavigate();
 
-    // Replace all newline characters with spaces
     const sourceText = `  Inside the room there lies another torch; similar to the ones that teleported Gavin from Arthur’s grave to his palace back at Azzgardos. Upon touching the torch; he is now teleported to a mysterious palace. The palace has a long hallway which even after having flaring torches over the banks is not bright enough to give a fair visibility. The walls of the palace show grim sightings of the war of Azzgardos… This palace is none other than the fortress of Argzak; capital of Kravaros.`;
     const typingSpeed = 3;
 
@@ -15,7 +13,6 @@ const Backstory_1 = () => {
 
         const interval = setInterval(() => {
             if (index < sourceText.length) {
-                // Append the next character if it exists
                 setText((prev) => prev + (sourceText[index] || ""));
                 index++;
             } else {

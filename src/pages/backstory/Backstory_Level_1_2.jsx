@@ -7,7 +7,7 @@ const Backstory_Level_1_2 = () => {
     const navigate = useNavigate();
 
     // Replace all newline characters with spaces
-    const sourceText = `  After the war of Azzgardos, Malakaroth had sent one of his most powerful army; the Elitos army, to attack the capital of gods; Azzgardos. Fearless Arthur led the final defence to save Azzgardos by blocking every possible entrance to the capital, but alas only one dungeon remained. The dungeon harboured a horrible creature that led to the death of the great demigod; Arthur. The sword fell inside the portal to the catacombs of Ehmest... The dungeon was later locked and protected by the wizards to avoid any attacks by the demonic creature. Just like your predecessors, even if you wish to wage a battle against Malakaroth, and to do that you will now enter the dungeon to start your path to find the sword of Arthur the great.`;
+    const sourceText = `  After the war of Azzgardos, Malakaroth had sent one of his most powerful army; the Elitos army, to attack the capital of gods; Azzgardos. Fearless Arthur led the final defence to save Azzgardos by blocking every possible entrance to the capital, but alas only one dungeon remained. The dungeon harboured a horrible creature that led to the death of the great demigod; Arthur. The sword fell inside the portal to the catacombs of Ehmest… The dungeon was later locked and protected by the wizards to avoid any attacks by the demonic creature. Just like your predecessors, even you wish to wage a battle against Malakaroth, and to do that you will now enter the dungeon to start your path to find the sword of Arthur the great.`;
     const typingSpeed = 3;
 
     useEffect(() => {

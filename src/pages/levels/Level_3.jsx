@@ -3,34 +3,12 @@ import { useNavigate } from "react-router-dom";
 import LayoutPage from '../interfaces/LayoutPage';
 
 const CombinedComponent = () => {
-    const [isTypingComplete, setIsTypingComplete] = useState(false);
-    const [isNextClicked, setIsNextClicked] = useState(false);
-    const [text, setText] = useState("");
     const [userInput, setUserInput] = useState("");
     const [resultMessage, setResultMessage] = useState("");
     const navigate = useNavigate();
 
     const typingSpeed = 3;
     const correctTranslation = "COLOSSALAS";
-
-    // Typewriter effect for backstory text
-    const sourceText = `  Help Gavin undo this spell: To chant the spell one must refer to the console in the chrome dev tools where the answer will lie. `;
-
-    useEffect(() => {
-        let index = 0;
-
-        const interval = setInterval(() => {
-            if (index < sourceText.length) {
-                setText((prev) => prev + (sourceText[index] || ""));
-                index++;
-            } else {
-                clearInterval(interval);
-                setIsTypingComplete(true);
-            }
-        }, typingSpeed);
-
-        return () => clearInterval(interval);
-    }, []);
 
     // Handle verification of user input
     const handleVerify = () => {

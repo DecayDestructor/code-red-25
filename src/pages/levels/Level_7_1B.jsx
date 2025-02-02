@@ -41,7 +41,7 @@ const ColorBoxes = () => {
   };
 
   const handleNextPage = () => {
-    navigate('/level_7_3');
+    navigate('/backstory_level_7_3');
   };
 
   return (

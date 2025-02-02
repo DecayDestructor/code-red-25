@@ -9,7 +9,7 @@ const Level_7_4 = () => {
   const [isGameOver, setIsGameOver] = useState(false);
   const [waiting, setWaiting] = useState(false);
   const [battleLog, setBattleLog] = useState([]);
-  const healthDecrementClassRef = useRef('decrease_by_one');
+  const healthDecrementClassRef = useRef('decrease_by_1');
   const logRef = useRef(null);
 
   useEffect(() => {
@@ -45,7 +45,10 @@ const Level_7_4 = () => {
     
     if (waiting && malakarothHp > 0 && !isGameOver) {
       interval = setInterval(() => {
-        const decrementValue = healthDecrementClassRef.current.includes('decrease_by_ten') ? 10 : 1;
+        const match = healthDecrementClassRef.current.match(/decrease_by_(\d+)/);
+        const parsedValue = match ? parseInt(match[1], 10) : 1;
+        const decrementValue = (parsedValue >= 1 && parsedValue <= 10) ? parsedValue : 1;
+
         setMalakarothHp((prev) => {
           const newHp = Math.max(0, prev - decrementValue);
           if (newHp === 0) {
@@ -55,7 +58,7 @@ const Level_7_4 = () => {
           return newHp;
         });
         addToBattleLog(`Time passes... Malakaroth loses ${decrementValue} HP`);
-      }, 60000); // Real minute intervals
+      }, 10000); // Real minute intervals
     }
 
     return () => clearInterval(interval);
@@ -131,13 +134,12 @@ const Level_7_4 = () => {
         </div>
 
         {/* Main Container */}
-        <div className="relative bg-gray-800 rounded-xl shadow-2xl p-8 w-full max-w-4xl text-white z-10 border border-gray-700">
+        <div className="relative bg-gray-800 rounded-xl shadow-2xl p-8 w-full max-w-4xl text-white z-10 border border-gray-700 ">
           {/* Title with Decorative Elements */}
           <div className="text-center mb-8">
             <h1 className="text-5xl font-bold text-yellow-400 mb-2 tracking-wider">
               Final Battle
             </h1>
-            <div className="text-xl text-gray-400">Gavin vs Malakaroth</div>
           </div>
 
           {/* Turn Indicator */}
@@ -189,7 +191,7 @@ const Level_7_4 = () => {
           {/* Battle Log */}
           <div 
             ref={logRef}
-            className="bg-gray-900 rounded-lg p-4 mb-6 h-32 overflow-y-auto border border-gray-700"
+            className="bg-gray-900 rounded-lg p-4 mb-6 h-24 overflow-y-auto border border-gray-700"
           >
             {battleLog.map((log, index) => (
               <div key={index} className="text-sm mb-1 text-gray-300">
@@ -228,7 +230,7 @@ const Level_7_4 = () => {
           </div>
 
           {/* Hidden healthbar for class observation */}
-          <div className="healthbar decrease_by_one hidden"></div>
+          <div className="healthbar decrease_by_1 hidden"></div>
 
           {/* Victory/Defeat Messages */}
           {isGameOver && (
