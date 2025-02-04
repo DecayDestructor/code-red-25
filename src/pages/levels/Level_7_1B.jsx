@@ -1,163 +1,92 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import LayoutPage from '../interfaces/LayoutPage';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-const ColorBoxes = () => {
-  const [colors, setColors] = useState(Array(6).fill(''));
-  const [showNextPageButton, setShowNextPageButton] = useState(false);
-  const [hoveredBox, setHoveredBox] = useState(null);
-  const [invalidInputs, setInvalidInputs] = useState(Array(6).fill(false));
+const HiddenChallengeComponent = () => {
+  const [userInput, setUserInput] = useState("");
+  const [panelColor, setPanelColor] = useState("rgb(0,255,0)"); // Default green
+  const [colorChanged, setColorChanged] = useState(false);
+  const [resultMessage, setResultMessage] = useState("");
   const navigate = useNavigate();
 
-  const normalizeColor = (color) => {
-    return color.split(',').map((part) => part.trim()).join(',');
-  };
-
-  useEffect(() => {
-    const allColorsValidAndGreen = colors.every(
-      (color) => normalizeColor(color) === '0,255,0' && color !== ''
-    );
-    setShowNextPageButton(allColorsValidAndGreen);
-  }, [colors]);
-
-  const handleColorChange = (index, value) => {
-    const updatedColors = [...colors];
-    updatedColors[index] = value;
-    setColors(updatedColors);
-
-    // Update invalid inputs
-    const newInvalidInputs = [...invalidInputs];
-    newInvalidInputs[index] = value !== '' && !isValidRgb(value);
-    setInvalidInputs(newInvalidInputs);
-  };
-
-  const isValidRgb = (color) => {
-    const regex = /^\d{1,3},\s*\d{1,3},\s*\d{1,3}$/;
-    if (regex.test(color)) {
-      const parts = color.split(',').map((val) => parseInt(val.trim()));
-      return parts.every((part) => part >= 0 && part <= 255);
+  const handleVerify = () => {
+    if (colorChanged && userInput.trim().toUpperCase() === "C86FE9E9CC38771BF90CE8AB26C17806E21305B3E040DD49EF475DC989CD8C67") {
+      setResultMessage("Correct! Proceeding to next level...");
+      setTimeout(() => {
+        navigate("/next-level");
+      }, 1500);
+    } else if (!colorChanged) {
+      setResultMessage("Incomplete!");
+    } else {
+      setResultMessage("Incorrect. Try again!");
     }
-    return false;
   };
 
-  const handleNextPage = () => {
-    navigate('/backstory_level_7_3');
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      handleVerify();
+    }
   };
 
   return (
-    <div className="flex justify-center items-center flex-col h-screen relative">
-      {/* Background Image */}
+    <div className="flex justify-center items-center h-screen relative overflow-hidden">
+      {/* Hidden instruction */}
       <img
-        src="src/assets/levels/Level_7_1.png"
-        alt="Background"
-        className="object-cover w-full h-full absolute z-0"
-      />
-      <LayoutPage />
+                src="src/assets/levels/Level_7_1A.png"
+                alt="Background"
+                className="object-cover w-full h-full absolute z-0"
+            />
+      {/* Central panel */}
+      <div
+        className="w-2/3 h-2/3 flex flex-col justify-center items-center relative"
+        style={{ backgroundColor: panelColor }} // Apply dynamic color
+      >
+        {/* Camouflaged text */}
+        <p
+          className="absolute top-5 text-center w-full"
+          style={{ color: panelColor, userSelect: "none" }}
+        >
+          SUBMIT C86FE9E9CC38771BF90CE8AB26C17806E21305B3E040DD49EF475DC989CD8C67
+        </p>
 
-      {/* Main Container */}
-      <div className="relative bg-white bg-opacity-50 backdrop-blur-md shadow-xl rounded-xl p-8 w-11/12 sm:w-4/5 lg:w-3/4 text-white z-10 h-[70.8%]">
-        {/* Header */}
-        <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
-          RGB Color Challenge
-        </h2>
+        {/* Input and verification area */}
+        <input
+          type="text"
+          value={userInput}
+          onChange={(e) => setUserInput(e.target.value)}
+          onKeyDown={handleKeyPress}
+          className="w-2/3 px-4 py-2 text-center rounded-md"
+          style={{ backgroundColor: panelColor }}
+          placeholder="Enter your input"
+        />
+        <button
+          onClick={handleVerify}
+          className="mt-4 px-6 py-2 bg-blue-900 text-white rounded-md"
+        >
+          Verify
+        </button>
 
-        {/* Grid of boxes */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
-          {colors.map((color, i) => (
-            <div
-              key={i}
-              className="relative transform transition-all duration-300 hover:scale-105"
-              onMouseEnter={() => setHoveredBox(i)}
-              onMouseLeave={() => setHoveredBox(null)}
-            >
-              <div
-                className={`h-32 rounded-xl shadow-lg flex flex-col items-center justify-center p-6
-                           transition-all duration-300 ${invalidInputs[i] ? 'shake-animation' : ''}`}
-                style={{
-                  backgroundColor: isValidRgb(colors[i])
-                    ? `rgb(${colors[i]})`
-                    : 'rgba(0, 0, 0, 0.3)',
-                  boxShadow: hoveredBox === i ? '0 0 20px rgba(255,255,255,0.3)' : 'none'
-                }}
-              >
-                {/* Box number */}
-                <div className="absolute top-2 left-2 w-7 h-7 rounded-full bg-black bg-opacity-50 
-                              flex items-center justify-center text-white font-bold">
-                  {i + 1}
-                </div>
-
-                <input
-                  type="text"
-                  placeholder="Enter RGB values"
-                  value={colors[i]}
-                  onChange={(e) => handleColorChange(i, e.target.value)}
-                  className={`w-full px-4 py-3 text-black rounded-lg border-2 
-                            focus:outline-none focus:ring-2 focus:ring-offset-2
-                            bg-white bg-opacity-90 transition-all duration-300
-                            ${invalidInputs[i]
-                      ? 'border-red-500 focus:ring-red-500'
-                      : 'border-gray-300 focus:ring-blue-500'}`}
-                />
-
-                {/* Validation message */}
-                {invalidInputs[i] && (
-                  <p className="absolute -bottom-6 left-0 right-0 text-red-500 text-sm text-center">
-                    Invalid RGB format
-                  </p>
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Result Message and Next Button */}
-        <div className="text-center mt-8">
-          {showNextPageButton ? (
-            <div className="animate-fadeIn relative bottom-5">
-              <p className="text-xl font-medium text-green-600">
-                Success! The pattern is complete.
-              </p>
-              <button
-                onClick={handleNextPage}
-                className="px-8 py-3 bg-gradient-to-r from-blue-900 to-blue-700 text-white 
-                          font-bold rounded-lg transform transition-all duration-300
-                          hover:scale-105 hover:shadow-lg hover:from-blue-800 hover:to-blue-600
-                          focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-              >
-                Continue to Next Level
-              </button>
-            </div>
-          ) : (
-            <p className="text-lg text-gray-700">
-              Find the correct RGB combination to unlock the next level
-            </p>
-          )}
-        </div>
+        {resultMessage && <p className="mt-4 text-white">{resultMessage}</p>}
       </div>
 
-      {/* Add CSS for animations */}
-      <style jsx>{`
-        @keyframes shake {
-          0%, 100% { transform: translateX(0); }
-          25% { transform: translateX(-5px); }
-          75% { transform: translateX(5px); }
-        }
-        
-        .shake-animation {
-          animation: shake 0.5s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(10px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-
-        .animate-fadeIn {
-          animation: fadeIn 0.5s ease-out forwards;
-        }
-      `}</style>
+      {/* Color change input */}
+      <input
+        type="text"
+        placeholder=""
+        className="absolute bottom-5 left-5 px-4 py-2 rounded-md bg-transparent text-white"
+        onChange={(e) => {
+          const colorValue = e.target.value.trim();
+          if (/^rgb\(\d{1,3},\d{1,3},\d{1,3}\)$/i.test(colorValue)) {
+            setPanelColor(colorValue);
+            setColorChanged(true);
+            setResultMessage(`Color changed to ${colorValue}!`);
+          } else {
+            setColorChanged(false);
+            setResultMessage("Enter a valid rgb(x,x,x) format");
+          }
+        }}
+      />
     </div>
   );
 };
 
-export default ColorBoxes;
+export default HiddenChallengeComponent;

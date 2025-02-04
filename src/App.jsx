@@ -50,7 +50,7 @@ const Backstory_Level_5B = lazy(() =>
 const Options_Level_5B = lazy(() =>
   import('./pages/options/Options_Level_5B')
 )
-const Level_5_2A = lazy(() => import('./pages/levels/Level_5_2A')) // Tattva Jain
+const Level_5_1 = lazy(() => import('./pages/levels/Level_5_1'))
 const Level_6_1 = lazy(() => import('./pages/levels/Level_6_1'))
 const Backstory_Level_7_1 = lazy(() =>
   import('./pages/backstory/Backstory_Level_7_1')
@@ -106,7 +106,7 @@ const App = () => {
           <Route path="/backstory_level_6_1" element={<Backstory_Level_6_1 />} />
           <Route path="/backstory_level_5B" element={<Backstory_Level_5B />} />
           <Route path="/options_level_5B" element={<Options_Level_5B />} />
-          <Route path="/level_5_2A" element={<Level_5_2A />} />
+          <Route path="/level_5_1" element={<Level_5_1 />} />
           <Route path="/level_6_1" element={<Level_6_1 />} />
           <Route path="/backstory_level_7_1" element={<Backstory_Level_7_1 />} />
           <Route path="/backstory_level_6_2" element={<Backstory_Level_6_2 />} />
