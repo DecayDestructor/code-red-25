@@ -1,12 +1,13 @@
-import { useState, useEffect } from "react";
+
 import level2_2 from '../../assets/level2_2.webp';
 import level2_1 from '../../assets/level2_1.webp'; 
 
 import { useNavigate } from "react-router-dom";
-import Level2_Puzzle from "./Level2_Puzzle";
+
+import TextDisplayComponent from "../../components/TextDisplayComponent";
 
 const Level2 = () => {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+
   const level2_texts = [
    
     "For the next relic you (Eryndor) walk to the catacombs of Ehmest to find the trumpet of war used by Malakaroth as that can be the relic where the second piece of his soul is hidden. Within the ancient catacombs of Ehmest, a soft glow begins to emanate from the intricate carvings on the walls.",
@@ -16,97 +17,17 @@ const Level2 = () => {
     
   ];
 
-
-
-  const [currentTextIndex, setCurrentTextIndex] = useState(0);
-  const [displayedText, setDisplayedText] = useState("");
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [backgroundImage, setBackgroundImage] = useState(level2_1);
-  const [showQuestion, setShowQuestion] = useState(false);
-
   const navigate = useNavigate();
+  const handleTextComplete = () => navigate("/level2_puzzle");
 
-  useEffect(() => {
-    if (currentTextIndex >= 2 && currentTextIndex < 4) {
-      setBackgroundImage(level2_2);
-    }  else {
-      setBackgroundImage(level2_1);
-    }
-
-    if (currentIndex < level2_texts[currentTextIndex]?.length) {
-      const timeout = setTimeout(() => {
-        const char = level2_texts[currentTextIndex][currentIndex];
-        setDisplayedText((prev) => prev + char);
-        setCurrentIndex(currentIndex + 1);
-      }, 20);
-
-      return () => clearTimeout(timeout);
-    }
-  }, [currentIndex, level2_texts, currentTextIndex]);
-
-  const handleNext = () => {
-    if (currentTextIndex + 1 < level2_texts.length) {
-      setDisplayedText("");
-      setCurrentIndex(0);
-      setCurrentTextIndex(currentTextIndex + 1);
-    } else {
-      setShowQuestion(true);
-      
-    }
-  };
-
-  const handleBack = () => {
-    if (currentTextIndex > 0) {
-      setDisplayedText("");
-      setCurrentIndex(0);
-      setCurrentTextIndex(currentTextIndex - 1);
-    } 
-  };
 
 
   return (
-    <div
-      className="flex justify-center h-screen  items-center flex-col imageContainer"
-      style={{
-        backgroundImage: `url(${backgroundImage})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        height: "100vh",
-        transition: "background-image 0.8s ease-in-out",
-      }}
-    >
-      {!showQuestion ? (
-        <>
-          <div className="boundary">
-            <div
-              className="font-serif text-container"
-              style={{ fontFamily: "'Pirata One', cursive" }}
-            >
-              {displayedText}
-            </div>
-          </div>
-          <div className="button flex">
-            <button
-              onClick={handleBack}
-              className="btn bg-black hover:bg-gray-700 text-white"
-            >
-              Back
-            </button>
-            <button
-              onClick={handleNext}
-              className="btn hover:bg-blue-800 text-white"
-            >
-              Next
-            </button>
-          </div>
-        </>
-      ) : (
-        <>
-        <Level2_Puzzle/>
-
-        </>
-      )}
-    </div>
+    <TextDisplayComponent
+          texts={level2_texts}
+          images={[level2_1, level2_2]}
+          onTextComplete={handleTextComplete}
+        />
   );
 };
 

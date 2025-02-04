@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Orb from "../../assets/orb8.png"
+import level2_2 from '../../assets/level2_2.webp';
+
 
 const Level2_Puzzle = () => {
 
@@ -17,7 +19,6 @@ const Level2_Puzzle = () => {
       newValues[index] = value;
       setSliderValues(newValues);
     
-      // Check if the puzzle is solved
       const isSolved = newValues.every((val, i) => val === targetPositions[i]);
       setSolved(isSolved);
 
@@ -32,6 +33,16 @@ const Level2_Puzzle = () => {
 
 
   return (
+    <div
+    className="flex justify-center h-screen  items-center flex-col imageContainer"
+    style={{
+      backgroundImage: `url(${level2_2})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      height: "100vh",
+      transition: "background-image 0.8s ease-in-out",
+    }}
+  >
     <div className=" flex items-center boundary justify-center ">
     <div className="max-w-4xl w-full bg-gradient-to-b bg-zinc-50/10  p-8 rounded-lg border border-amber-900/800 shadow-2xl">
 
@@ -106,6 +117,16 @@ const Level2_Puzzle = () => {
         </div>
       </div>
     </div>
+  </div>
+  <div className="button flex">
+          <Link
+              to="/level2"
+              className="btn bg-black hover:bg-gray-700 text-white"
+            >
+              Back
+            </Link>
+
+            </div>
   </div>
   )
 }
