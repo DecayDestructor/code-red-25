@@ -40,7 +40,7 @@ const Backstory_1 = () => {
                 </h1>
                 {isTypingComplete && (
                     <button
-                    onClick={() => (window.location.href = "/Level_5_1.html")}
+                    onClick={() => (window.location.href = "/Level_5A.html")}
                         className="absolute bottom-[-4rem] right-0 px-6 py-3 bg-white bg-opacity-70 text-2xl tracking-wide rounded-lg hover:bg-opacity-90 transition-transform transform hover:scale-105"
                     >
                         Next

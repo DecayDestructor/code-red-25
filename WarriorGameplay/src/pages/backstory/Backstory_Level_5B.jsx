@@ -40,7 +40,7 @@ With Raven's instincts guiding you, a crucial decision lies ahead: follow the ma
             setCurrentPassage(secondPassage);
         } else {
             // If showing the second passage, navigate to the next level
-            navigate("/options_level_5b");
+            navigate("/level_5b");
         }
     };
 

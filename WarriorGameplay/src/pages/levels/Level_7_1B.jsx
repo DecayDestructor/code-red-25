@@ -13,7 +13,7 @@ const HiddenChallengeComponent = () => {
     if (colorChanged && userInput.trim().toUpperCase() === "C86FE9E9CC38771BF90CE8AB26C17806E21305B3E040DD49EF475DC989CD8C67") {
       setResultMessage("Correct! Proceeding to next level...");
       setTimeout(() => {
-        navigate("/next-level");
+        navigate("/backstory_level_7_3");
       }, 1500);
     } else if (!colorChanged) {
       setResultMessage("Incomplete!");
