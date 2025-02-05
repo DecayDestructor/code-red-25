@@ -1,4 +1,4 @@
-const waypoints = [
+export const waypoints = [
   {
     x: -124.21331566744,
     y: 475.322954620735
@@ -39,5 +39,4 @@ const waypoints = [
     x: 1407.75091089765,
     y: 286.518714806227
   }
-]
-export default waypoints;
+];

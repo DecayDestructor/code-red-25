@@ -1,7 +1,7 @@
-import Sprite from "./Sprite";
-import waypoints from "./waypoints"; 
+import { Sprite } from './Sprite.js';
+import { waypoints } from '../waypoints.js';
 
-export default class Enemy extends Sprite {
+export class Enemy extends Sprite {
   constructor({ position = { x: 0, y: 0 } }) {
     super({
       position,
@@ -18,7 +18,7 @@ export default class Enemy extends Sprite {
       x: this.position.x + this.width / 2,
       y: this.position.y + this.height / 2
     };
-    this.radius = 1000;
+    this.radius = 50;
     this.health = 100;
     this.velocity = {
       x: 0,
@@ -26,9 +26,10 @@ export default class Enemy extends Sprite {
     };
   }
 
-  draw(c) {
-    super.draw(c); 
+  draw() {
+    super.draw();
 
+    // health bar
     c.fillStyle = 'red';
     c.fillRect(this.position.x, this.position.y - 15, this.width, 10);
 
@@ -41,8 +42,8 @@ export default class Enemy extends Sprite {
     );
   }
 
-  update(c) {
-    this.draw(c); 
+  update() {
+    this.draw();
     super.update();
 
     const waypoint = waypoints[this.waypointIndex];
@@ -50,7 +51,7 @@ export default class Enemy extends Sprite {
     const xDistance = waypoint.x - this.center.x;
     const angle = Math.atan2(yDistance, xDistance);
 
-    const speed = 3;
+    const speed = 3.5;
 
     this.velocity.x = Math.cos(angle) * speed;
     this.velocity.y = Math.sin(angle) * speed;

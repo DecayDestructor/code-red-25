@@ -1,4 +1,4 @@
-export default class Sprite {
+export class Sprite {
   constructor({
     position = { x: 0, y: 0 },
     imageSrc,
@@ -8,10 +8,6 @@ export default class Sprite {
     this.position = position;
     this.image = new Image();
     this.image.src = imageSrc;
-    this.image.onload = () => {
-      this.isLoaded = true;  
-      console.log(`Image loaded: ${imageSrc}`);
-    };
     this.frames = {
       max: frames.max,
       current: 0,
@@ -19,25 +15,18 @@ export default class Sprite {
       hold: 3
     };
     this.offset = offset;
-    this.isLoaded = false; 
   }
 
-  draw(c) {
-    if (!this.image || !this.isLoaded) {
-      console.log('Image not loaded or not initialized!');
-      return; 
-    }
-
+  draw() {
     const cropWidth = this.image.width / this.frames.max;
     const crop = {
       position: {
-        x: cropWidth * this.frames.current, 
+        x: cropWidth * this.frames.current,
         y: 0
       },
       width: cropWidth,
       height: this.image.height
     };
-
     c.drawImage(
       this.image,
       crop.position.x,
@@ -52,6 +41,7 @@ export default class Sprite {
   }
 
   update() {
+    // responsible for animation
     this.frames.elapsed++;
     if (this.frames.elapsed % this.frames.hold === 0) {
       this.frames.current++;

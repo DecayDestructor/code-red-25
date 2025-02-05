@@ -1,4 +1,4 @@
-export default class PlacementTile {
+export class PlacementTile {
   constructor({ position = { x: 0, y: 0 } }) {
     this.position = position;
     this.size = 64;
@@ -6,13 +6,13 @@ export default class PlacementTile {
     this.occupied = false;
   }
 
-  draw(c) {
+  draw() {
     c.fillStyle = this.color;
     c.fillRect(this.position.x, this.position.y, this.size, this.size);
   }
 
-  update(mouse, c) {
-    this.draw(c); 
+  update(mouse) {
+    this.draw();
 
     if (
       mouse.x > this.position.x &&
@@ -21,8 +21,6 @@ export default class PlacementTile {
       mouse.y < this.position.y + this.size
     ) {
       this.color = 'white';
-    } else {
-      this.color = 'rgba(255, 255, 255, 0.15)';
-    }
+    } else this.color = 'rgba(255, 255, 255, 0.15)';
   }
 }
