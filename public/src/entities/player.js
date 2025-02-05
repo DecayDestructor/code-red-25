@@ -1,6 +1,6 @@
-import { state, statePropsEnum } from "../state/globalStateManager.js";
-import { healthBar } from "../ui/healthBar.js";
-import { makeBlink } from "./entitySharedLogic.js";
+import { state, statePropsEnum } from "public/src/state/globalStateManager.js";
+import { healthBar } from "public/src/ui/healthBar.js";
+import { makeBlink } from "public/src/entities/entitySharedLogic.js";
 
 export function makePlayer(k) {
   return k.make([

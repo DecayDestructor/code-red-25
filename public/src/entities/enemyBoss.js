@@ -1,6 +1,6 @@
-import { state, statePropsEnum } from "../state/globalStateManager.js";
-import { makeBlink } from "./entitySharedLogic.js";
-import { makeNotificationBox } from "../ui/notificationBox.js";
+import { state, statePropsEnum } from "public/src/state/globalStateManager.js";
+import { makeBlink } from "public/src/entities/entitySharedLogic.js";
+import { makeNotificationBox } from "public/src/ui/notificationBox.js";
 
 export function makeBoss(k, initialPos) {
   return k.make([

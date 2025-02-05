@@ -1,9 +1,9 @@
-import { makeBoss } from "../entities/enemyBoss.js";
-import { makeDrone } from "../entities/enemyDrone.js";
-import { makeCartridge } from "../entities/healthCartridge.js";
-import { makePlayer } from "../entities/player.js";
-import { state } from "../state/globalStateManager.js";
-import { healthBar } from "../ui/healthBar.js";
+import { makeBoss } from "public/src/entities/enemyBoss.js";
+import { makeDrone } from "public/src/entities/enemyDrone.js";
+import { makeCartridge } from "public/src/entities/healthCartridge.js";
+import { makePlayer } from "public/src/entities/player.js";
+import { state } from "public/src/state/globalStateManager.js";
+import { healthBar } from "public/src/ui/healthBar.js";
 
 import {
   setMapColliders,
@@ -11,7 +11,7 @@ import {
   setCameraControls,
   setCameraZones,
   setExitZones,
-} from "./roomUtils.js";
+} from "public/src/scenes/roomUtils.js";
 
 export async function room1(
   k,
