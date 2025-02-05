@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Seagram';
+  src: url('/src/assets/fonts/Seagram tfb.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'MedievalSharp';
+  src: url('/src/assets/fonts/MedievalSharp-Book.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: 'MedievalSharp', sans-serif;
+}
+
+#preloader .progress-bar {
+  width: 200px;
+  height: 2px;
+}
+
+#preloader .progress {
+  transition: width 0.3s ease-out;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.option {
+  margin-left: 35px;
+  margin-right: 35px;
+  padding: 30px 40px;
+  background: linear-gradient(90deg, #3f51b5, #5c6bc0, #283593, #5c6bc0, #3f51b5);
+  background-size: 200% 100%;
+  color: white;
+  border: none;
+  border-radius: 35px;
+  font-size: 1.2em;
+  font-style: italic;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  animation: shimmer 5s infinite linear;
+}
+
+.option:hover {
+  background: linear-gradient(90deg, #5c6bc0, #3f51b5, #283593);
+  border-color: #ffffff;
+  outline: none;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 1);
+  transform: scale(1.1);
+}
