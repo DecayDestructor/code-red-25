@@ -28,8 +28,8 @@ const Level_3 = lazy(() => import('./pages/levels/Level_3'))
 const Backstory_Level_4 = lazy(() =>
   import('./pages/backstory/Backstory_Level_4')
 )
-const Options_Level_4 = lazy(() =>
-  import('./pages/options/Options_Level_4') // Anyone
+const Options_Level_4 = lazy(
+  () => import('./pages/options/Options_Level_4') // Anyone
 )
 const Level_4A = lazy(() => import('./pages/levels/Level_4A'))
 const Backstory_Level_5A = lazy(() =>
@@ -38,15 +38,15 @@ const Backstory_Level_5A = lazy(() =>
 const Backstory_Level_5B = lazy(() =>
   import('./pages/backstory/Backstory_Level_5B')
 )
-const Options_Level_5B = lazy(() =>
-  import('./pages/options/Options_Level_5B') // Anyone
+const Options_Level_5B = lazy(
+  () => import('./pages/options/Options_Level_5B') // Anyone
 )
 const Level_5_2A = lazy(() => import('./pages/levels/Level_5_2A')) // Tattva Jain
 const Level_6_1 = lazy(() => import('./pages/levels/Level_6_1'))
 const Level_6_2 = lazy(() => import('./pages/levels/Level_6_2'))
 const Level_7_1 = lazy(() => import('./pages/levels/Level_7_1'))
-const Options_Level_7A = lazy(() =>
-  import('./pages/options/Options_Level_7A') // Anyone
+const Options_Level_7A = lazy(
+  () => import('./pages/options/Options_Level_7A') // Anyone
 )
 const Level_7_1A = lazy(() => import('./pages/levels/Level_7_1A'))
 const Level_7_1B = lazy(() => import('./pages/levels/Level_7_1B'))
