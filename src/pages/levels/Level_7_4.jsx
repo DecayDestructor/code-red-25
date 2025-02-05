@@ -58,7 +58,7 @@ const Level_7_4 = () => {
           return newHp;
         });
         addToBattleLog(`Time passes... Malakaroth loses ${decrementValue} HP`);
-      }, 10000); // Real minute intervals
+      }, 60000); // Real minute intervals
     }
 
     return () => clearInterval(interval);

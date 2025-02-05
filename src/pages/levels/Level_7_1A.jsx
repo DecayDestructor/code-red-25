@@ -13,7 +13,7 @@ const CombinedComponent = () => {
         if (userInput.trim().toUpperCase() === correctTranslation) {
             setResultMessage("Correct! Well done!");
             setTimeout(() => {
-                navigate("/backstory_level_7_1b");
+                navigate("/ ");
             }, 1500);
         } else {
             setResultMessage("Incorrect. Try again!");
@@ -35,7 +35,6 @@ const CombinedComponent = () => {
                 className="object-cover w-full h-full absolute z-0"
             />
             <LayoutPage />
-                // Input and submit box section
             <div className="bg-black bg-opacity-50 backdrop-blur-md shadow-lg rounded-lg p-8 w-11/12 sm:w-2/3 lg:w-1/3 text-white text-center">
                 <h1 className="text-2xl font-bold mb-4">Enter Answer</h1>
                 <input

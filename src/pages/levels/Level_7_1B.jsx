@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import LayoutPage from '../interfaces/LayoutPage';
 
 const HiddenChallengeComponent = () => {
   const [userInput, setUserInput] = useState("");
@@ -28,13 +29,14 @@ const HiddenChallengeComponent = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen relative overflow-hidden">
+    <div className="flex justify-center items-center flex-col h-screen relative">
       {/* Hidden instruction */}
       <img
-                src="src/assets/levels/Level_7_1A.png"
-                alt="Background"
-                className="object-cover w-full h-full absolute z-0"
-            />
+        src="src/assets/levels/Level_7_1B.jpg"
+        alt="Background"
+        className="object-cover w-full h-full absolute z-0"
+      />
+      <LayoutPage />
       {/* Central panel */}
       <div
         className="w-2/3 h-2/3 flex flex-col justify-center items-center relative"

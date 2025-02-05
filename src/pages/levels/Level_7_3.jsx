@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import LayoutPage from '../interfaces/LayoutPage';
 
 const YourComponent = () => {
   const navigate = useNavigate();
@@ -32,6 +33,7 @@ const YourComponent = () => {
         alt="Background"
         className="object-cover w-full h-full absolute z-0"
       />
+      <LayoutPage />
 
       <div className="relative z-10 text-center p-8 rounded-lg m-8">
         <h1 className="text-4xl font-extrabold mb-4 text-white drop-shadow-lg">
@@ -65,7 +67,7 @@ const YourComponent = () => {
           />
         </form>
       </div>
-      <a href={"link"} hidden />
+      <a href={"https://docs.google.com/document/d/1sjiGhP8IMtobg1o5iGfNM1JxFcf6kcijlh2LtyCz0B8/edit?usp=sharing"} hidden />
     </div>
   );
 };
