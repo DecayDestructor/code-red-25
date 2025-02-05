@@ -54,14 +54,14 @@ let round = 1;
 let enemyCount = 4;
 let spawnInProgress = false;
 
-let baseBuildingCost = 40; 
+let baseBuildingCost = 45; 
 
 function startRound() {
   if (spawnInProgress) return;
   spawnInProgress = true;
   document.querySelector('#round').innerHTML = `Round: ${round}`;
 
-  const adjustedEnemyCount = round > 3 ? enemyCount * 1.5 : enemyCount;
+  const adjustedEnemyCount = round > 2 ? enemyCount * 1.5 : enemyCount;
   spawnEnemies(adjustedEnemyCount);
 
   if (round > 3) {
@@ -76,10 +76,13 @@ function startRound() {
 
   setTimeout(() => {
     round++;
-    enemyCount += 2;
+    enemyCount += 1;
+    if(round > 7){
+      enemyCount += (2 * (round % 7));
+    }
     spawnInProgress = false;
 
-    if (round > 6) {
+    if (round > 10) {
       window.location.href = '/level8';
     }
 
