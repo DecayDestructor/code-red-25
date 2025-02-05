@@ -1,4 +1,4 @@
-import { state, statePropsEnum } from "../state/globalStateManager.js";
+import { state, statePropsEnum } from "public/src/state/globalStateManager.js";
 
 export function setBackgroundColor(k, hexColorCode) {
   k.add([

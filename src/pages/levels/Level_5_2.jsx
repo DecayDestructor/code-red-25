@@ -1,62 +1,75 @@
 import React, { useState, useEffect } from 'react';
 import LayoutPage from '../interfaces/LayoutPage';
 
-const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 const Hyperplexed = ({ id }) => {
-    const [text, setText] = useState("HYPERPLEXED");
-    const [showRedirectLink, setShowRedirectLink] = useState(false);
+  const [text, setText] = useState('HYPERPLEXED')
+  const [showRedirectLink, setShowRedirectLink] = useState(false)
 
-    useEffect(() => {
-        const intervalId = setInterval(() => {
-            setText(prevText =>
-                prevText.split("").map(() => letters[Math.floor(Math.random() * letters.length)]).join("")
-            );
-        }, 30);
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setText((prevText) =>
+        prevText
+          .split('')
+          .map(() => letters[Math.floor(Math.random() * letters.length)])
+          .join('')
+      )
+    }, 30)
 
-        const targetNode = document.getElementById(id);
+    const targetNode = document.getElementById(id)
 
-        const observer = new MutationObserver((mutationsList) => {
-            for (let mutation of mutationsList) {
-                if (mutation.type === 'attributes' && !targetNode.classList.contains('hyperplexed')) {
-                    handleClassRemoval();
-                }
-            }
-        });
+    const observer = new MutationObserver((mutationsList) => {
+      for (let mutation of mutationsList) {
+        if (
+          mutation.type === 'attributes' &&
+          !targetNode.classList.contains('hyperplexed')
+        ) {
+          handleClassRemoval()
+        }
+      }
+    })
 
-        observer.observe(targetNode, { attributes: true });
+    observer.observe(targetNode, { attributes: true })
 
-        return () => {
-            clearInterval(intervalId);
-            observer.disconnect();
-        };
-    }, [id]);
+    return () => {
+      clearInterval(intervalId)
+      observer.disconnect()
+    }
+  }, [id])
 
-    const handleClassRemoval = () => {
-        setShowRedirectLink(true);
-    };
+  const handleClassRemoval = () => {
+    setShowRedirectLink(true)
+  }
 
-    return (
-        <div id={id} className="my-5">
-            {showRedirectLink ? (
-                <div className="text-white p-5 rounded-lg text-center max-w-[80%] mx-auto">
-                    <p></p>
-                    <a href="https://www.youtube.com/watch?v=lr1L_xUKB1E"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-yellow-300 underline">
-                        Visit YouTube
-                    </a>
-                </div>
-            ) : (
-                <h1 className={`text-white text-2xl font-mono my-5 ${id.endsWith('1') || id.endsWith('3') ? '-translate-y-[10px]' : 'translate-y-[10px]'
-                    }`}>
-                    {text}
-                </h1>
-            )}
+  return (
+    <div id={id} className="my-5">
+      {showRedirectLink ? (
+        <div className="bg-black/80 text-white p-5 rounded-lg text-center max-w-[80%] mx-auto">
+          <p></p>
+          <a
+            href="https://www.youtube.com/watch?v=lr1L_xUKB1E"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-yellow-300 underline"
+          >
+            Visit YouTube
+          </a>
         </div>
-    );
-};
+      ) : (
+        <h1
+          className={`text-white text-2xl font-mono my-5 ${
+            id.endsWith('1') || id.endsWith('3')
+              ? '-translate-y-[10px]'
+              : 'translate-y-[10px]'
+          }`}
+        >
+          {text}
+        </h1>
+      )}
+    </div>
+  )
+}
 
 const App = () => {
     return (
@@ -77,4 +90,4 @@ const App = () => {
     );
 };
 
-export default App;
+export default App

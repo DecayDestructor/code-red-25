@@ -1,4 +1,4 @@
-import kaboom from "../lib/kaboom.mjs";
+import kaboom from "public/lib/kaboom.mjs";
 
 export const scale = 2;
 export const k = kaboom({

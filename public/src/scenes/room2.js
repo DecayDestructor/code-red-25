@@ -1,13 +1,13 @@
-import { makeCartridge } from "../entities/healthCartridge.js";
-import { makePlayer } from "../entities/player.js";
-import { healthBar } from "../ui/healthBar.js";
+import { makeCartridge } from "public/src/entities/healthCartridge.js";
+import { makePlayer } from "public/src/entities/player.js";
+import { healthBar } from "public/src/ui/healthBar.js";
 import {
   setBackgroundColor,
   setMapColliders,
   setCameraZones,
   setExitZones,
   setCameraControls,
-} from "./roomUtils.js";
+} from "public/src/scenes/roomUtils.js";
 
 export function room2(k, roomData, previousSceneData) {
   setBackgroundColor(k, "#a2aed5");

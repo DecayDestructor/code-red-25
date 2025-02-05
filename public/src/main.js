@@ -1,8 +1,8 @@
-import { k } from "./kaboomLoader.js";
-import { room1 } from "./scenes/room1.js";
-import { room2 } from "./scenes/room2.js";
-import { setBackgroundColor } from "./scenes/roomUtils.js";
-import { makeNotificationBox } from "./ui/notificationBox.js";
+import { k } from "public/src/kaboomLoader.js";
+import { room1 } from "public/src/scenes/room1.js";
+import { room2 } from "public/src/scenes/room2.js";
+import { setBackgroundColor } from "public/src/scenes/roomUtils.js";
+import { makeNotificationBox } from "public/src/ui/notificationBox.js";
 
 async function main() {
   const room1Data = await (await fetch("./maps/room1.json")).json();

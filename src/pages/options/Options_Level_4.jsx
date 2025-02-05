@@ -1,70 +1,70 @@
-import React, { useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const Level5_2 = () => {
-  const [hoveredButton, setHoveredButton] = useState(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const navigate = useNavigate();
+  const [hoveredButton, setHoveredButton] = useState(null)
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const navigate = useNavigate()
 
   const handleOption1Click = () => {
     setTimeout(() => {
-      navigate("/backstory_level_4A");
-    }, 500);
-  };
+      navigate('/backstory_level_4A')
+    }, 500)
+  }
 
   const handleOption2Click = () => {
     setTimeout(() => {
-      navigate("/backstory_level_5B");
-    }, 500);
-  };
+      navigate('/backstory_level_5B')
+    }, 500)
+  }
 
   // Calculate evasive movement for the second button
   const calculateEvasiveMovement = (e, buttonRect) => {
-    if (!buttonRect) return { x: 0, y: 0 };
-    
-    const buttonCenterX = buttonRect.left + buttonRect.width / 2;
-    const buttonCenterY = buttonRect.top + buttonRect.height / 2;
-    
+    if (!buttonRect) return { x: 0, y: 0 }
+
+    const buttonCenterX = buttonRect.left + buttonRect.width / 2
+    const buttonCenterY = buttonRect.top + buttonRect.height / 2
+
     // Calculate direction from mouse to button center
-    const dirX = e.clientX - buttonCenterX;
-    const dirY = e.clientY - buttonCenterY;
-    
+    const dirX = e.clientX - buttonCenterX
+    const dirY = e.clientY - buttonCenterY
+
     // Normalize and inverse the direction
-    const length = Math.sqrt(dirX * dirX + dirY * dirY);
-    const normalizedX = dirX / length;
-    const normalizedY = dirY / length;
-    
+    const length = Math.sqrt(dirX * dirX + dirY * dirY)
+    const normalizedX = dirX / length
+    const normalizedY = dirY / length
+
     // Movement strength decreases as distance increases
-    const distanceFactor = Math.min(1, 100 / length);
-    
+    const distanceFactor = Math.min(1, 100 / length)
+
     return {
-      x: -normalizedX * 1000 * distanceFactor,
-      y: -normalizedY * 1000 * distanceFactor
-    };
-  };
+      x: -normalizedX * 1000 * distanceFactor + 1000,
+      y: -normalizedY * 1000 * distanceFactor + 1000,
+    }
+  }
 
   const handleMouseMove = (e) => {
     if (hoveredButton === 2) {
-      const buttonElement = document.getElementById('evasiveButton');
+      const buttonElement = document.getElementById('evasiveButton')
       if (buttonElement) {
-        const buttonRect = buttonElement.getBoundingClientRect();
-        const movement = calculateEvasiveMovement(e, buttonRect);
-        setMousePosition(movement);
+        const buttonRect = buttonElement.getBoundingClientRect()
+        const movement = calculateEvasiveMovement(e, buttonRect)
+        setMousePosition(movement)
       }
     }
-  };
+  }
 
   return (
-    <div 
+    <div
       className="flex justify-center items-center min-h-screen bg-cover bg-center bg-fixed relative overflow-hidden"
-      style={{ 
+      style={{
         backgroundImage: "url('src/assets/options/Options_Level_4.png')",
       }}
       onMouseMove={handleMouseMove}
     >
       {/* Animated overlay gradients */}
       <div className="absolute inset-0 bg-gradient-to-r from-blue-900/30 via-transparent to-purple-900/30 animate-pulse" />
-      
+
       {/* Main content */}
       <div className="w-full max-w-6xl mx-4 relative z-10">
         <div className="text-center mb-20">
@@ -105,14 +105,18 @@ const Level5_2 = () => {
             onClick={handleOption2Click}
             onMouseEnter={() => setHoveredButton(2)}
             onMouseLeave={() => {
-              setHoveredButton(null);
-              setMousePosition({ x: 0, y: 0 });
+              setHoveredButton(null)
+              setMousePosition({ x: 0, y: 0 })
             }}
             style={{
-              transform: hoveredButton === 2 ? 
-                `translate(${mousePosition.x}px, ${mousePosition.y}px)` : 
-                'translate(0, 0)',
-              transition: hoveredButton === 2 ? 'transform 0.1s ease-out' : 'transform 0.3s ease-out'
+              transform:
+                hoveredButton === 2
+                  ? `translate(${mousePosition.x}px, ${mousePosition.y}px)`
+                  : 'translate(0, 0)',
+              transition:
+                hoveredButton === 2
+                  ? 'transform 1s ease-out'
+                  : 'transform 1s ease-out',
             }}
           >
             <div className="relative h-full w-full transition-all duration-500 transform-gpu group-hover:scale-105 group-hover:rotate-x-12">
@@ -133,7 +137,7 @@ const Level5_2 = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Level5_2;
+export default Level5_2
