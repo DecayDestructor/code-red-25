@@ -1,6 +1,5 @@
 import React, { useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import jumpscareVideo from '../../assets/jumpscares/Jumpscare_6_2.MP4';
 
 const Jumpscare_6_2 = () => {
   const videoRef = useRef(null);
@@ -27,7 +26,7 @@ const Jumpscare_6_2 = () => {
     <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%' }}>
       <video 
         ref={videoRef}
-        src={jumpscareVideo} 
+        src="src/assets/jumpscares/Jumpscare_6_2.mp4"
         autoPlay 
         muted 
         style={{ width: '100%', height: '100%', objectFit: 'cover' }}
