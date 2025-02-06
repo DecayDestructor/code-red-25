@@ -1,4 +1,4 @@
-const pool = require('../db.js')
+const pool = require('../lib/db.js')
 // import express
 const express = require('express')
 const app = express()
