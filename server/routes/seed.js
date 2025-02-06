@@ -70,10 +70,6 @@ router.post('/tables', async (req, res) => {
   }
 })
 
-router.post('/leveltables', async (req, res) => {
-  const { level } = req.body
-})
-
 //insert a user
 
 router.post('/team', async (req, res) => {
@@ -108,6 +104,41 @@ router.post('/team', async (req, res) => {
   } catch (err) {
     console.error(err.stack)
     res.status(500).send('An error occurred while inserting the user')
+  }
+})
+
+router.post('/insert-answer/wizard/:level', async (req, res) => {
+  const { answer } = req.body
+  const { level } = req.params
+  const insertAnswerQuery = `
+    INSERT INTO wizard_level (level, answer)
+    VALUES ($1, $2)
+    RETURNING *;
+  `
+  try {
+    const result = await pool.query(insertAnswerQuery, [level, answer])
+    res.status(200).send(result.rows[0])
+  } catch (err) {
+    console.error(err.stack)
+    res.status(500).send('An error occurred while inserting the answer')
+  }
+})
+
+//create similar route for warrior
+router.post('/insert-answer/warrior/:level', async (req, res) => {
+  const { answer } = req.body
+  const { level } = req.params
+  const insertAnswerQuery = `
+    INSERT INTO warrior_level (level, answer)
+    VALUES ($1, $2)
+    RETURNING *;
+  `
+  try {
+    const result = await pool.query(insertAnswerQuery, [level, answer])
+    res.status(200).send(result.rows[0])
+  } catch (err) {
+    console.error(err.stack)
+    res.status(500).send('An error occurred while inserting the answer')
   }
 })
 
