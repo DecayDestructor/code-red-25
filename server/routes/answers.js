@@ -3,7 +3,7 @@ const pool = require('../lib/db.js')
 const express = require('express')
 const app = express()
 const redis = require('../lib/redis.js')
-
+const warriorAnswers = require('../data/warrior-answers.js')
 const router = express.Router()
 
 router.get('/get-answer/warrior/:level', async (req, res) => {
@@ -73,104 +73,21 @@ router.get('/get-answer/wizard/:level', async (req, res) => {
 router.get('/check-answer/warrior/:level', async (req, res) => {
   const { level } = req.params
   const { answer, teamId } = req.body
-  const redisKey = `warrior:level:${level}`
+  // const redisKey = `warrior:level:${level}`
   const teamKey = `team:${teamId}`
-
-  try {
-    const cachedData = await redis.get(redisKey)
-
-    if (cachedData) {
-      console.log('Serving from Redis Cache')
-      const result = JSON.parse(cachedData)
-      console.log(result)
-
-      const isCorrect = result.some(
-        (row) => row.answer.toLowerCase() === answer.toLowerCase()
-      )
-
-      if (isCorrect) {
-        await redis.hset(teamKey, 'warrior:level', level)
-        console.log(await redis.hgetall(teamKey))
-        return res.status(200).json({ correct: true })
-      } else {
-        return res.status(200).json({ correct: false })
-      }
-    }
-
-    // If not cached, fetch from PostgreSQL
-    console.log('Not in cache, fetching from PostgreSQL')
-    const getAnswerQuery = `SELECT * FROM warrior_level WHERE level = $1`
-    const result = await pool.query(getAnswerQuery, [level])
-    console.log(result)
-
-    if (result.rows.length === 0) {
-      return res.status(404).json({ error: 'Level not found' })
-    }
-
-    // Cache the retrieved answers in Redis with expiration
-    await redis.set(redisKey, JSON.stringify(result.rows), 'EX', 300)
-
-    // Check if the provided answer is correct
-    const isCorrect = result.rows.some(
-      (row) => row.answer.toLowerCase() === answer.toLowerCase()
-    )
-
-    if (isCorrect) {
-      await redis.hset(teamKey, 'warrior:level', level)
-      console.log(await redis.hgetall(teamKey))
-      return res.status(200).json({ correct: true })
-    } else {
-      return res.status(200).json({ correct: false })
-    }
-  } catch (error) {
-    console.error('Error fetching data:', error)
-    return res.status(500).send('Server Error')
+  console.log(warriorAnswers[`${level}`])
+  if (!warriorAnswers[`${level}`]) {
+    return res.status(404).json({ error: 'Level not found' })
   }
-})
-
-router.get('check-answer/wizard/:level', async (req, res) => {
-  const { level } = req.params
-  const { answer, teamId } = req.body
-  const redisKey = `wizard:level:${level}`
-  const teamKey = `team:${teamId}`
-  try {
-    const cachedData = await redis.get(redisKey)
-    if (cachedData) {
-      console.log('Serving from Redis Cache')
-      const result = JSON.parse(cachedData)
-      console.log(result)
-      const isCorrect = result.some(
-        (row) => row.answer.toLowerCase() === answer.toLowerCase()
-      )
-      if (isCorrect) {
-        await redis.hset(teamKey, 'wizard:level', level)
-        console.log(await redis.hgetall(teamKey))
-        return res.status(200).json({ correct: true })
-      } else {
-        return res.status(200).json({ correct: false })
-      }
-    }
-    const answerQuery = 'SELECT * FROM wizard_level WHERE level= $1 '
-    const result = await pool.query(answerQuery, [level])
-    if (result.rows.length === 0) {
-      return res.status(404).json({ error: 'Level not found' })
-    }
-    await redis.set(redisKey, JSON.stringify(result.rows), 'EX', 300)
-    const isCorrect = result.rows.some(
-      (row) => row.answer.toLowerCase() === answer.toLowerCase()
-    )
-    if (isCorrect) {
-      await redis.hset(teamKey, 'wizard:level', level)
-      console.log(await redis.hgetall(teamKey))
-      return res.status(200).json({ correct: true })
-    } else {
-      return res.status(200).json({ correct: false })
-    }
-  } catch (err) {
-    console.error('Error fetching data:', err)
-    return res.status(500).send('Server Error')
+  const isCorrect = warriorAnswers[`${level}`].some(
+    (row) => row.toLowerCase() === answer.toLowerCase()
+  )
+  if (isCorrect) {
+    await redis.hset(teamKey, 'warrior:level', level)
+    // console.log(await redis.hgetall(teamKey))
+    return res.status(200).json({ correct: true })
   }
+  return res.status(200).json({ correct: false })
 })
-// route to check if an answer is correct
 
 module.exports = router
