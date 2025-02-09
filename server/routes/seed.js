@@ -1,7 +1,6 @@
 const pool = require('../lib/db.js')
 // import express
 const express = require('express')
-const app = express()
 
 const router = express.Router()
 
@@ -20,49 +19,33 @@ router.post('/tables', async (req, res) => {
   const createTableQuery = `
   CREATE TABLE IF NOT EXISTS team (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    password VARCHAR(255) NOT NULL
+    name VARCHAR (255),
+    wizard_level VARCHAR(255) NOT NULL,
+    warrior_level VARCHAR(255) NOT NULL
   );`
 
-  const createWizardTableQuery = `
-  CREATE TABLE IF NOT EXISTS wizards (
-    id SERIAL PRIMARY KEY,
-    team_id INT NOT NULL,
-    levels INTEGER[],
-    CONSTRAINT team_id_fk FOREIGN KEY (team_id) REFERENCES team (id) ON DELETE CASCADE
-  );`
-
-  const createWarriorTableQuery = `
-  CREATE TABLE IF NOT EXISTS warriors (
-    id SERIAL PRIMARY KEY,
-    team_id INT NOT NULL,
-    levels INTEGER[],
-    CONSTRAINT team_id_fk FOREIGN KEY (team_id) REFERENCES team (id) ON DELETE CASCADE
-  );`
-
-  const createWizardLevel = `
-  CREATE TABLE IF NOT EXISTS wizard_level(
-    id SERIAL PRIMARY KEY,
-    level VARCHAR(10),
-    answer VARCHAR(255)
-  )
-  `
-  const createWarriorLevel = `
-  CREATE TABLE IF NOT EXISTS warrior_level(
-    id SERIAL PRIMARY KEY,
-    level VARCHAR(10),
-    answer VARCHAR(255)
-  )
-  `
+  // const createWizardLevel = `
+  // CREATE TABLE IF NOT EXISTS wizard_level(
+  //   id SERIAL PRIMARY KEY,
+  //   level VARCHAR(10),
+  //   answer VARCHAR(255)
+  // )
+  // `
+  // const createWarriorLevel = `
+  // CREATE TABLE IF NOT EXISTS warrior_level(
+  //   id SERIAL PRIMARY KEY,
+  //   level VARCHAR(10),
+  //   answer VARCHAR(255)
+  // )
+  // `
 
   try {
     const table = await pool.query(createTableQuery)
     // console.log(response)
-    const wizard = await pool.query(createWizardTableQuery)
-    const warrior = await pool.query(createWarriorTableQuery)
-    const wizard_level = await pool.query(createWizardLevel)
-    const warrior_level = await pool.query(createWarriorLevel)
-    console.log(table, warrior, wizard, wizard_level, warrior_level)
+
+    // const wizard_level = await pool.query(createWizardLevel)
+    // const warrior_level = await pool.query(createWarriorLevel)
+    // console.log(table, wizard_level, warrior_level)
     res.status(200).send('Table created successfully') // Send a success response.
   } catch (err) {
     console.error(err.stack)
@@ -73,33 +56,18 @@ router.post('/tables', async (req, res) => {
 //insert a user
 
 router.post('/team', async (req, res) => {
-  const { name, password } = req.body
+  const { name } = req.body
   // insert into the three tables
   const insertTeamQuery = `
-    INSERT INTO team (name, password)
-    VALUES ($1, $2)
+    INSERT INTO team (name, wizard_level, warrior_level)
+    VALUES ($1, $2, $3)
     RETURNING *;
   `
-
-  // insert into wizard and warrior with foreign key
-  const insertWizardQuery = `
-   INSERT INTO wizards (team_id, levels)
-   VALUES($1,$2)
-   RETURNING *`
-
-  const insertWarriorQuery = `
-   INSERT INTO warriors (team_id, levels)
-   VALUES($1,$2)
-   RETURNING *`
   try {
-    const team = await pool.query(insertTeamQuery, [name, password])
-    const wizard = await pool.query(insertWizardQuery, [team.rows[0].id, []])
-    const warrior = await pool.query(insertWarriorQuery, [team.rows[0].id, []])
+    const team = await pool.query(insertTeamQuery, [name, 0, 0])
     //return the inserted data
     res.status(200).send({
       team: team.rows[0],
-      wizard: wizard.rows[0],
-      warrior: warrior.rows[0],
     })
   } catch (err) {
     console.error(err.stack)

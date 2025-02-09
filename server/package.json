@@ -4,6 +4,7 @@
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "ioredis": "^5.4.2",
+    "node-cron": "^3.0.3",
     "pg": "^8.13.1"
   },
   "name": "server",
@@ -12,7 +13,6 @@
   "directories": {
     "lib": "lib"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon index.js"
