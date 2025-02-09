@@ -36,7 +36,6 @@ const getDataFromPostgres = async () => {
   try {
     const query = `SELECT id, warrior_level, wizard_level FROM team`
 
-    // Use EXISTS instead of KEYS for better performance
     const redisDataExists = (await redis.keys('team:*')).length
 
     if (redisDataExists == 0) {
