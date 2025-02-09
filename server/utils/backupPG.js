@@ -26,7 +26,9 @@ const backupDataToPostgres = async () => {
         ]
       )
     }
-  } catch (error) {}
+  } catch (error) {
+    console.error(error)
+  }
 }
 
 const getDataFromPostgres = async () => {
@@ -49,7 +51,9 @@ const getDataFromPostgres = async () => {
         })
       }
     }
-  } catch (err) {}
+  } catch (err) {
+    console.error(err)
+  }
 }
 
 getDataFromPostgres()
