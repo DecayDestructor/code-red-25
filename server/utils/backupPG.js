@@ -27,10 +27,10 @@ const backupDataToPostgres = async () => {
         [teamId, warriorLevel, wizardLevel]
       )
 
-      console.log(`✅ Backed up data for Team ${teamId}`)
+      console.log(` Backed up data for Team ${teamId}`)
     }
   } catch (error) {
-    console.error('❌ Backup job failed:', error)
+    console.error(' Backup job failed:', error)
   }
 }
 
