@@ -1,13 +1,10 @@
 const cron = require('node-cron')
 const redis = require('../lib/redis.js')
 const pool = require('../lib/db.js')
+
 const backupDataToPostgres = async () => {
   try {
-    console.log('🔹 Running backup job...')
-
-    // Get all team keys from Redis
     const teamKeys = await redis.keys('team:*')
-    console.log(teamKeys)
 
     for (const teamKey of teamKeys) {
       const teamData = await redis.hgetall(teamKey)
@@ -20,20 +17,45 @@ const backupDataToPostgres = async () => {
 
       // Insert or update team progress in PostgreSQL
       await pool.query(
-        `INSERT INTO team (id, warrior_level, wizard_level)
+        `
+        INSERT INTO team (id, warrior_level, wizard_level)
          VALUES ($1, $2, $3)
          ON CONFLICT (id) DO UPDATE 
-         SET warrior_level = EXCLUDED.warrior_level, wizard_level = EXCLUDED.wizard_level;`,
-        [teamId, warriorLevel, wizardLevel]
+         SET warrior_level = EXCLUDED.warrior_level, wizard_level = EXCLUDED.wizard_level;,]`[
+          (teamId, warriorLevel, wizardLevel)
+        ]
       )
-
-      console.log(` Backed up data for Team ${teamId}`)
     }
-  } catch (error) {
-    console.error(' Backup job failed:', error)
-  }
+  } catch (error) {}
 }
 
-cron.schedule('*/1 * * * *', backupDataToPostgres)
+const getDataFromPostgres = async () => {
+  // const allKeys = await redis.keys('team:*')
+  // console.log(allKeys)
 
-console.log('⏳ Cron job started. Running every 5 minutes...')
+  try {
+    const query = `SELECT id, warrior_level, wizard_level FROM team`
+
+    // Use EXISTS instead of KEYS for better performance
+    const redisDataExists = (await redis.keys('team:*')).length
+
+    if (redisDataExists == 0) {
+      const result = await pool.query(query)
+
+      for (const row of result.rows) {
+        const teamKey = `team:${row.id}`
+        await redis.hset(teamKey, {
+          'warrior:level': row.warrior_level,
+          'wizard:level': row.wizard_level,
+        })
+      }
+    }
+  } catch (err) {}
+}
+
+getDataFromPostgres()
+// Run backup job every 30 seconds
+cron.schedule('*/7 * * * *', backupDataToPostgres)
+
+// Run data fetch job every 30 seconds
+cron.schedule('*/6 * * * *', getDataFromPostgres)
