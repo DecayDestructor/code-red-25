@@ -18,6 +18,8 @@ import Level3_Puzzle from './pages/levels/Level3_Puzzle.jsx';
 import Level4_Puzzle from './pages/levels/Level4_Puzzle.jsx';
 import Level6_Puzzle from './pages/levels/Level6_Puzzle.jsx';
 import Level7_2pre from './pages/levels/Level7_2pre.jsx';
+import Win from './components/Win.jsx';
+import Lose from './components/Lose.jsx';
 
 
 createRoot(document.getElementById('root')).render(
@@ -52,6 +54,9 @@ createRoot(document.getElementById('root')).render(
         <Route path="levels">
           
         </Route>
+
+        <Route path="/win" element={<Win />} />
+        <Route path="/lose" element={<Lose />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,
