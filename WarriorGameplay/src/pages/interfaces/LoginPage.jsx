@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-
+import axios from 'axios'
 const SignupPage = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -9,7 +9,9 @@ const SignupPage = () => {
   const [success, setSuccess] = useState('')
 
   const navigate = useNavigate()
-  const handleSignup = (e) => {
+  console.log(username)
+
+  const handleSignup = async (e) => {
     e.preventDefault()
     setError('')
     setSuccess('')
@@ -20,33 +22,30 @@ const SignupPage = () => {
       return
     }
 
-    if (password.length < 6) {
-      setError('Password must be at least 6 characters long')
+    if (password !== 'CR2025') {
+      setError('Incorrect Password!')
       return
     }
-
-    // Check if user already exists
-    const existingUsers = JSON.parse(localStorage.getItem('users') || '[]')
-    const userExists = existingUsers.some((user) => user.username === username)
-
-    if (userExists) {
-      setError('Username already exists')
-      return
-    }
-
-    // Save new user
-    const newUser = { username, password }
-    const updatedUsers = [...existingUsers, newUser]
 
     try {
-      localStorage.setItem('users', JSON.stringify(updatedUsers))
+      const { data } = await axios.post('/team/login', {
+        id: username,
+      })
+      if (data.error) {
+        setError(data.error)
+        return
+      }
+      console.log(data)
+
+      localStorage.setItem('id', data.id)
       setSuccess('User successfully registered!')
 
       setUsername('')
       setPassword('')
-
-      // Redirect to backstory_1
-      navigate('/backstory_1')
+      setTimeout(() => {
+        navigate('/backstory_1')
+      }, 4000)
+      // navigate('/backstory_1')
     } catch (err) {
       setError('Failed to save user. Please try again.')
       console.error('Signup error:', err)

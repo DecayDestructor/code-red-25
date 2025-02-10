@@ -32,8 +32,8 @@ const backupDataToPostgres = async () => {
 }
 
 const getDataFromPostgres = async () => {
-  // const allKeys = await redis.keys('team:*')
-  // console.log(allKeys)
+  const allKeys = await redis.keys('team:*')
+  console.log(allKeys)
 
   try {
     const query = `SELECT id, warrior_level, wizard_level FROM team`
