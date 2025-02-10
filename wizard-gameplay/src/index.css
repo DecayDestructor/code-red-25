@@ -78,7 +78,7 @@ button:focus-visible {
     @apply w-[780px]  flex flex-col justify-center items-center p-[20px] border-4 border-black rounded-2xl bg-[rgba(255,239,213,0.356)];
   }
   .text-container {
-    @apply text-[32px] font-bold border tracking-normal border-black w-[700px] text-justify p-2.5 rounded-lg bg-[rgba(255,239,213,0.356)] opacity-100 leading-tight;
+    @apply text-black text-[32px] font-bold border tracking-normal border-black w-[700px] text-justify p-2.5 rounded-lg bg-[rgba(255,239,213,0.356)] opacity-100 leading-tight;
   }
   .boldText {
     @apply text-3xl font-bold my-5;
@@ -101,13 +101,13 @@ button:focus-visible {
     @apply bg-blue-500  text-white py-3 px-5 font-bold text-lg border-none cursor-pointer rounded-lg mt-5 mx-7 self-center;
   }
   .answer {
-    @apply text-[24px] tracking-wide bg-[#f9f9f9] p-3 border-0 rounded-2xl m-3  ;
+    @apply text-[24px] tracking-wide bg-[#f9f9f9] p-3 border-0 rounded-2xl m-3 text-black;
   }
   .error{
     @apply  text-[24px] bg-white p-1 rounded-xl  text-red-500 ;
   }
   .heading {
-    @apply text-[52px] font-bold;
+    @apply text-[52px] font-bold text-black;
   }
 }
 

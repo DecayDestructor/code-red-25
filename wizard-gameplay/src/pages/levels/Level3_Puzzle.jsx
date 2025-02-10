@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import LayoutPage from "../../components/Layout";
 import level3_1 from '../../assets/level3_1.webp'; 
 import { Link, useNavigate } from "react-router-dom";
 
@@ -15,7 +15,7 @@ const Level3_Puzzle = () => {
 
  const handleSubmitAnswer = () => {
     const correctAnswer1 = 312211;
-    const correctAnswer2 = 13112221
+    const correctAnswer2 = 13112221;
     const userAnswer1 =  answer1;
     const userAnswer2 =  answer2;
 
@@ -37,7 +37,7 @@ const Level3_Puzzle = () => {
         transition: "background-image 0.8s ease-in-out",
       }}
     >
-
+<LayoutPage />
         <div className=" boundary">
             <div className="heading"> Level 3</div>
 

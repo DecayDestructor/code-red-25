@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import level1_3 from '../../assets/level1_3.webp'; // Ensure the correct image path
 import { Link, useNavigate } from "react-router-dom";
+import LayoutPage from '../../components/Layout'
 
 const Level1_Puzzle = () => {
   const [answer, setAnswer] = useState("");
@@ -34,37 +35,37 @@ const Level1_Puzzle = () => {
         transition: "background-image 0.8s ease-in-out",
       }}
     >
- 
-        <div className=" boundary">
-            <div className="heading"> CRYPTOGRAPHY IS FUN</div>
-            
-          <input
-            type="text"
-            value={answer}
-            className="answer answer-container"
-            onChange={(e) => {
-              setAnswer(e.target.value);
-              setShowError(false);
-            }}
-            placeholder="Enter your answer here"
-          />
-          {showError && <div className="error">❌ Wrong Answer! Try Again</div>}
-          <div className="button flex">
-          <Link
-              to="/level1"
-              className="btn bg-black hover:bg-gray-700 text-white"
-            >
-              Back
-            </Link>
-            <button
-              onClick={handleSubmitAnswer}
-              className="btn bg-green-500 hover:bg-green-700 text-white"
-            >
-              Submit
-            </button>
-            </div>
+      <LayoutPage />
+      <div className=" boundary">
+        <div className="heading "> CRYPTOGRAPHY IS FUN</div>
 
+        <input
+          type="text"
+          value={answer}
+          className="answer answer-container"
+          onChange={(e) => {
+            setAnswer(e.target.value);
+            setShowError(false);
+          }}
+          placeholder="Enter your answer here"
+        />
+        {showError && <div className="error">❌ Wrong Answer! Try Again</div>}
+        <div className="button flex">
+          <Link
+            to="/level1"
+            className="btn bg-black hover:bg-gray-700 text-white"
+          >
+            Back
+          </Link>
+          <button
+            onClick={handleSubmitAnswer}
+            className="btn bg-green-500 hover:bg-green-700 text-white"
+          >
+            Submit
+          </button>
         </div>
+
+      </div>
     </div>
   );
 };

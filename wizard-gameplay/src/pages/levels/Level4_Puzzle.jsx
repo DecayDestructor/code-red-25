@@ -1,5 +1,5 @@
 import { useState} from "react";
-
+import LayoutPage from "../../components/Layout";
 import level4_1 from '../../assets/level4_1.webp'; // Ensure the correct image path
 import { Link, useNavigate } from "react-router-dom";
 
@@ -33,7 +33,7 @@ const Level4_Puzzle = () => {
         transition: "background-image 0.8s ease-in-out",
       }}
     >
-
+<LayoutPage />
       <div className=" boundary">
             <div className="heading">Level 4</div>
 
