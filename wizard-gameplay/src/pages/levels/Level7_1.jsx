@@ -166,10 +166,10 @@ const Level7_1 = () => {
             contentRef.current.innerHTML += commands[7].textIfPasswordNotAddedAndNotSudoAndNotDefeatedMaleVoryx;
           } else {
 
-
-            /////////////////////////////////////////////////////////
-            //Add Navigate code to pre level 7.2///////////////////
-            /////////////////////////////////////////////////////
+            const navigate = useNavigate();
+            setTimeout(() => {
+              navigate("/levels/Level7_2pre");
+            }, 1000);
 
 
 

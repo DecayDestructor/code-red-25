@@ -17,6 +17,7 @@ import Level2_Puzzle from './pages/levels/Level2_Puzzle.jsx';
 import Level3_Puzzle from './pages/levels/Level3_Puzzle.jsx';
 import Level4_Puzzle from './pages/levels/Level4_Puzzle.jsx';
 import Level6_Puzzle from './pages/levels/Level6_Puzzle.jsx';
+import Level7_2pre from './pages/levels/Level7_2pre.jsx';
 
 
 createRoot(document.getElementById('root')).render(
@@ -46,6 +47,8 @@ createRoot(document.getElementById('root')).render(
         
         <Route path="/level7_1" element={<Level7_1 />} />
         <Route path="/level7_2" element={<Level7_2 />} />
+        <Route path="/level7_2pre" element={<Level7_2pre />} />
+
         <Route path="levels">
           
         </Route>
