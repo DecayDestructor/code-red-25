@@ -16,15 +16,15 @@ const backupDataToPostgres = async () => {
       const wizardLevel = teamData['wizard:level'] || 0
 
       // Insert or update team progress in PostgreSQL
-      await pool.query(
+      const data = await pool.query(
         `
         INSERT INTO team (id, warrior_level, wizard_level)
          VALUES ($1, $2, $3)
          ON CONFLICT (id) DO UPDATE 
-         SET warrior_level = EXCLUDED.warrior_level, wizard_level = EXCLUDED.wizard_level;,]`[
-          (teamId, warriorLevel, wizardLevel)
-        ]
+         SET warrior_level = EXCLUDED.warrior_level, wizard_level = EXCLUDED.wizard_level RETURNING *;`,
+        [teamId, warriorLevel, wizardLevel]
       )
+      console.log(data.rows)
     }
   } catch (error) {
     console.error(error)
@@ -42,14 +42,18 @@ const getDataFromPostgres = async () => {
 
     if (redisDataExists == 0) {
       const result = await pool.query(query)
+      console.log(result.rows)
 
-      for (const row of result.rows) {
-        const teamKey = `team:${row.id}`
-        await redis.hset(teamKey, {
-          'warrior:level': row.warrior_level,
-          'wizard:level': row.wizard_level,
-        })
-      }
+      const promises = result.rows.map((row) =>
+        redis.hset(
+          `team:${row.id}`,
+          'warrior:level',
+          row.warrior_level,
+          'wizard:level',
+          row.wizard_level
+        )
+      )
+      await Promise.all(promises)
     }
   } catch (err) {
     console.error(err)
@@ -58,7 +62,5 @@ const getDataFromPostgres = async () => {
 
 getDataFromPostgres()
 // Run backup job every 30 seconds
-cron.schedule('*/7 * * * *', backupDataToPostgres)
-
-// Run data fetch job every 30 seconds
-cron.schedule('*/6 * * * *', getDataFromPostgres)
+cron.schedule('*/7 * * * *', backupDataToPostgres) // Runs every 7 minutes
+cron.schedule('*/5 * * * *', getDataFromPostgres) // Runs every 5 minutes

@@ -1,30 +1,31 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import LayoutPage from '../interfaces/LayoutPage';
-
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import LayoutPage from '../interfaces/LayoutPage'
+import checkAnswers from '../../../utils/checkAnswers'
 const YourComponent = () => {
-  const navigate = useNavigate();
-  const [answer, setAnswer] = useState('');
-  const link = "https://docs.google.com/document/d/1sjiGhP8IMtobg1o5iGfNM1JxFcf6kcijlh2LtyCz0B8/edit?usp=sharing";
-  window.link = link;
+  const navigate = useNavigate()
+  const [answer, setAnswer] = useState('')
+  const link =
+    'https://docs.google.com/document/d/1sjiGhP8IMtobg1o5iGfNM1JxFcf6kcijlh2LtyCz0B8/edit?usp=sharing'
+  window.link = link
 
-  const ans = '!EdocNeddih77@Sna';
+  const ans = '!EdocNeddih77@Sna'
 
-  const checkAnswer = (e) => {
-    e.preventDefault();  // Prevent form submission from refreshing the page
+  const checkAnswer = async (e) => {
+    e.preventDefault() // Prevent form submission from refreshing the page
 
     if (answer.length === 0) {
-      alert("Empty");
-      return;
+      alert('Empty')
+      return
     }
-
+    const { correct } = await checkAnswers(answer, '7_3')
     if (answer === ans) {
-      alert("correct");
-      navigate('/level_7_4');  // Navigate to level_7_4 on correct answer
+      alert('correct')
+      navigate('/level_7_4') // Navigate to level_7_4 on correct answer
     } else {
-      alert("incorrect");
+      alert('incorrect')
     }
-  };
+  }
 
   return (
     <div className="relative flex flex-col items-center justify-center h-screen text-white">
@@ -67,9 +68,14 @@ const YourComponent = () => {
           />
         </form>
       </div>
-      <a href={"https://docs.google.com/document/d/1sjiGhP8IMtobg1o5iGfNM1JxFcf6kcijlh2LtyCz0B8/edit?usp=sharing"} hidden />
+      <a
+        href={
+          'https://docs.google.com/document/d/1sjiGhP8IMtobg1o5iGfNM1JxFcf6kcijlh2LtyCz0B8/edit?usp=sharing'
+        }
+        hidden
+      />
     </div>
-  );
-};
+  )
+}
 
-export default YourComponent;
+export default YourComponent

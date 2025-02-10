@@ -70,7 +70,7 @@ router.get('/get-answer/wizard/:level', async (req, res) => {
   }
 })
 
-router.get('/check-answer/warrior/:level', async (req, res) => {
+router.post('/check-answer/warrior/:level', async (req, res) => {
   const { level } = req.params
   const { answer, teamId } = req.body
   // const redisKey = `warrior:level:${level}`

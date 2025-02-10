@@ -11,6 +11,7 @@ const warriorAnswers = {
   '6_2': ['SSD', 'Secondary Storage', 'Hard Drive'], // Multiple answers for level 6.2
   '7_1A': ['Ichorfonias'],
   '5B': ['HTML'],
+  '5_1': ['Solved'],
 }
 
 module.exports = warriorAnswers

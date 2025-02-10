@@ -1,32 +1,34 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import LayoutPage from '../interfaces/LayoutPage';
+import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import LayoutPage from '../interfaces/LayoutPage'
+import checkAnswers from '../../../utils/checkAnswers'
 
 const HiddenChallengeComponent = () => {
-  const [userInput, setUserInput] = useState("");
-  const [panelColor, setPanelColor] = useState("rgb(0,255,0)"); // Default green
-  const [colorChanged, setColorChanged] = useState(false);
-  const [resultMessage, setResultMessage] = useState("");
-  const navigate = useNavigate();
+  const [userInput, setUserInput] = useState('')
+  const [panelColor, setPanelColor] = useState('rgb(0,255,0)') // Default green
+  const [colorChanged, setColorChanged] = useState(false)
+  const [resultMessage, setResultMessage] = useState('')
+  const navigate = useNavigate()
 
-  const handleVerify = () => {
-    if (colorChanged && userInput.trim().toUpperCase() === "C86FE9E9CC38771BF90CE8AB26C17806E21305B3E040DD49EF475DC989CD8C67") {
-      setResultMessage("Correct! Proceeding to next level...");
+  const handleVerify = async () => {
+    const { correct } = checkAnswers(userInput, '7_1B')
+    if (colorChanged && correct) {
+      setResultMessage('Correct! Proceeding to next level...')
       setTimeout(() => {
-        navigate("/backstory_level_7_3");
-      }, 1500);
+        navigate('/backstory_level_7_3')
+      }, 1500)
     } else if (!colorChanged) {
-      setResultMessage("Incomplete!");
+      setResultMessage('Incomplete!')
     } else {
-      setResultMessage("Incorrect. Try again!");
+      setResultMessage('Incorrect. Try again!')
     }
-  };
+  }
 
   const handleKeyPress = (event) => {
-    if (event.key === "Enter") {
-      handleVerify();
+    if (event.key === 'Enter') {
+      handleVerify()
     }
-  };
+  }
 
   return (
     <div className="flex justify-center items-center flex-col h-screen relative">
@@ -45,9 +47,10 @@ const HiddenChallengeComponent = () => {
         {/* Camouflaged text */}
         <p
           className="absolute top-5 text-center w-full"
-          style={{ color: panelColor, userSelect: "none" }}
+          style={{ color: panelColor, userSelect: 'none' }}
         >
-          SUBMIT C86FE9E9CC38771BF90CE8AB26C17806E21305B3E040DD49EF475DC989CD8C67
+          SUBMIT
+          C86FE9E9CC38771BF90CE8AB26C17806E21305B3E040DD49EF475DC989CD8C67
         </p>
 
         {/* Input and verification area */}
@@ -76,19 +79,19 @@ const HiddenChallengeComponent = () => {
         placeholder=""
         className="absolute bottom-5 left-5 px-4 py-2 rounded-md bg-transparent text-white"
         onChange={(e) => {
-          const colorValue = e.target.value.trim();
+          const colorValue = e.target.value.trim()
           if (/^rgb\(\d{1,3},\d{1,3},\d{1,3}\)$/i.test(colorValue)) {
-            setPanelColor(colorValue);
-            setColorChanged(true);
-            setResultMessage(`Color changed to ${colorValue}!`);
+            setPanelColor(colorValue)
+            setColorChanged(true)
+            setResultMessage(`Color changed to ${colorValue}!`)
           } else {
-            setColorChanged(false);
-            setResultMessage("Enter a valid rgb(x,x,x) format");
+            setColorChanged(false)
+            setResultMessage('Enter a valid rgb(x,x,x) format')
           }
         }}
       />
     </div>
-  );
-};
+  )
+}
 
-export default HiddenChallengeComponent;
+export default HiddenChallengeComponent
