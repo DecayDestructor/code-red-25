@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import LayoutPage from '../interfaces/LayoutPage';
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from 'react'
+import LayoutPage from '../interfaces/LayoutPage'
+import { useNavigate } from 'react-router-dom'
+import checkAnswers from '../../../utils/checkAnswers'
 
-const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 const Hyperplexed = ({ id }) => {
-  const [text, setText] = useState('HYPERPLEXED');
-  const [showRedirectLink, setShowRedirectLink] = useState(false);
+  const [text, setText] = useState('HYPERPLEXED')
+  const [showRedirectLink, setShowRedirectLink] = useState(false)
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -15,10 +16,10 @@ const Hyperplexed = ({ id }) => {
           .split('')
           .map(() => letters[Math.floor(Math.random() * letters.length)])
           .join('')
-      );
-    }, 30);
+      )
+    }, 30)
 
-    const targetNode = document.getElementById(id);
+    const targetNode = document.getElementById(id)
 
     const observer = new MutationObserver((mutationsList) => {
       for (let mutation of mutationsList) {
@@ -26,22 +27,22 @@ const Hyperplexed = ({ id }) => {
           mutation.type === 'attributes' &&
           !targetNode.classList.contains('hyperplexed')
         ) {
-          handleClassRemoval();
+          handleClassRemoval()
         }
       }
-    });
+    })
 
-    observer.observe(targetNode, { attributes: true });
+    observer.observe(targetNode, { attributes: true })
 
     return () => {
-      clearInterval(intervalId);
-      observer.disconnect();
-    };
-  }, [id]);
+      clearInterval(intervalId)
+      observer.disconnect()
+    }
+  }, [id])
 
   const handleClassRemoval = () => {
-    setShowRedirectLink(true);
-  };
+    setShowRedirectLink(true)
+  }
 
   return (
     <div id={id} className="w-full flex items-center justify-center py-4">
@@ -58,37 +59,34 @@ const Hyperplexed = ({ id }) => {
           </a>
         </div>
       ) : (
-        <h1 className="text-white text-2xl font-mono">
-          {text}
-        </h1>
+        <h1 className="text-white text-2xl font-mono">{text}</h1>
       )}
     </div>
-  );
-};
+  )
+}
 
 const App = () => {
-  const [userInput, setUserInput] = useState("");
-  const [resultMessage, setResultMessage] = useState("");
-  const navigate = useNavigate();
+  const [userInput, setUserInput] = useState('')
+  const [resultMessage, setResultMessage] = useState('')
+  const navigate = useNavigate()
 
-  const correctTranslation = "AHA TAMATAR BADE MAJEDAR";
-
-  const handleVerify = () => {
-    if (userInput.trim().toUpperCase() === correctTranslation) {
-      setResultMessage("Correct! Well done!");
+  const handleVerify = async () => {
+    const { correct } = await checkAnswers(userInput, '5B')
+    if (correct) {
+      setResultMessage('Correct! Well done!')
       setTimeout(() => {
-        navigate("/options_level_5b");
-      }, 1500);
+        navigate('/options_level_5b')
+      }, 1500)
     } else {
-      setResultMessage("Incorrect. Try again!");
+      setResultMessage('Incorrect. Try again!')
     }
-  };
+  }
 
   const handleKeyPress = (event) => {
-    if (event.key === "Enter") {
-      handleVerify();
+    if (event.key === 'Enter') {
+      handleVerify()
     }
-  };
+  }
 
   return (
     <div className="flex justify-center items-center flex-col h-screen relative">
@@ -105,7 +103,7 @@ const App = () => {
           <Hyperplexed id="component-3" />
           <Hyperplexed id="component-4" />
         </div>
-        <div className='w-full flex items-center justify-center flex-col mt-4'>
+        <div className="w-full flex items-center justify-center flex-col mt-4">
           <input
             type="text"
             id="morseInput"
@@ -128,7 +126,7 @@ const App = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default App;
+export default App

@@ -74,6 +74,8 @@ router.post('/check-answer/warrior/:level', async (req, res) => {
   const { level } = req.params
   const { answer, teamId } = req.body
   // const redisKey = `warrior:level:${level}`
+  console.log(level, teamId)
+
   const teamKey = `team:${teamId}`
   console.log(warriorAnswers[`${level}`])
   if (!warriorAnswers[`${level}`]) {

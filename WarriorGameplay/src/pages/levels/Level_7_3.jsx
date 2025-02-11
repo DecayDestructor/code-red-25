@@ -9,8 +9,6 @@ const YourComponent = () => {
     'https://docs.google.com/document/d/1sjiGhP8IMtobg1o5iGfNM1JxFcf6kcijlh2LtyCz0B8/edit?usp=sharing'
   window.link = link
 
-  const ans = '!EdocNeddih77@Sna'
-
   const checkAnswer = async (e) => {
     e.preventDefault() // Prevent form submission from refreshing the page
 
@@ -19,7 +17,7 @@ const YourComponent = () => {
       return
     }
     const { correct } = await checkAnswers(answer, '7_3')
-    if (answer === ans) {
+    if (correct) {
       alert('correct')
       navigate('/level_7_4') // Navigate to level_7_4 on correct answer
     } else {

@@ -10,7 +10,7 @@ const warriorAnswers = {
   '7_3': ['!EdocNeddih77@Sna'],
   '6_2': ['SSD', 'Secondary Storage', 'Hard Drive'], // Multiple answers for level 6.2
   '7_1A': ['Ichorfonias'],
-  '5B': ['HTML'],
+  '5B': ['AHA TAMATAR BADE MAJEDAR'],
   '5_1': ['Solved'],
 }
 
