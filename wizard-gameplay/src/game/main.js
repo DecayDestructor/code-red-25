@@ -83,7 +83,7 @@ function startRound() {
     spawnInProgress = false;
 
     if (round > 10) {
-      window.location.href = '/level8';
+      window.location.href = '/win';
     }
 
   }, roundTime);

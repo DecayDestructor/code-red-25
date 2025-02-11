@@ -6,7 +6,7 @@ const Level7_2pre = () => {
   const Level7_2pre_texts = [
     "Now that Malevoryx is dead, Eryndor feels his life force ebbing away into a dark state of death. The self-destruction of the kraken had been an explosion of untold magnitudes, and Eryndor had been fortunate enough to not have been killed immediately.",
     "Using Malevoryx’s third eye, an instrument to see at any location within the Fort Argzak, he notices that Gavin is sorely outnumbered and may be ambushed by the Army of Golems, Malakaroth’s vessels from hell.",
-    "He decides to use the last of his magical powers to prevent the forces of Azzgardos (led by Andwyn) from being defeated by using his remaining power to build multiple catapults and cannons to defeat the golems."
+    "He decides to use the last of his magical powers to prevent the forces of Azzgardos (led by Gavin) from being defeated by using his remaining power to build multiple catapults and cannons to defeat the golems."
 ];
 
 
