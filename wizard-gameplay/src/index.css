@@ -1,0 +1,122 @@
+/* :root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+} */
+
+@import "tailwindcss";
+
+ @layer components {
+  
+  .body {
+    @apply  flex justify-center items-center h-screen m-0 bg-no-repeat bg-center bg-cover w-screen;
+  }
+  .boundary {
+    @apply w-[780px]  flex flex-col justify-center items-center p-[20px] border-4 border-black rounded-2xl bg-[rgba(255,239,213,0.356)];
+  }
+  .text-container {
+    @apply text-black text-[32px] font-bold border tracking-normal border-black w-[700px] text-justify p-2.5 rounded-lg bg-[rgba(255,239,213,0.356)] opacity-100 leading-tight;
+  }
+  .boldText {
+    @apply text-3xl font-bold my-5;
+  }
+  .b1 {
+    @apply flex flex-col h-screen m-0;
+  } 
+  .btn {
+    @apply bg-[#0000ff]  text-white px-5 py-3 font-bold text-lg mt-5 mx-8 rounded-lg self-center cursor-pointer border-0;
+  }
+  .button{
+    @apply flex w-[780px]  flex-row items-center justify-between;
+  }
+  
+  .answer-container {
+    @apply flex flex-col mt-5 ;
+  }
+
+  .submit {
+    @apply bg-blue-500  text-white py-3 px-5 font-bold text-lg border-none cursor-pointer rounded-lg mt-5 mx-7 self-center;
+  }
+  .answer {
+    @apply text-[24px] tracking-wide bg-[#f9f9f9] p-3 border-0 rounded-2xl m-3 text-black;
+  }
+  .error{
+    @apply  text-[24px] bg-white p-1 rounded-xl  text-red-500 ;
+  }
+  .heading {
+    @apply text-[52px] font-bold text-black;
+  }
+}
+
+
+
+
+
+
+
+
+
+

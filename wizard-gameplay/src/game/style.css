@@ -1,0 +1,118 @@
+:root {
+  --font-family: 'Changa One', cursive;
+  --line-height: 1.5;
+  --font-weight: 400;
+  --primary-color: white;
+  --secondary-color: black;
+  --coin-color: gold;
+  --heart-color: red;
+  --text-stroke-color: black;
+}
+
+body {
+  margin: 0;
+  background-color: var(--secondary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  font-family: var(--font-family);
+  line-height: var(--line-height);
+  font-weight: var(--font-weight);
+  color: var(--primary-color);
+  overflow: hidden; /* Prevent scrolling */
+}
+
+#app {
+  max-width: 1400px;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.game-container {
+  position: relative;
+  display: inline-block;
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+#gameOver {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  font-size: 72px;
+  color: var(--primary-color);
+  text-shadow: 3px 3px 3px var(--text-stroke-color);
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 5px;
+}
+
+.status-bar {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 380px;
+  height: 70px;
+  background: linear-gradient(to left bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+  padding: 10px 20px;
+  font-size: 28px;
+  color: var(--primary-color);
+  -webkit-text-stroke: 2px var(--text-stroke-color);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.6);
+  z-index: 10; /* Make sure it's above the canvas */
+}
+
+.coins, .hearts {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.coins svg, .hearts svg {
+  width: 30px;
+  height: 30px;
+  margin-right: 8px;
+}
+
+.coins svg {
+  fill: var(--coin-color);
+}
+
+.hearts svg {
+  fill: var(--heart-color);
+}
+
+#coins, #hearts {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .status-bar {
+    width: 300px;
+    font-size: 24px;
+    padding: 8px 16px;
+  }
+
+  .coins svg, .hearts svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  #coins, #hearts {
+    font-size: 18px;
+  }
+}
