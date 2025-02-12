@@ -7,7 +7,7 @@ const Backstory_Level_1_1 = () => {
     const navigate = useNavigate();
 
     // Replace all newline characters with spaces
-    const sourceText = `  Very few ores when crafted with utter perfection under the guidance of a specific design can create a weapon that can injure and kill demons. Other than gods, no one possesses such weapons. Arthur, was one of the very few demigods that had survived and escaped the wrath of battle of Azzgardos. From the later remains of the destruction caused in the battlefield, Arthur had managed to salvage the remaining bits of specially crafted weapons created by Haephastus himself. This sword was later restored under full moon to create what many refer to as Arthur's sword.`;
+    const sourceText = `  You rule the hidden citadel of Azgardos, the last palace of the gods, far from Kravaros. Like your ancestors, you seek to continue the war against Lord Malakaroth. In the citadel lies a cursed dungeon, tainted by the essence of Ehmest, as it violated Hades' laws. The dungeon is said to hold the route to Arthur’s sword—a weapon capable of killing demons. Crafted by Hephaestus and restored under a full moon, Arthur's sword was forged from the remnants of the great battle at Azgardos.`;
     const typingSpeed = 3;
 
     useEffect(() => {

@@ -7,15 +7,13 @@ const Backstory_Level_1_3 = () => {
     const navigate = useNavigate();
 
     // First text passage
-    const firstPassage = `  You enter the dungeon, and to your astonishment, a message glows on the wall, written in bright golden ichor-God's blood: "He was not fast enough. He died. Now you will too." Undeterred, you press forward into the pitch darkness, only to collide with a heavy wooden door. Again, glowing golden ichor etches a sinister message: "Too Slow; TOO SLOW! There resides Rhaegan, a majestic dragon, forged by demons through ancient hybridization techniques. It loathes slow, feeble intruders like YOU! Only five warriors have ever made it past. Will you be the sixth?" The challenge lies ahead—time to prove your worth.`;
+    const firstPassage = `  Gavin enters the dungeon and sees a depiction hanging on the wall of the battlefield and perhaps the only surviving object from the massacre of Azzgardos. The painting is said to have the clues to enter the location to the catacombs of Ehmest.`;
 
     // Second text passage
-    const secondPassage = `  I'm quick as a wink, 
-    I'm gone in a flash,
-    If you try to catch me,
-    You'll never last.
-    Only 10th second of your life has power
-    If not, then there will be a blood shower...`;
+    const secondPassage = `  "A picture holds more than you see,
+A silent whisper, a hidden key.
+Not in the frame, but deep inside,
+The place you seek is where exif hides."`;
 
     const [currentPassage, setCurrentPassage] = useState(firstPassage);
     const typingSpeed = 3;
