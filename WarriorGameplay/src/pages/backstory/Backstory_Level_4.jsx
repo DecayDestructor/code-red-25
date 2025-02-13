@@ -6,7 +6,7 @@ const Backstory_1 = () => {
     const [isTypingComplete, setIsTypingComplete] = useState(false);
     const navigate = useNavigate();
 
-    const sourceText = `  The last of titans fall prey to the rays of sunlight. Just a step before the land of demons lies the final stronghold. But Gavin’s army just cannot outmatch the sheer strength of the final army (As Malakaroth calls it). To defeat them one enters a room that has a detonator to destroy the fortress. or take help from Raven; Raven is the descendant of elitos army who were slained by Malakaroth after he failed to capture the city of Azgardos. Raven is now the sole survivor of elitos. You can also approach Raven to burn the whole stronghold using special fuel crafted by elitos army when they burned the villages protected by the gods to the ground.`;
+    const sourceText = `  The last of titans fall prey to the rays of sunlight. Just a step before the land of demons lies the final stronghold. But Gavin’s army just cannot outmatch the sheer strength of the Army of Burning men, Malakaroth's strongest army. To defeat them one enters a room that has a detonator to destroy the fortress or take help from Raven; Raven is a remaining member of the Elitos army who were slained by Malakaroth after they failed to capture Azgardos. You can also approach Raven to burn the whole stronghold using special fuel crafted by the Elitos army when they plundered and torched the civilization after the War of Gods.`;
     const typingSpeed = 3;
 
     useEffect(() => {

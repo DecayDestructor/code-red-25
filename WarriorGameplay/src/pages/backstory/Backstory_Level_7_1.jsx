@@ -10,9 +10,12 @@ const Backstory_Level_1_3 = () => {
     const firstPassage = `  Gavin stood before the locked box, heart pounding. Inside lay Ichorfonias, the heart of Malakaroth's power—an invention born of pride, cruelty, and dark magic. Created by an ex-servant of Hephaestus, it was a living testament to obsession, a machine so intricate it held the very soul of its maker. Destroying it wasn't just ending a creation—it was crushing Malakaroth's reign and stripping him of his most deadly weapon. Ichorfonias's op code read-`;
 
     // Second text passage
-    const secondPassage = `  To find the slope, a path you tread,
-By my rule, the curve is read.
-One mark, one change, the tale's creation—`;
+    const secondPassage = `  In endless sums where patterns reside,
+    I dance through terms with a shifting stride.
+    First I diffrentiate myself with precision and grace,
+    Then I integrate to a higher place.
+    A sequence of steps both subtle and fleet,
+    Till convergence and logic finally meet.`;
 
     const [currentPassage, setCurrentPassage] = useState(firstPassage);
     const typingSpeed = 3;

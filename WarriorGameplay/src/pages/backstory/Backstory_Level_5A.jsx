@@ -5,7 +5,7 @@ const Backstory_1 = () => {
     const [text, setText] = useState("");
     const [isTypingComplete, setIsTypingComplete] = useState(false);
 
-    const sourceText = `  Inside the room there lies another torch; similar to the ones that teleported Gavin from Arthur’s grave to his palace back at Azzgardos. Upon touching the torch; he is now teleported to a mysterious palace. The palace has a long hallway which even after having flaring torches over the banks is not bright enough to give a fair visibility. The walls of the palace show grim sightings of the war of Azzgardos… This palace is none other than the fortress of Argzak; capital of Kravaros.`;
+    const sourceText = `Inside the room there lies a torch. Upon touching the torch, Gavin is now teleported to a mysterious palace. The palace has a long hallway which even after having flaring torches over the banks is not bright enough to give a fair visibility. The walls of the palace show grim sightings of the war of Azzgardos… This palace is none other than the fortress of Argzak; capital of Kravaros; home of Lord Malakaroth.`;
     const typingSpeed = 3;
 
     useEffect(() => {
