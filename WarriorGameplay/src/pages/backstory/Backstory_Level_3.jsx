@@ -7,7 +7,8 @@ const Backstory_Level_1_2 = () => {
     const navigate = useNavigate();
 
     // Replace all newline characters with spaces
-    const sourceText = `  The grave opens, revealing Arthur's legendary sword and a torch. As you grasp the torch, you're transported to the desolate plains of Azzgardos. To begin your assault, you must conquer the land of Titans at the borders of Kravaros. These monstrous beings, bound only to bloodshed, are nearly invincible—except to the rays of the sun, which can scorch them to death.Malakaroth, their dark master, has cast a spell of eternal darkness over Kravaros to shield them. Your only hope of defeating the Titans is to break this spell and restore the suns light.`;
+    const sourceText = `  The grave opens, revealing Arthur's legendary sword. As you grasp the sword, you're transported to the desolate plains of Azzgardos. To begin your assault, you must conquer the land of Titans at the borders of Kravaros. These monstrous beings, bound only to bloodshed, are nearly invincible—except to the rays of the sun, which can scorch them to death. Malakaroth, their dark master, has cast a spell of eternal darkness over Kravaros to shield them. Your only hope of defeating the Titans is to break this spell and restore the sunlight.
+    To find the hidden spell, you must look beyond the screen`;
     const typingSpeed = 3;
 
     useEffect(() => {

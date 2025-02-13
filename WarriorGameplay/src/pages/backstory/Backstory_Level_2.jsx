@@ -10,7 +10,7 @@ const Backstory_Level_1_1 = () => {
     const navigate = useNavigate();
     const typingSpeed = 3;
 
-    const sourceText = `  In the eerie catacombs of Ehmest, formed from the fallen of Azzgardos, silence weighs heavily, broken only by your footsteps. At a narrow corridor's end, a dead end reveals a grave marked by an intricate seal of cryptic, familiar symbols. On the wall there is some text shimmering in a fading glow "What must you use to write, to communicate, often and daily. Fit for your pockets and usable with your fingers." before it fully fades, leaving Gavin alone with the symbols engraved on the grave...`;
+    const sourceText = `  In the eerie catacombs of Ehmest, silence weighs heavily, broken only by your footsteps. At a narrow corridor's end, a dead end reveals a grave marked by an intricate seal of cryptic, familiar symbols. On the wall there is some text shimmering in a fading glow "What must you use to tap and write, to communicate, often and daily. Fit for your pockets and usable with your fingers." before it fully fades, leaving Gavin alone with the symbols engraved on the grave...`;
 
     useEffect(() => {
         let index = 0;
