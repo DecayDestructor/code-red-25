@@ -7,7 +7,7 @@ const Backstory_Level_1_3 = () => {
     const navigate = useNavigate();
 
     // First text passage
-    const firstPassage = `  Raven takes charge, leading you and your army along the edges of the continent to the desolate village of Valzer, once the proud home of the Elitos. The air is thick with memories of a brighter past, now overshadowed by ruin and decay.`;
+    const firstPassage = `  Raven takes charge, leading you and your army along the edges of the continent to the desolate village of Valzer, once the proud home of the Elitos. The air is thick with memories of a brighter past, now overshadowed by ruin and decay. There is an enchanted signpost standing in front of the gates to Valzer. Gavin realizes that another riddle lies ahead that must be solved before he can enter the desolate city.`;
 
     // Second text passage
     const secondPassage = `  I was inspired by a Titan, who bore the world on his back,
