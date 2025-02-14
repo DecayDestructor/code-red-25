@@ -3,28 +3,28 @@ import { useNavigate } from 'react-router-dom'
 import LayoutPage from '../interfaces/LayoutPage'
 import checkAnswers from '../../../utils/checkAnswers'
 const YourComponent = () => {
-  const navigate = useNavigate();
-  const [userInput, setUserInput] = useState("");
-  const [resultMessage, setResultMessage] = useState("");
-  const link = "https://docs.google.com/document/d/1sjiGhP8IMtobg1o5iGfNM1JxFcf6kcijlh2LtyCz0B8/edit?usp=sharing";
-  window.link = link;
-
+  const navigate = useNavigate()
+  const [userInput, setUserInput] = useState('')
+  const [resultMessage, setResultMessage] = useState('')
+  const link =
+    'https://docs.google.com/document/d/1sjiGhP8IMtobg1o5iGfNM1JxFcf6kcijlh2LtyCz0B8/edit?usp=sharing'
+  window.link = link
 
   const handleVerify = async () => {
-    const{correct} = await checkAnswers(userInput,'7_3')
+    const { correct } = await checkAnswers(userInput, '7_3')
     if (correct) {
-      setResultMessage("Correct! Well done!");
+      setResultMessage('Correct! Well done!')
       setTimeout(() => {
-        navigate("/level_7_4");
-      }, 1500);
+        navigate('/level_7_4')
+      }, 1500)
     } else {
-      setResultMessage("Incorrect. Try again!");
+      setResultMessage('Incorrect. Try again!')
     }
-  };
+  }
 
   const handleKeyPress = (event) => {
-    if (event.key === "Enter") {
-      handleVerify();
+    if (event.key === 'Enter') {
+      handleVerify()
     }
   }
 
@@ -58,21 +58,8 @@ const YourComponent = () => {
         </p>
         <a href={link} hidden />
       </div>
-<<<<<<< HEAD
-      <a
-        href={
-          'https://docs.google.com/document/d/1sjiGhP8IMtobg1o5iGfNM1JxFcf6kcijlh2LtyCz0B8/edit?usp=sharing'
-        }
-        hidden
-      />
-=======
->>>>>>> 7d70a552be3e38533f2db9cfff96eb68cfc1dc02
     </div>
   )
 }
 
-<<<<<<< HEAD
 export default YourComponent
-=======
-export default YourComponent;
->>>>>>> 7d70a552be3e38533f2db9cfff96eb68cfc1dc02
