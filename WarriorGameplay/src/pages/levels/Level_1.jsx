@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LayoutPage from '../interfaces/LayoutPage';
+import { useDispatch } from 'react-redux';
+import { unlockLevel  } from '../../store';
 
 const Level_1A = () => {
     const [userInput, setUserInput] = useState("");
     const [resultMessage, setResultMessage] = useState("");
+    const dispatch = useDispatch();
+    dispatch(unlockLevel("level_1a"));
 
     const navigate = useNavigate();
     const correctTranslations = ["PARTHENON GREECE", "ATHENS GREECE"];
@@ -13,6 +17,7 @@ const Level_1A = () => {
         if (correctTranslations.includes(userInput.trim().toUpperCase())) {
             setResultMessage("Correct! Well done!");
             setTimeout(() => {
+                dispatch(unlockLevel("level_1A"));
                 navigate("/backstory_level_1a");
             }, 1500);
         } else {

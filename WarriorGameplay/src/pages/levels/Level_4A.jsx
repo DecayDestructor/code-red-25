@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LayoutPage from '../interfaces/LayoutPage';
+import { unlockLevel  } from '../../store';
+import { useDispatch} from 'react-redux'
 
 const CombinedComponent = () => {
     const [userInput, setUserInput] = useState("");
     const [resultMessage, setResultMessage] = useState("");
     const navigate = useNavigate();
-
+    const dispatch = useDispatch();
     const correctTranslation = "BETRAYAL";
 
     // Handle verification of user input
@@ -14,6 +16,7 @@ const CombinedComponent = () => {
         if (userInput.trim().toUpperCase() === correctTranslation) {
             setResultMessage("Correct! Well done!");
             setTimeout(() => {
+                dispatch(unlockLevel("level_5a"));
                 navigate("/backstory_level_5a");
             }, 1500);
         } else {

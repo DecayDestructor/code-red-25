@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 import LayoutPage from '../interfaces/LayoutPage';
+import { useDispatch} from 'react-redux'
+import { unlockLevel  } from '../../store';
 
 const CombinedComponent = () => {
     const [userInput, setUserInput] = useState("");
     const [resultMessage, setResultMessage] = useState("");
 
     const navigate = useNavigate(); // Initialize navigate
-    
+    const dispatch = useDispatch();
     const correctTranslation = "ICHORFONIAS";
     const handleVerify = () => {
         if (userInput.trim().toUpperCase() === correctTranslation) {
             setResultMessage("Correct! Well done!");
             setTimeout(() => {
+                dispatch(unlockLevel("jumpscare_7_1A"));
                 navigate("/jumpscare_7_1A");
             }, 1500);
         } else {

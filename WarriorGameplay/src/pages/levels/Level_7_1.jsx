@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import LayoutPage from "../interfaces/LayoutPage";
+import { useDispatch} from 'react-redux'
+import { unlockLevel  } from '../../store';
 
 const Level7_1 = () => {
     const [buttonsState, setButtonsState] = useState(Array(9).fill("0"));
     const targetPattern = "110011011";
     const [isCorrect, setIsCorrect] = useState(false);
     const [submitted, setSubmitted] = useState(false);
-
+    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const handleButtonClick = (index) => {
@@ -24,6 +26,7 @@ const Level7_1 = () => {
 
         if (isPatternCorrect) {
             setTimeout(() => {
+                dispatch(unlockLevel("level_7a"));
                 navigate("/options_level_7a");
             }, 1000); 
         } else {

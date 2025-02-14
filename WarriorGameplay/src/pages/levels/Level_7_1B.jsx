@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import LayoutPage from '../interfaces/LayoutPage';
+const dispatch = useDispatch();
+const navigate = useNavigate();
 
 const HiddenChallengeComponent = () => {
   const [userInput, setUserInput] = useState("");
@@ -8,11 +10,12 @@ const HiddenChallengeComponent = () => {
   const [colorChanged, setColorChanged] = useState(false);
   const [resultMessage, setResultMessage] = useState("");
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const handleVerify = () => {
     if (colorChanged && userInput.trim().toUpperCase() === "C86FE9E9CC38771BF90CE8AB26C17806E21305B3E040DD49EF475DC989CD8C67") {
       setResultMessage("Correct! Proceeding to next level...");
       setTimeout(() => {
+        dispatch(unlockLevel("level_7_3"));
         navigate("/backstory_level_7_3");
       }, 1500);
     } else if (!colorChanged) {

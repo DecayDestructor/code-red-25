@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LayoutPage from '../interfaces/LayoutPage';
+import { useDispatch} from 'react-redux'
+import { unlockLevel  } from '../../store';
 
 const BackstoryLevelComponent = () => {
     const [userInput, setUserInput] = useState("");
     const [resultMessage, setResultMessage] = useState("");
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const correctTranslations = ["SSD", "SECONDARY STORAGE", "HARD DRIVE"];
 
@@ -13,6 +16,7 @@ const BackstoryLevelComponent = () => {
         if (correctTranslations.includes(userInput.trim().toUpperCase())) {
             setResultMessage("Correct! Well done!");
             setTimeout(() => {
+                dispatch(unlockLevel("jumpscare_6_2"));
                 navigate("/jumpscare_6_2");
             }, 1500);
         } else {

@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LayoutPage from '../interfaces/LayoutPage';
+import { useDispatch} from 'react-redux'
+import { unlockLevel  } from '../../store';
+import { useDispatch} from 'react-redux'
+import { unlockLevel  } from '../../store';
 
 const YourComponent = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [userInput, setUserInput] = useState("");
   const [resultMessage, setResultMessage] = useState("");
   const link = "https://docs.google.com/document/d/1sjiGhP8IMtobg1o5iGfNM1JxFcf6kcijlh2LtyCz0B8/edit?usp=sharing";
@@ -15,6 +20,7 @@ const YourComponent = () => {
     if (userInput.trim().toUpperCase() === correctTranslation) {
       setResultMessage("Correct! Well done!");
       setTimeout(() => {
+        dispatch(unlockLevel("level_7_4"));
         navigate("/level_7_4");
       }, 1500);
     } else {

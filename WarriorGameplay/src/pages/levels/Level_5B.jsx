@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import LayoutPage from '../interfaces/LayoutPage';
 import { useNavigate } from "react-router-dom";
+import { useDispatch} from 'react-redux'
+import { unlockLevel  } from '../../store';
 
 const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
@@ -72,11 +74,12 @@ const App = () => {
   const navigate = useNavigate();
 
   const correctTranslation = "AHA TAMATAR BADE MAJEDAR";
-
+  const dispatch = useDispatch();
   const handleVerify = () => {
     if (userInput.trim().toUpperCase() === correctTranslation) {
       setResultMessage("Correct! Well done!");
       setTimeout(() => {
+        dispatch(unlockLevel("options_level_5b"));
         navigate("/options_level_5b");
       }, 1500);
     } else {
