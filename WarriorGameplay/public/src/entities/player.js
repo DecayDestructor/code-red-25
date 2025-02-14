@@ -30,7 +30,7 @@ export function makePlayer(k) {
       setControls() {
         this.controlHandlers = []
 
-        document.querySelector('canvas').addEventListener('space', (event) => {
+        document.querySelector('canvas').addEventListener('click', (event) => {
           if (event.button === 0) {
             if (this.curAnim() !== 'attack' && this.isGrounded()) {
               this.isAttacking = true
