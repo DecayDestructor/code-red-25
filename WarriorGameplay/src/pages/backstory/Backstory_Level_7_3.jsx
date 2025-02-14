@@ -4,7 +4,7 @@ const Backstory_1 = () => {
     const [text, setText] = useState("");
     const [isTypingComplete, setIsTypingComplete] = useState(false);
 
-    const sourceText = `  Malakaroth's vulnerability is fleeting—he can only be defeated in the brief moment between day and night. As fortune has it, the Ichorfonias is now operational, a powerful artifact brimming with spells designed to exploit the weaknesses of any foe. Each spell, however, requires a unique numerical code to activate.Among its arsenal lies a spell capable of altering time itself, shifting the world into evening. But Malakaroth, cunning as ever, ensured that the code for this critical spell is deeply concealed, hidden away from even the mightiest of demigods.The challenge now is clear: uncover the code, wield the Ichorfonias, and strike at the precise moment when Malakaroth is at his weakest.Time is of the essence.`;
+    const sourceText = `The end is near. With each minute, Malakaroth's demise is coming closer and closer. The penultimate challenge before you face the demon lord himself involves finding the hidden link. Look for the 'link' using all the tools in your arsenal. Once you shall find the link, look for the 69th key, find the first object within that, and then move into the array of the first object, and find the second object there. Of the 2nd array key, your answer shall be present in the 75th attribute of the 71st attribute.`;
     const typingSpeed = 3;
 
     useEffect(() => {
