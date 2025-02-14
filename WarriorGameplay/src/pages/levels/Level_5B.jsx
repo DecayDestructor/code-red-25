@@ -5,7 +5,7 @@ import checkAnswers from '../../../utils/checkAnswers'
 
 const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
-const Hyperplexed = ({ id }) => {
+const Hyperplexed = ({ id, link }) => {
   const [text, setText] = useState('HYPERPLEXED')
   const [showRedirectLink, setShowRedirectLink] = useState(false)
 
@@ -50,7 +50,7 @@ const Hyperplexed = ({ id }) => {
         <div className="flex-1 w-full flex flex-col justify-evenly text-center">
           <p></p>
           <a
-            href="https://www.youtube.com/watch?v=lr1L_xUKB1E"
+            href={link}
             target="_blank"
             rel="noopener noreferrer"
             className="text-yellow-300 underline"
@@ -98,10 +98,10 @@ const App = () => {
       <LayoutPage />
       <div className="relative flex flex-col items-center bg-black/75 rounded-2xl p-8 w-[90vw] max-w-7xl h-[70vh] overflow-hidden shadow-[0_0_30px_rgba(255,255,0,0.8)]">
         <div className="flex-1 w-full flex flex-col justify-evenly">
-          <Hyperplexed id="component-1" />
-          <Hyperplexed id="component-2" />
-          <Hyperplexed id="component-3" />
-          <Hyperplexed id="component-4" />
+          <Hyperplexed id="component-1" link="https://www.youtube.com/watch?v=V-_O7nl0Ii0" />
+          <Hyperplexed id="component-2" link="https://www.youtube.com/watch?v=EE-xtCF3T94" />
+          <Hyperplexed id="component-3" link="https://www.youtube.com/watch?v=68HrmbZiwaI" />
+          <Hyperplexed id="component-4" link="https://www.youtube.com/watch?v=PavYAOpVpJI" />
         </div>
         <div className="w-full flex items-center justify-center flex-col mt-4">
           <input
