@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LayoutPage from '../interfaces/LayoutPage';
-import { useDispatch} from 'react-redux'
-import { unlockLevel  } from '../../store';
+
 import { useDispatch} from 'react-redux'
 import { unlockLevel  } from '../../store';
 
