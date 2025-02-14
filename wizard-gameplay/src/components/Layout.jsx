@@ -11,7 +11,7 @@ const LayoutPage = () => {
     let endTime = localStorage.getItem('gameEndTime')
 
     if (!endTime) {
-      endTime = new Date().getTime() + 60 * 60 * 1000
+      endTime = new Date().getTime() + 60 * 60 * 1000 * 3
       localStorage.setItem('gameEndTime', endTime)
     }
 
