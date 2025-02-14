@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import './App.css'
+import axios from 'axios'
 
 function App() {
   const [count, setCount] = useState(0)
-
+  axios.defaults.baseURL = 'http://localhost:5000'
   return (
     <>
       <div>

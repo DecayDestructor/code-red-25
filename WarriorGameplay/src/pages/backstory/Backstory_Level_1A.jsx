@@ -7,13 +7,10 @@ const Backstory_Level_1_3 = () => {
     const navigate = useNavigate();
 
     // First text passage
-    const firstPassage = `  The Reverse World is built on madness and chaos, this is where gods used to banish the most horrid creatures to ever roam the universe. To succeed, one must navigate this twisted world swiftly, for hesitation is deadly. In the Reverse World, there is no time to waste. The key to ending Malakroth's reign and restoring light to Azgardos lies within this nightmarish dimension—but to find it, one must be faster than time.`;
+    const firstPassage = `  The Reverse World is built on chaos, this is where gods used to banish the most horrid creatures to ever roam the universe. To succeed, one must navigate this twisted world swiftly, for hesitation is deadly. In the Reverse World, there is no time to waste. The key to ending Malakroth's reign and restoring light to Azgardos lies within this nightmarish dimension.`;
 
     // Second text passage
-    const secondPassage = `  In the fabric of the page, whispers remain,
-    Lying beneath, without a name.
-    Seek the silent truth, veiled in code,
-    Where the source reveals the path once sowed.`;
+    const secondPassage = ` "In the whispers of time, the serpent winds backwards". What does it mean? Backwards shall you wind? Or reversal shall you do?`;
 
     const [currentPassage, setCurrentPassage] = useState(firstPassage);
     const typingSpeed = 3;
