@@ -3,6 +3,7 @@ import { room1 } from '/src/scenes/room1.js'
 import { room2 } from '/src/scenes/room2.js'
 import { setBackgroundColor } from '/src/scenes/roomUtils.js'
 import { makeNotificationBox } from '/src/ui/notificationBox.js'
+import checkAnswers from '../../utils/checkAnswers'
 
 async function main() {
   const room1Data = await (await fetch('./maps/room1.json')).json()
@@ -19,8 +20,9 @@ async function main() {
     setBackgroundColor(k, '#20214a')
     k.add(makeNotificationBox(k, 'Press Enter to proceed.'))
 
-    k.onKeyPress('enter', () => {
+    k.onKeyPress('enter', async () => {
       // Redirect to the backstory page
+      const { correct } = await checkAnswers('Solved', '5_1')
       window.location.href = './backstory_level_6_1'
     })
   })

@@ -12,8 +12,8 @@ const Backstory_Level_1_3 = () => {
     // Second text passage
     const secondPassage = `  "A picture holds more than you see,
 A silent whisper, a hidden key.
-Not in the frame, but deep inside,
-The place you seek is where exif hides."`;
+Not in the input frame, but deep behind,
+The place you seek is where EXIF hides."`;
 
     const [currentPassage, setCurrentPassage] = useState(firstPassage);
     const typingSpeed = 3;

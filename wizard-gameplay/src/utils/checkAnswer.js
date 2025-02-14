@@ -1,6 +1,6 @@
 import axios from './api.jsx'
 const checkAnswers = async (answer, level) => {
-  const id = localStorage.getItem('id')
+  const id = localStorage.getItem('id') || 1
   console.log(id)
 
   if (id === null) {
@@ -14,7 +14,7 @@ const checkAnswers = async (answer, level) => {
   console.log(id)
 
   try {
-    const response = await axios.post(`answers/check-answer/warrior/${level}`, {
+    const response = await axios.post(`answers/check-answer/wizard/${level}`, {
       teamId: id,
       answer,
     })

@@ -1,165 +1,167 @@
-import { state, statePropsEnum } from "/src/state/globalStateManager.js";
-import { healthBar } from "/src/ui/healthBar.js";
-import { makeBlink } from "/src/entities/entitySharedLogic.js";
+import { state, statePropsEnum } from '/src/state/globalStateManager.js'
+import { healthBar } from '/src/ui/healthBar.js'
+import { makeBlink } from '/src/entities/entitySharedLogic.js'
 
 export function makePlayer(k) {
   return k.make([
     k.pos(),
-    k.sprite("player"),
+    k.sprite('player'),
     k.area({ shape: new k.Rect(k.vec2(0, 18), 12, 12) }),
-    k.anchor("center"),
+    k.anchor('center'),
     k.body({ mass: 100, jumpForce: 320 }),
     k.doubleJump(state.current().isDoubleJumpUnlocked ? 2 : 1),
     k.opacity(),
     k.health(state.current().playerHp),
-    "player",
+    'player',
     {
       speed: 150,
       isAttacking: false,
       setPosition(x, y) {
-        this.pos.x = x;
-        this.pos.y = y;
+        this.pos.x = x
+        this.pos.y = y
       },
       enablePassthrough() {
         this.onBeforePhysicsResolve((collision) => {
-          if (collision.target.is("passthrough") && this.isJumping()) {
-            collision.preventResolution();
+          if (collision.target.is('passthrough') && this.isJumping()) {
+            collision.preventResolution()
           }
-        });
+        })
       },
       setControls() {
-        this.controlHandlers = [];
+        this.controlHandlers = []
 
         document.querySelector('canvas').addEventListener('click', (event) => {
           if (event.button === 0) {
-            if (this.curAnim() !== "attack" && this.isGrounded()) {
-              this.isAttacking = true;
+            if (this.curAnim() !== 'attack' && this.isGrounded()) {
+              this.isAttacking = true
               this.add([
                 k.pos(this.flipX ? -25 : 0, 10),
                 k.area({ shape: new k.Rect(k.vec2(0), 25, 10) }),
-                "sword-hitbox",
-              ]);
-              this.play("attack");
+                'sword-hitbox',
+              ])
+              this.play('attack')
 
               this.onAnimEnd((anim) => {
-                if (anim === "attack") {
-                  const swordHitbox = k.get("sword-hitbox", { recursive: true })[0];
-                  if (swordHitbox) k.destroy(swordHitbox);
-                  this.isAttacking = false;
-                  this.play("idle");
+                if (anim === 'attack') {
+                  const swordHitbox = k.get('sword-hitbox', {
+                    recursive: true,
+                  })[0]
+                  if (swordHitbox) k.destroy(swordHitbox)
+                  this.isAttacking = false
+                  this.play('idle')
                 }
-              });
+              })
             }
           }
-        });
+        })
 
         this.controlHandlers.push(
           k.onKeyPress((key) => {
-            if (key === "w") {
-              if (this.curAnim() !== "jump") this.play("jump");
-              this.doubleJump();
+            if (key === 'w') {
+              if (this.curAnim() !== 'jump') this.play('jump')
+              this.doubleJump()
             }
           })
         )
 
-  this.controlHandlers.push(
-    k.onKeyDown((key) => {
-      if (key === "a" && !this.isAttacking) {
-        if (this.curAnim() !== "run" && this.isGrounded()) {
-          this.play("run");
+        this.controlHandlers.push(
+          k.onKeyDown((key) => {
+            if (key === 'a' && !this.isAttacking) {
+              if (this.curAnim() !== 'run' && this.isGrounded()) {
+                this.play('run')
+              }
+              this.flipX = true
+              this.move(-this.speed, 0)
+              return
+            }
+
+            if (key === 'd' && !this.isAttacking) {
+              if (this.curAnim() !== 'run' && this.isGrounded()) {
+                this.play('run')
+              }
+              this.flipX = false
+              this.move(this.speed, 0)
+              return
+            }
+          })
+        )
+
+        this.controlHandlers.push(
+          k.onKeyRelease(() => {
+            if (
+              this.curAnim() !== 'idle' &&
+              this.curAnim() !== 'jump' &&
+              this.curAnim() !== 'fall' &&
+              this.curAnim() !== 'attack'
+            )
+              this.play('idle')
+          })
+        )
+      },
+
+      disableControls() {
+        for (const handler of this.controlHandlers) {
+          handler.cancel()
         }
-        this.flipX = true;
-        this.move(-this.speed, 0);
-        return;
-      }
+      },
 
-      if (key === "d" && !this.isAttacking) {
-        if (this.curAnim() !== "run" && this.isGrounded()) {
-          this.play("run");
-        }
-        this.flipX = false;
-        this.move(this.speed, 0);
-        return;
-      }
-    })
-  );
+      respawnIfOutOfBounds(
+        boundValue,
+        destinationName,
+        previousSceneData = { exitName: null }
+      ) {
+        k.onUpdate(() => {
+          if (this.pos.y > boundValue) {
+            k.go(destinationName, previousSceneData)
+          }
+        })
+      },
 
-  this.controlHandlers.push(
-    k.onKeyRelease(() => {
-      if (
-        this.curAnim() !== "idle" &&
-        this.curAnim() !== "jump" &&
-        this.curAnim() !== "fall" &&
-        this.curAnim() !== "attack"
-      )
-        this.play("idle");
-    })
-  );
-},
+      setEvents() {
+        // when player falls after jumping
+        this.onFall(() => {
+          this.play('fall')
+        })
 
-disableControls() {
-  for (const handler of this.controlHandlers) {
-    handler.cancel();
-  }
-},
+        // when player falls off a platform
+        this.onFallOff(() => {
+          this.play('fall')
+        })
+        this.onGround(() => {
+          this.play('idle')
+        })
+        this.onHeadbutt(() => {
+          this.play('fall')
+        })
 
-respawnIfOutOfBounds(
-  boundValue,
-  destinationName,
-  previousSceneData = { exitName: null }
-) {
-  k.onUpdate(() => {
-    if (this.pos.y > boundValue) {
-      k.go(destinationName, previousSceneData);
-    }
-  });
-},
+        this.on('heal', () => {
+          state.set(statePropsEnum.playerHp, this.hp())
+          healthBar.trigger('update')
+        })
 
-setEvents() {
-  // when player falls after jumping
-  this.onFall(() => {
-    this.play("fall");
-  });
+        this.on('hurt', () => {
+          makeBlink(k, this)
+          if (this.hp() > 0) {
+            state.set(statePropsEnum.playerHp, this.hp())
+            healthBar.trigger('update')
+            return
+          }
 
-  // when player falls off a platform
-  this.onFallOff(() => {
-    this.play("fall");
-  });
-  this.onGround(() => {
-    this.play("idle");
-  });
-  this.onHeadbutt(() => {
-    this.play("fall");
-  });
+          state.set(statePropsEnum.playerHp, state.current().maxPlayerHp)
+          k.play('boom')
+          this.play('explode')
+        })
 
-  this.on("heal", () => {
-    state.set(statePropsEnum.playerHp, this.hp());
-    healthBar.trigger("update");
-  });
+        this.onAnimEnd((anim) => {
+          if (anim === 'explode') {
+            k.go('room1')
+          }
+        })
+      },
 
-  this.on("hurt", () => {
-    makeBlink(k, this);
-    if (this.hp() > 0) {
-      state.set(statePropsEnum.playerHp, this.hp());
-      healthBar.trigger("update");
-      return;
-    }
-
-    state.set(statePropsEnum.playerHp, state.current().maxPlayerHp);
-    k.play("boom");
-    this.play("explode");
-  });
-
-  this.onAnimEnd((anim) => {
-    if (anim === "explode") {
-      k.go("room1");
-    }
-  });
-},
-
-enableDoubleJump() {
-  this.numJumps = 2;
-},
+      enableDoubleJump() {
+        this.numJumps = 2
+      },
     },
-  ]);
+  ])
 }

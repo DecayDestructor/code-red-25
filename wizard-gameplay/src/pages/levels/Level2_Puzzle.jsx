@@ -1,47 +1,44 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { Link, useNavigate } from "react-router-dom";
-import Orb from "../../assets/orb8.png"
-import level2_2 from '../../assets/level2_2.webp';
-import LayoutPage from "../../components/Layout";
-
+import { useState } from 'react'
+import { motion } from 'framer-motion'
+import { Link, useNavigate } from 'react-router-dom'
+import Orb from '../../assets/orb8.png'
+import level2_2 from '../../assets/level2_2.webp'
+import LayoutPage from '../../components/Layout'
+import checkAnswers from '../../utils/checkAnswer'
 
 const Level2_Puzzle = () => {
+  const [sliderValues, setSliderValues] = useState([8, 8, 8]) // Default mid-point
+  const [activeOrb, setActiveOrb] = useState(null)
+  const [solved, setSolved] = useState(false)
+  const navigate = useNavigate()
 
-  const [sliderValues, setSliderValues] = useState([8, 8, 8]); // Default mid-point
-  const [activeOrb, setActiveOrb] = useState(null);
-  const [solved, setSolved] = useState(false);
-  const navigate = useNavigate();
+  const targetPositions = [3, 12, 15]
 
-  const targetPositions = [3, 12, 15];
+  const handleSliderChange = async (index, value) => {
+    const newValues = [...sliderValues]
+    newValues[index] = value
+    setSliderValues(newValues)
 
-  const handleSliderChange = (index, value) => {
-    const newValues = [...sliderValues];
-    newValues[index] = value;
-    setSliderValues(newValues);
-
-    const isSolved = newValues.every((val, i) => val === targetPositions[i]);
-    setSolved(isSolved);
-
+    const isSolved = newValues.every((val, i) => val === targetPositions[i])
+    setSolved(isSolved)
     if (isSolved) {
+      const { correct } = await checkAnswers('3', '2')
       navigate('/level3')
     }
-  };
+  }
 
-  const getRandomSpeed = () => Math.random() * 2 + 1; // Random speed between 1 and 3 seconds
-  const getRandomAmplitude = () => Math.random() * 70 + 30; // Random range (30-100px)
-
-
+  const getRandomSpeed = () => Math.random() * 2 + 1 // Random speed between 1 and 3 seconds
+  const getRandomAmplitude = () => Math.random() * 70 + 30 // Random range (30-100px)
 
   return (
     <div
       className="flex justify-center items-center flex-col imageContainer"
       style={{
         backgroundImage: `url(${level2_2})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        height: "100vh",
-        transition: "background-image 0.8s ease-in-out",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        height: '100vh',
+        transition: 'background-image 0.8s ease-in-out',
       }}
     >
       <LayoutPage />
@@ -53,30 +50,25 @@ const Level2_Puzzle = () => {
               {[0, 1, 2].map((index) => (
                 <motion.div
                   key={index}
-                  className={`relative group cursor-pointer ${activeOrb === index ? "scale-110 transition-transform" : ""
-                    }`}
+                  className={`relative group cursor-pointer ${
+                    activeOrb === index ? 'scale-110 transition-transform' : ''
+                  }`}
                   //   onMouseEnter={() => setActiveOrb(index)}
                   //   onMouseLeave={() => setActiveOrb(null)}
                   animate={{
                     x: solved
                       ? targetPositions[index] * 10
-                      : [
-                        0,
-                        getRandomAmplitude(),
-                        -getRandomAmplitude(),
-                        0,
-                      ],
+                      : [0, getRandomAmplitude(), -getRandomAmplitude(), 0],
                   }}
                   transition={{
                     repeat: solved ? 0 : Infinity,
                     duration: getRandomSpeed(),
-                    ease: "easeInOut",
-                    repeatType: "mirror",
+                    ease: 'easeInOut',
+                    repeatType: 'mirror',
                   }}
                 >
                   <div className="absolute inset-0 animate-pulse rounded-full bg-gradient-radial from-white/20 to-transparent" />
                   <img src={Orb} className="w-[100px] h-[100px]" alt="" />
-
                 </motion.div>
               ))}
             </div>
@@ -112,7 +104,6 @@ const Level2_Puzzle = () => {
                   </div>
                 ))}
               </div>
-
             </div>
           </div>
         </div>
