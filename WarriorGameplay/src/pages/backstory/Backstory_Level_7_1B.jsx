@@ -10,8 +10,8 @@ const Backstory_Level_1_1 = () => {
     const sourceText = `  Your heart is that of an engineer and you understand the bond between creator and creation. Your compassion runs deep. You now open ichorfonias and an inscription states:
 "Where the sun sinks low and shadows creep,
 A corner lies where secrets sleep.
-Seek the place where the humble reside,
-And let your hand gently guide."
+Seek the place where the humble empty textboxes reside,
+And let your magenta hand gently guide."
 `;
     const typingSpeed = 3;
 

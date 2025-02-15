@@ -5,7 +5,7 @@ const Backstory_1 = () => {
     const [text, setText] = useState("");
     const [isTypingComplete, setIsTypingComplete] = useState(false);
 
-    const sourceText = `  With a resolute breath, Gavin knew hesitation was over. The engineer's pleas lingered, but trusting anyone linked to Malakaroth was too dangerous. Ichorfonias had to be destroyed—its annihilation was the key to ending Malakaroth's reign. Victory was near but required a bomb to obliterate the dark lord's greatest weapon. Yet, one final piece remained: Arthur's sword, which could only strike if the target's name was spoken aloud. Ichorfonias. There was no turning back—solving this would end Malakaroth's reign and shatter his pride.`;
+    const sourceText = `  With a resolute breath, Gavin knew hesitation was over. The engineer's pleas lingered, but trusting anyone linked to Malakaroth was too dangerous. Ichorfonias had to be destroyed—its annihilation was the key to ending Malakaroth's reign. Victory was near but required a bomb to obliterate the dark lord's greatest weapon. Yet, one final piece remained: Arthur's sword, which could only strike if the target's name was spoken aloud. There was no turning back—solving this would end Malakaroth's reign and shatter his pride.`;
     const typingSpeed = 3;
 
     useEffect(() => {

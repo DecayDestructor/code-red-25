@@ -59,7 +59,7 @@ const Backstory_Level_1_3 = () => {
                 className="object-cover w-full h-full absolute z-0"
             />
             {/* Text Container */}
-            <div className="relative bg-white bg-opacity-70 p-6 rounded-lg w-[48%] z-10 h-[66%]">
+            <div className="relative bg-white bg-opacity-70 p-6 rounded-lg w-[58%] z-10 h-[75%]">
                 <h1 className={`text-2xl tracking-wide whitespace-pre-line ${currentPassage === secondPassage ? 'text-center' : ''}`}>
                     {text}
                     {!isTypingComplete && <span className="animate-pulse">|</span>}
