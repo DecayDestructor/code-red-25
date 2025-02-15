@@ -1,27 +1,26 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter, Routes, Route } from "react-router";
+import { BrowserRouter, Routes, Route } from 'react-router'
 import './index.css'
 import App from './App.jsx'
-import Backstory_1 from './pages/levels/Backstory_1.jsx';
-import Level4 from './pages/levels/Level4.jsx';
-import Level3 from './pages/levels/Level3.jsx';
-import Level2 from './pages/levels/Level2.jsx';
-import Level1 from './pages/levels/Level1.jsx';
-import Level5 from "./pages/levels/Level5.jsx";
-import Level6 from './pages/levels/Level6.jsx';
-import Level7_1 from "./pages/levels/Level7_1_Puzzle.jsx";
-import Level7_2 from "./pages/levels/Level7_2.jsx";
-import Level1_Puzzle from './pages/levels/Level1_Puzzle.jsx';
-import Level2_Puzzle from './pages/levels/Level2_Puzzle.jsx';
-import Level3_Puzzle from './pages/levels/Level3_Puzzle.jsx';
-import Level4_Puzzle from './pages/levels/Level4_Puzzle.jsx';
-import Level6_Puzzle from './pages/levels/Level6_Puzzle.jsx';
-import Level7_2pre from './pages/levels/Level7_2pre.jsx';
-import Level7_1pre from "./pages/levels/Level7_1.jsx"
-import Win from './components/Win.jsx';
-import Lose from './components/Lose.jsx';
-
+import Backstory_1 from './pages/levels/Backstory_1.jsx'
+import Level4 from './pages/levels/Level4.jsx'
+import Level3 from './pages/levels/Level3.jsx'
+import Level2 from './pages/levels/Level2.jsx'
+import Level1 from './pages/levels/Level1.jsx'
+import Level5 from './pages/levels/Level5.jsx'
+import Level6 from './pages/levels/Level6.jsx'
+import Level7_1 from './pages/levels/Level7_1_Puzzle.jsx'
+import Level7_2 from './pages/levels/Level7_2.jsx'
+import Level1_Puzzle from './pages/levels/Level1_Puzzle.jsx'
+import Level2_Puzzle from './pages/levels/Level2_Puzzle.jsx'
+import Level3_Puzzle from './pages/levels/Level3_Puzzle.jsx'
+import Level4_Puzzle from './pages/levels/Level4_Puzzle.jsx'
+import Level6_Puzzle from './pages/levels/Level6_Puzzle.jsx'
+import Level7_2pre from './pages/levels/Level7_2pre.jsx'
+import Level7_1pre from './pages/levels/Level7_1.jsx'
+import Win from './components/Win.jsx'
+import Lose from './components/Lose.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -47,20 +46,18 @@ createRoot(document.getElementById('root')).render(
 
         <Route path="/level6" element={<Level6 />} />
         <Route path="/level6_puzzle" element={<Level6_Puzzle />} />
-        
+
         <Route path="/level7_1" element={<Level7_1pre />} />
         <Route path="/level7_1_puzzle" element={<Level7_1 />} />
 
         <Route path="/level7_2" element={<Level7_2 />} />
         <Route path="/level7_2pre" element={<Level7_2pre />} />
 
-        <Route path="levels">
-          
-        </Route>
+        <Route path="levels"></Route>
 
         <Route path="/win" element={<Win />} />
         <Route path="/lose" element={<Lose />} />
       </Routes>
     </BrowserRouter>
-  </StrictMode>,
+  </StrictMode>
 )

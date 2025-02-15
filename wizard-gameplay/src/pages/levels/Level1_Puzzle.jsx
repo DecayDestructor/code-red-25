@@ -1,38 +1,33 @@
-import { useState } from "react";
+import { useState } from 'react'
 
-import level1_3 from '../../assets/level1_3.webp'; // Ensure the correct image path
-import { Link, useNavigate } from "react-router-dom";
+import level1_3 from '../../assets/level1_3.webp' // Ensure the correct image path
+import { Link, useNavigate } from 'react-router-dom'
 import LayoutPage from '../../components/Layout'
+import checkAnswers from '../../utils/checkAnswer'
 
 const Level1_Puzzle = () => {
-  const [answer, setAnswer] = useState("");
-  const [showError, setShowError] = useState(false);
-  const navigate = useNavigate();
+  const [answer, setAnswer] = useState('')
+  const [showError, setShowError] = useState(false)
+  const navigate = useNavigate()
 
-
-  const handleSubmitAnswer = () => {
-    const correctAnswer = 79.5;
-    const userAnswer = parseFloat(answer);
-
-    if (userAnswer >= correctAnswer - 1 && userAnswer <= correctAnswer + 1) {
-      navigate("/level2");
+  const handleSubmitAnswer = async () => {
+    const { correct } = await checkAnswers(answer, '1')
+    if (correct) {
+      navigate('/level2')
     } else {
-      setShowError(true);
+      setShowError(true)
     }
-  };
-
-
-
+  }
 
   return (
     <div
       className="flex justify-center items-center flex-col imageContainer"
       style={{
         backgroundImage: `url(${level1_3})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        height: "100vh",
-        transition: "background-image 0.8s ease-in-out",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        height: '100vh',
+        transition: 'background-image 0.8s ease-in-out',
       }}
     >
       <LayoutPage />
@@ -44,8 +39,8 @@ const Level1_Puzzle = () => {
           value={answer}
           className="answer answer-container"
           onChange={(e) => {
-            setAnswer(e.target.value);
-            setShowError(false);
+            setAnswer(e.target.value)
+            setShowError(false)
           }}
           placeholder="Enter your answer here"
         />
@@ -64,10 +59,9 @@ const Level1_Puzzle = () => {
             Submit
           </button>
         </div>
-
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Level1_Puzzle;
+export default Level1_Puzzle

@@ -24,7 +24,7 @@ const backupDataToPostgres = async () => {
          SET warrior_level = EXCLUDED.warrior_level, wizard_level = EXCLUDED.wizard_level RETURNING *;`,
         [teamId, warriorLevel, wizardLevel]
       )
-      console.log(data.rows)
+      console.log('backed up to pg')
     }
   } catch (error) {
     console.error(error)
