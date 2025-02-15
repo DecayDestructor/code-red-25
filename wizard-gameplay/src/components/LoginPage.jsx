@@ -1,57 +1,58 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import loginBg from '../assets/login.webp'; // Add this import
-import userIcon from '../assets/interfaces/Users.svg'; // Add this import
-import eyeOpen from '../assets/interfaces/EyeOpen.svg'; // Add this import
-import eyeClose from '../assets/interfaces/EyeClose.svg'; // Add this import
-
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import loginBg from '../assets/login.webp' // Add this import
+import userIcon from '../assets/interfaces/Users.svg' // Add this import
+import eyeOpen from '../assets/interfaces/EyeOpen.svg' // Add this import
+import eyeClose from '../assets/interfaces/EyeClose.svg' // Add this import
+import axios from '../utils/api'
 const SignupPage = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
+  const [error, setError] = useState('')
+  const [success, setSuccess] = useState('')
 
-  const navigate = useNavigate();
-  const handleSignup = (e) => {
-    e.preventDefault();
-    setError('');
-    setSuccess('');
+  const navigate = useNavigate()
+  const handleSignup = async (e) => {
+    e.preventDefault()
+    setError('')
+    setSuccess('')
 
+    // Validate input
     if (!username.trim()) {
-      setError('Username is required');
-      return;
+      setError('Username is required')
+      return
     }
 
-    if (password.length < 6) {
-      setError('Password must be at least 6 characters long');
-      return;
+    if (password !== 'CR2025') {
+      setError('Incorrect Password!')
+      return
     }
-
-    const existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
-    const userExists = existingUsers.some((user) => user.username === username);
-
-    if (userExists) {
-      setError('Username already exists');
-      return;
-    }
-
-    const newUser = { username, password };
-    const updatedUsers = [...existingUsers, newUser];
 
     try {
-      localStorage.setItem('users', JSON.stringify(updatedUsers));
-      setSuccess('User successfully registered!');
+      const { data } = await axios.post('/team/login', {
+        id: username,
+      })
+      if (data.error) {
+        setError(data.error)
+        return
+      }
+      console.log(data)
 
-      setUsername('');
-      setPassword('');
+      localStorage.setItem('id', data.id)
+      setSuccess('User successfully registered!')
 
-      navigate('/backstory');
+      setUsername('')
+      setPassword('')
+      setTimeout(() => {
+        navigate('/backstory_1')
+      }, 4000)
+      // navigate('/backstory_1')
     } catch (err) {
-      setError('Failed to save user. Please try again.');
-      console.error('Signup error:', err);
+      setError('Failed to save user. Please try again.')
+      console.error('Signup error:', err)
     }
-  };
+  }
 
   return (
     <div className="h-screen flex justify-center items-center relative">
@@ -125,7 +126,7 @@ const SignupPage = () => {
         </form>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SignupPage;
+export default SignupPage
