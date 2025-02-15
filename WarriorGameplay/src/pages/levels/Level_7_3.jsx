@@ -18,10 +18,10 @@ const YourComponent = () => {
     }
     const { correct } = await checkAnswers(answer, '7_3')
     if (correct) {
-      alert('correct')
+      // alert('correct')
       navigate('/level_7_4') // Navigate to level_7_4 on correct answer
     } else {
-      alert('incorrect')
+      // alert('incorrect')
     }
   }
 
