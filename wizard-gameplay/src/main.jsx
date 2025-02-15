@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router'
 import './index.css'
 import App from './App.jsx'
+import SignupPage from './components/LoginPage.jsx'
 import Backstory_1 from './pages/levels/Backstory_1.jsx'
 import Level4 from './pages/levels/Level4.jsx'
 import Level3 from './pages/levels/Level3.jsx'
@@ -30,6 +31,7 @@ createRoot(document.getElementById('root')).render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
+        <Route path="/login" element={<SignupPage />} />
         <Route path="/backstory" element={<Backstory_1 />} />
         <Route path="/level1" element={<ProtectedRoute level={"level1"} element={<Level1 />} />} />
         <Route path="/level1_puzzle"  element={<ProtectedRoute level={"level1"} element={<Level1_Puzzle />} />} />
