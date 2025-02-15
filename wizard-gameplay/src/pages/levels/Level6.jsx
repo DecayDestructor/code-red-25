@@ -2,6 +2,8 @@ import level6_1 from '../../assets/level6_1.webp';
 import level6_3 from '../../assets/level6_3.webp'; 
 import { useNavigate } from "react-router-dom";
 import TextDisplayComponent from "../../components/TextDisplayComponent";
+import { useDispatch } from 'react-redux';
+import { unlockLevel  } from '../../protectedRoutes/store';
 
 const level6_texts = [
   "The kraken’s heart is made of metal and fortunately after a battle between the vicious creature and your spells,"+
@@ -14,8 +16,11 @@ const level6_texts = [
 ];
 const Level6 = () => {
   const navigate = useNavigate();
-
-  const handleTextComplete = () => navigate("/level6_puzzle");
+  const dispatch = useDispatch();
+  const handleTextComplete = () => {
+    dispatch(unlockLevel("level6"));
+    navigate("/level6_puzzle");
+  };
 
   return (
     <TextDisplayComponent 

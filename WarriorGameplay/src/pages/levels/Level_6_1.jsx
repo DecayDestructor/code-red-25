@@ -2,18 +2,21 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import LayoutPage from '../interfaces/LayoutPage'
 import checkAnswers from '../../../utils/checkAnswers'
-
+import { useDispatch } from 'react-redux';
+import { unlockLevel  } from '../../protectedRoutes/store';
 const BackstoryLevelComponent = () => {
   const [userInput, setUserInput] = useState('')
   const [resultMessage, setResultMessage] = useState('')
   const navigate = useNavigate()
 
+  const dispatch = useDispatch();
   // Handle verification of user input
   const handleVerify = async () => {
     const { correct } = await checkAnswers(userInput, '6_1')
     if (correct) {
       setResultMessage('Correct! Well done!')
       setTimeout(() => {
+        dispatch(unlockLevel("level_7_1"));
         navigate('/backstory_level_7_1')
       }, 1500)
     } else {
