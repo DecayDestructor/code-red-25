@@ -62,4 +62,8 @@ const YourComponent = () => {
   )
 }
 
+<<<<<<< HEAD
 export default YourComponent
+=======
+export default YourComponent;
+>>>>>>> 2cefae5bf1db460c6024e22d59178579abf30d5f
