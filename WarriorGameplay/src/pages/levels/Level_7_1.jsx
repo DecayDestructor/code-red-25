@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import LayoutPage from '../interfaces/LayoutPage'
 import checkAnswers from '../../../utils/checkAnswers'
+import bgImg from "../../assets/levels/Level_7_1.png"
+
 import { useDispatch } from 'react-redux';
 import { unlockLevel  } from '../../protectedRoutes/store';
 const Level7_1 = () => {
@@ -39,7 +41,7 @@ const Level7_1 = () => {
     <div className="flex justify-center items-center flex-col h-screen relative">
       {/* Background Image */}
       <img
-        src="src/assets/levels/level_7_1.png"
+        src={bgImg}
         alt="Background"
         className="object-cover w-full h-full absolute z-0"
       />
