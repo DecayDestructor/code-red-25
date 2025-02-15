@@ -4,11 +4,13 @@ import { room2 } from '/src/scenes/room2.js'
 import { setBackgroundColor } from '/src/scenes/roomUtils.js'
 import { makeNotificationBox } from '/src/ui/notificationBox.js'
 import checkAnswers from '../../utils/checkAnswers'
+import { useDispatch } from 'react-redux'
+import { unlockLevel } from '../../src/protectedRoutes/store'
 
 async function main() {
   const room1Data = await (await fetch('./maps/room1.json')).json()
   const room2Data = await (await fetch('./maps/room2.json')).json()
-
+  const dispatch = useDispatch
   k.scene('room1', (previousSceneData) => {
     room1(k, room1Data, previousSceneData)
   })
@@ -23,6 +25,7 @@ async function main() {
     k.onKeyPress('enter', async () => {
       // Redirect to the backstory page
       const { correct } = await checkAnswers('Solved', '5_1')
+      dispatch(unlockLevel('level_6_1'))
       window.location.href = './backstory_level_6_1'
     })
   })
