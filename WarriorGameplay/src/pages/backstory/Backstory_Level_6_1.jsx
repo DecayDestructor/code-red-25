@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { unlockLevel  } from '../../protectedRoutes/store';
 
 const Backstory_Level_1_3 = () => {
     const [text, setText] = useState("");
     const [isTypingComplete, setIsTypingComplete] = useState(false);
     const navigate = useNavigate();
+  const dispatch = useDispatch();
 
     // First text passage
     const firstPassage = `  Malakaroth was not only known for his ruthless cunning but also for his terrifying creations—devices that could confine the enemies with deadly precision. These instruments weren't just tools, but cursed mechanisms that trapped their victims in webs of black magic, leaving no way out. His war room, hidden deep within the palace, held the answers to how these mysterious traps were set in motion, and Gavin's mission was to uncover the mystery and find the coordinates to reach it before it was too late. But with each step deeper into the palace, the danger grew, and he couldn't shake the feeling that something—or someone—was watching him. What could help him in this endeavor? Perhaps the answer lies in an ancient riddle.`;
@@ -46,6 +49,7 @@ const Backstory_Level_1_3 = () => {
             setCurrentPassage(secondPassage);
         } else {
             // If showing the second passage, navigate to the next level
+            dispatch(unlockLevel("level_6_1"));
             navigate("/level_6_1");
         }
     };

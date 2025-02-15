@@ -2,18 +2,21 @@ import React, { useEffect, useState } from 'react'
 import { isRouteErrorResponse, useNavigate } from 'react-router-dom' // Import useNavigate
 import LayoutPage from '../interfaces/LayoutPage'
 import checkAnswers from '../../../utils/checkAnswers'
+import { useDispatch } from 'react-redux';
+import { unlockLevel  } from '../../protectedRoutes/store';
 
 const CombinedComponent = () => {
   const [userInput, setUserInput] = useState('')
   const [resultMessage, setResultMessage] = useState('')
 
   const navigate = useNavigate() // Initialize navigate
-
+  const dispatch = useDispatch();
   const handleVerify = async () => {
     const { correct } = await checkAnswers(userInput, '7_1A')
     if (correct) {
       setResultMessage('Correct! Well done!')
       setTimeout(() => {
+        dispatch(unlockLevel("jumpscare_7_1A"));
         navigate('/jumpscare_7_1A')
       }, 1500)
     } else {

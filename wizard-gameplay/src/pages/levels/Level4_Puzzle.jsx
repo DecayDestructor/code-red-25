@@ -3,16 +3,20 @@ import LayoutPage from '../../components/Layout'
 import level4_1 from '../../assets/level4_1.webp' // Ensure the correct image path
 import { Link, useNavigate } from 'react-router-dom'
 import checkAnswers from '../../utils/checkAnswer.js'
+import { useDispatch } from 'react-redux';
+import { unlockLevel  } from '../../protectedRoutes/store';
+
 const Level4_Puzzle = () => {
   const navigate = useNavigate()
   const [answer, setAnswer] = useState('')
   const [showError, setShowError] = useState(false)
-
+  const dispatch = useDispatch();
   const handleSubmitAnswer = async () => {
     const { correct } = await checkAnswers(answer, '4')
 
     if (correct) {
-      navigate('/level6')
+      dispatch(unlockLevel("level5"));
+      navigate('/index.html')
     } else {
       setShowError(true)
     }

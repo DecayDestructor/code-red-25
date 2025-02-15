@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import LayoutPage from '../interfaces/LayoutPage'
 import { useNavigate } from 'react-router-dom'
 import checkAnswers from '../../../utils/checkAnswers'
-
+import { useDispatch } from 'react-redux';
+import { unlockLevel  } from '../../protectedRoutes/store';
 const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 const Hyperplexed = ({ id, link }) => {
@@ -69,12 +70,13 @@ const App = () => {
   const [userInput, setUserInput] = useState('')
   const [resultMessage, setResultMessage] = useState('')
   const navigate = useNavigate()
-
+  const dispatch = useDispatch();
   const handleVerify = async () => {
     const { correct } = await checkAnswers(userInput, '5B')
     if (correct) {
       setResultMessage('Correct! Well done!')
       setTimeout(() => {
+        dispatch(unlockLevel("options_level_5b"));
         navigate('/options_level_5b')
       }, 1500)
     } else {

@@ -3,17 +3,20 @@ import { useNavigate } from 'react-router-dom'
 import LayoutPage from '../interfaces/LayoutPage'
 import checkAnswers from '../../../utils/checkAnswers'
 import bgImg from "../../assets/levels/Level_6_2.png"
+import { useDispatch } from 'react-redux';
+import { unlockLevel  } from '../../protectedRoutes/store';
 
 const BackstoryLevelComponent = () => {
   const [userInput, setUserInput] = useState('')
   const [resultMessage, setResultMessage] = useState('')
   const navigate = useNavigate()
-
+  const dispatch = useDispatch();
   const handleVerify = async () => {
     const { correct } = await checkAnswers(userInput, '6_2')
     if (correct) {
       setResultMessage('Correct! Well done!')
       setTimeout(() => {
+        dispatch(unlockLevel("jumpscare_6_2"));
         navigate('/jumpscare_6_2')
       }, 1500)
     } else {
