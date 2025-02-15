@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import LayoutPage from '../interfaces/LayoutPage'
 import checkAnswers from '../../../utils/checkAnswers'
+import { useDispatch } from 'react-redux';
+import { unlockLevel  } from '../../protectedRoutes/store';
 
 const HiddenChallengeComponent = () => {
   const [userInput, setUserInput] = useState('')
@@ -9,12 +11,13 @@ const HiddenChallengeComponent = () => {
   const [colorChanged, setColorChanged] = useState(false)
   const [resultMessage, setResultMessage] = useState('')
   const navigate = useNavigate()
-
+  const dispatch = useDispatch();
   const handleVerify = async () => {
     const { correct } = checkAnswers(userInput, '7_1B')
     if (colorChanged && correct) {
       setResultMessage('Correct! Proceeding to next level...')
       setTimeout(() => {
+        dispatch(unlockLevel("level_7_3"));
         navigate('/backstory_level_7_3')
       }, 1500)
     } else if (!colorChanged) {

@@ -1,19 +1,24 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { unlockLevel  } from '../../protectedRoutes/store';
 
 const Level5_2 = () => {
   const [hoveredButton, setHoveredButton] = useState(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
+  
   const handleOption1Click = () => {
     setTimeout(() => {
+      dispatch(unlockLevel("level_7_1a"));
       navigate("/backstory_level_7_1A");
     }, 500);
   };
 
   const handleOption2Click = () => {
     setTimeout(() => {
+      dispatch(unlockLevel("level_7_1b"));
       navigate("/backstory_level_7_1B");
     }, 500);
   };

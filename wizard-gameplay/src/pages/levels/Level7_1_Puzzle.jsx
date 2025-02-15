@@ -1,5 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
+import { useDispatch } from 'react-redux';
+import { unlockLevel  } from '../../protectedRoutes/store';
+
 
 const Level7_1 = () => {
   const textRef = useRef(null);
@@ -13,7 +16,7 @@ const Level7_1 = () => {
   const [commandHistory, setCommandHistory] = useState([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const HOSTNAME = `eryndor@kravaros-arcane-forge:~$`;
   const HOSTNAME_HTML = `<span style="margin-left:1rem; font-weight:bold; color:oklch(.508 .118 165.612);">${HOSTNAME}</span>`;
   // var BLUR_PX = 3;
@@ -160,7 +163,9 @@ const Level7_1 = () => {
             if(name === "--Malevoryx" || name === "--MALEVORYX" || name === "--malevoryx"){
               contentRef.current.innerHTML += `<br> Congrats! You have defeated the evil mage Malevoryx. <br>
                 You may now proceed to the next level. Simply type "next level" as a command to do so!!!<br>`
-              setDefeatedMalevoryx(true)
+                dispatch(unlockLevel("level7_2"));
+                setDefeatedMalevoryx(true)
+                // navigate("/Level7_2");
               }
           }
         } else if(command === command_names[7]){
