@@ -662,7 +662,7 @@ button span {
             
             
             var degreeValue = Math.round(currentHeading - window.orientation);
-            console.log(degreeValue);
+            // console.log(degreeValue);
             if (degreeValue < 0)
             {
                 degreeValue += (Math.ceil(Math.abs(degreeValue) / 360) * 360);
@@ -791,28 +791,28 @@ button span {
     <div class="answers" >
         <div class="answer">
             <p >Answer 1</p>
-            <input type="number">
+            <input type="number" class="ans_1">
         </div>
 
         <div class="answer">
             <p >Answer 2</p>
-            <input type="number">
+            <input type="number" class="ans_2">
         </div>
 
         <div class="answer">
             <p >Answer 3</p>
-            <input type="number">
+            <input type="number" class="ans_3">
         </div>
 
     </div>
     <div class="answers">
-        <button>
+        <button class="ans_btn">
             <span> SUBMIT   
             </span>
         </button>
     </div>
     
-    
+    <script src="./index.js"></script>
 </body>
 
 </html>
