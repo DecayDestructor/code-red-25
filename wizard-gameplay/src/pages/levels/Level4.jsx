@@ -5,7 +5,7 @@ import TextDisplayComponent from "../../components/TextDisplayComponent";
 const Level4 = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const level4_texts = [
-    "“To find the Wizard's Legacy, seek the market where ownable digital treasures are traded. The biggest marketplace will reveal the key to unlock the artifact. ‘Cassandra’ , some call the treasure… seek his, and give us his address…”"   
+    "“To find the Wizard's Legacy, seek the market where ownable digital treasures are traded. The biggest marketplace will reveal the key to unlock the artifact. ‘Cassandra’ , some call the treasure… seek this, and give us her address…”"   
   ];
 
   const navigate = useNavigate();

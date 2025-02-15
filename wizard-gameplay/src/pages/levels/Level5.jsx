@@ -10,7 +10,8 @@ const Level5 = () => {
         "All you have is a broken compass and 3 hints: ",
         "'A shrewd merchant encoded his secret vault’s location with numbers that sum to 360. The first number is double the second, and the third is the average of the first two. What bearing does the largest number hold?'",
         "'In the forest of echoes, a tree marks its place. It leans not toward the rising sun but to a bearing four-sevenths of a full circle from the east, bending slightly northward. What direction does it call?'",
-        "'An old traveler once told me of a landmark forgotten by time, just shy of the western edge. Its bearing lies one and three-sevenths of a degree east of the halfway mark between true west and true north. Seek the balance of its forgotten path.'"
+        "'An old traveler once told me of a landmark forgotten by time, just shy of the western edge. Its bearing lies one and three-sevenths of a degree east of the halfway mark between true west and true north. Seek the balance of its forgotten path.'",
+        "For each of the 3 hints, at the right coordinates, do not forget to check your hidden tool for secret messages..."
     ] 
 
     const handleTextComplete = () => window.location.href = "/index.html"
