@@ -118,7 +118,7 @@ const App = () => {
           <Route path="/level_5B" element={<ProtectedRoute level={"level_5b"} element={<Level_5B/>} />}  />
           <Route path="/options_level_5B" element={<ProtectedRoute level={"options_level_5b"} element={<Options_Level_5B/>} />} />
 
-          <Route path="/backstory_level_6_1" element={<ProtectedRoute level={"level_6_1"} element={<Backstory_Level_6_1/>} />}          />
+          <Route path="/backstory_level_6_1" element={<ProtectedRoute level={"level_6_1"} element={<Backstory_Level_6_1/>} />}      />
           <Route path="/level_6_1" element={<ProtectedRoute level={"level_6_1"} element={<Level_6_1/>} />} />
           
           <Route path="/jumpscare_6_2" element={<ProtectedRoute level={"jumpscare_6_2"} element={<Jumpscare_6_2/>} />} />
