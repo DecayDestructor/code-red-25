@@ -4,7 +4,7 @@ import level3_1 from '../../assets/level3_1.webp'
 import { Link, useNavigate } from 'react-router-dom'
 import checkAnswers from '../../utils/checkAnswer'
 import { useDispatch } from 'react-redux';
-import { unlockLevel  } from '../../protectedRoutes/store';
+import { lockLevel, unlockLevel  } from '../../protectedRoutes/store';
 
 const Level3_Puzzle = () => {
   const [answer1, setAnswer1] = useState('')
@@ -21,7 +21,8 @@ const Level3_Puzzle = () => {
     const { correct } = await checkAnswers(answer1.concat(answer2), '3')
 
     if (correct) {
-      dispatch(unlockLevel("level3"));
+      dispatch(unlockLevel("level4"));
+      dispatch(lockLevel("level3"));
       navigate('/level4')
     } else {
       setShowError(true)

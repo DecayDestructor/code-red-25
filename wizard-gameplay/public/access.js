@@ -25,9 +25,9 @@ function getGameProgress() {
 function checkAccess() {
   const gameProgress = getGameProgress();
   const unlockedLevels = gameProgress.unlockedLevels || {};
-  const latestUnlockedLevel = gameProgress.latestUnlockedLevel || "level_1"; // Default to level_1
+  const latestUnlockedLevel = gameProgress.latestUnlockedLevel || "level1"; // Default to level_1
 
-  if (!unlockedLevels["level_5a"]) {
+  if (!unlockedLevels["level5"]) {
     // console.warn("Access denied: level_5A is locked! Redirecting to last unlocked level...");
     window.location.href = `/${latestUnlockedLevel}`; // Redirect to last unlocked level
   } else {

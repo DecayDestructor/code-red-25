@@ -5,7 +5,7 @@ const ProtectedRoute = ({ level, element }) => {
   const unlockedLevels = useSelector((state) => state.game.unlockedLevels);
   const latestUnlockedLevel = useSelector((state) => state.game.latestUnlockedLevel);
 
-  console.log("Protected Route Check:", { level, unlockedLevels, latestUnlockedLevel }); // Debugging log
+  // console.log("Protected Route Check:", { level, unlockedLevels, latestUnlockedLevel }); // Debugging log
 
   if (unlockedLevels[level] === true) {
     return element;

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import LayoutPage from '../interfaces/LayoutPage'
 import checkAnswers from '../../../utils/checkAnswers'
 import { useDispatch } from 'react-redux';
-import { unlockLevel  } from '../../protectedRoutes/store';
+import { lockLevel, unlockLevel  } from '../../protectedRoutes/store';
 
 
 const CombinedComponent = () => {
@@ -20,6 +20,7 @@ const CombinedComponent = () => {
       setResultMessage('Correct! Well done!')
       setTimeout(() => {
         dispatch(unlockLevel("options_level_4"));
+        dispatch(lockLevel("level_3"));
         navigate('/backstory_level_4')
       }, 1500)
     } else {

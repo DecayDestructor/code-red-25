@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import LayoutPage from '../interfaces/LayoutPage'
 import checkAnswers from '../../../utils/checkAnswers'
+import { useDispatch } from 'react-redux';
+import { lockLevel, unlockLevel  } from '../../protectedRoutes/store';
+
 const YourComponent = () => {
   const navigate = useNavigate()
   const [userInput, setUserInput] = useState('')
@@ -9,6 +12,7 @@ const YourComponent = () => {
   const link =
     'https://docs.google.com/document/d/1sjiGhP8IMtobg1o5iGfNM1JxFcf6kcijlh2LtyCz0B8/edit?usp=sharing'
   window.link = link
+  const dispatch = useDispatch();
 
   const handleVerify = async () => {
     const { correct } = await checkAnswers(userInput, '7_3')
@@ -16,6 +20,8 @@ const YourComponent = () => {
       setResultMessage('Correct! Well done!')
       setTimeout(() => {
         navigate('/level_7_4')
+        dispatch(unlockLevel("level_7_4"));
+        dispatch(lockLevel("level_7_3"));
       }, 1500)
     } else {
       setResultMessage('Incorrect. Try again!')

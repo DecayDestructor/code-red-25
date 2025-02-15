@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { useDispatch } from 'react-redux';
-import { unlockLevel  } from '../../protectedRoutes/store';
+import { lockLevel, unlockLevel  } from '../../protectedRoutes/store';
 
 
 const Level7_1 = () => {
@@ -164,6 +164,8 @@ const Level7_1 = () => {
               contentRef.current.innerHTML += `<br> Congrats! You have defeated the evil mage Malevoryx. <br>
                 You may now proceed to the next level. Simply type "next level" as a command to do so!!!<br>`
                 dispatch(unlockLevel("level7_2"));
+                dispatch(lockLevel("level7_1"));
+                navigate("/level7_2");
                 setDefeatedMalevoryx(true)
                 // navigate("/Level7_2");
               }

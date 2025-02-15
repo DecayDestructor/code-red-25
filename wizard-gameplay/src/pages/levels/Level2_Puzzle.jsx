@@ -6,7 +6,7 @@ import level2_2 from '../../assets/level2_2.webp'
 import LayoutPage from '../../components/Layout'
 import checkAnswers from '../../utils/checkAnswer'
 import { useDispatch } from 'react-redux';
-import { unlockLevel  } from '../../protectedRoutes/store';
+import { lockLevel, unlockLevel  } from '../../protectedRoutes/store';
 
 const Level2_Puzzle = () => {
   const [sliderValues, setSliderValues] = useState([8, 8, 8]) // Default mid-point
@@ -26,6 +26,7 @@ const Level2_Puzzle = () => {
     if (isSolved) {
       const { correct } = await checkAnswers('3', '2')
       dispatch(unlockLevel("level3"));
+      dispatch(lockLevel("level2"));
       navigate('/level3')
     }
   }

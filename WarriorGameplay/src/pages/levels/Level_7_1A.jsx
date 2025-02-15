@@ -3,7 +3,7 @@ import { isRouteErrorResponse, useNavigate } from 'react-router-dom' // Import u
 import LayoutPage from '../interfaces/LayoutPage'
 import checkAnswers from '../../../utils/checkAnswers'
 import { useDispatch } from 'react-redux';
-import { unlockLevel  } from '../../protectedRoutes/store';
+import { lockLevel, unlockLevel  } from '../../protectedRoutes/store';
 
 const CombinedComponent = () => {
   const [userInput, setUserInput] = useState('')
@@ -16,7 +16,8 @@ const CombinedComponent = () => {
     if (correct) {
       setResultMessage('Correct! Well done!')
       setTimeout(() => {
-        dispatch(unlockLevel("jumpscare_7_1A"));
+        dispatch(unlockLevel("jumpscare_7_1a"));
+        dispatch(lockLevel("level_7_1a"));
         navigate('/jumpscare_7_1A')
       }, 1500)
     } else {

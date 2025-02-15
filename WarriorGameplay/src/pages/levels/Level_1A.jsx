@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import LayoutPage from '../interfaces/LayoutPage'
 import checkAnswers from '../../../utils/checkAnswers'
 import { useDispatch } from 'react-redux';
-import { unlockLevel  } from '../../protectedRoutes/store';
+import { lockLevel, unlockLevel  } from '../../protectedRoutes/store';
 
 const Level_1A = () => {
   const [userInput, setUserInput] = useState('')
@@ -17,6 +17,7 @@ const Level_1A = () => {
       setResultMessage('Correct! Well done!')
       setTimeout(() => {
         dispatch(unlockLevel("level_2"));
+        dispatch(lockLevel("level_1a"));
         navigate('/backstory_level_2')
       }, 1500)
     } else {

@@ -1,12 +1,17 @@
 import React, { useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { lockLevel, unlockLevel  } from '../../protectedRoutes/store';
 
 const Jumpscare_6_2 = () => {
   const videoRef = useRef(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const handleVideoEnd = () => {
+      dispatch(unlockLevel("options_level_4"));
+      dispatch(lockLevel("jumpscares_level_6_2"));
       navigate('/backstory_level_4');
     };
 

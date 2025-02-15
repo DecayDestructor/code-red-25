@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import LayoutPage from '../interfaces/LayoutPage'
 import checkAnswers from '../../../utils/checkAnswers'
 import { useDispatch } from 'react-redux';
-import { unlockLevel  } from '../../protectedRoutes/store';
+import { lockLevel, unlockLevel  } from '../../protectedRoutes/store';
 
 const HiddenChallengeComponent = () => {
   const [userInput, setUserInput] = useState('')
@@ -18,6 +18,7 @@ const HiddenChallengeComponent = () => {
       setResultMessage('Correct! Proceeding to next level...')
       setTimeout(() => {
         dispatch(unlockLevel("level_7_3"));
+        dispatch(lockLevel("level_7_1b"));
         navigate('/backstory_level_7_3')
       }, 1500)
     } else if (!colorChanged) {

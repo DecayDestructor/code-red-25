@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
-import { unlockLevel  } from '../../protectedRoutes/store';
+import { lockLevel, unlockLevel  } from '../../protectedRoutes/store';
 
 const Level5_2 = () => {
   const [hoveredButton, setHoveredButton] = useState(null);
@@ -12,6 +12,7 @@ const Level5_2 = () => {
   const handleOption1Click = () => {
     setTimeout(() => {
       dispatch(unlockLevel("level_5a"));
+      dispatch(lockLevel("options_level_5b"));
       navigate("/backstory_level_5A");
     }, 500);
   };
@@ -19,6 +20,7 @@ const Level5_2 = () => {
   const handleOption2Click = () => {
     setTimeout(() => {
       dispatch(unlockLevel("level_6_2"));
+      dispatch(lockLevel("options_level_5b"));
       navigate("/backstory_level_6_2");
     }, 500);
   };

@@ -5,7 +5,7 @@ import checkAnswers from '../../../utils/checkAnswers'
 import bgImg from "../../assets/levels/Level_7_1.png"
 
 import { useDispatch } from 'react-redux';
-import { unlockLevel  } from '../../protectedRoutes/store';
+import { lockLevel, unlockLevel  } from '../../protectedRoutes/store';
 const Level7_1 = () => {
   const [buttonsState, setButtonsState] = useState(Array(9).fill('0'))
   const [isCorrect, setIsCorrect] = useState(false)
@@ -27,7 +27,8 @@ const Level7_1 = () => {
 
     if (isPatternCorrect) {
       setTimeout(() => {
-        dispatch(unlockLevel("level_7a"));
+        dispatch(unlockLevel("options_level_7a"));
+        dispatch(lockLevel("level_7_1"));
         navigate('/options_level_7a')
       }, 1000)
     } else {

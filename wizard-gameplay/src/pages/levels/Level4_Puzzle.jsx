@@ -4,7 +4,7 @@ import level4_1 from '../../assets/level4_1.webp' // Ensure the correct image pa
 import { Link, useNavigate } from 'react-router-dom'
 import checkAnswers from '../../utils/checkAnswer.js'
 import { useDispatch } from 'react-redux';
-import { unlockLevel  } from '../../protectedRoutes/store';
+import { lockLevel, unlockLevel  } from '../../protectedRoutes/store';
 
 const Level4_Puzzle = () => {
   const navigate = useNavigate()
@@ -16,6 +16,7 @@ const Level4_Puzzle = () => {
 
     if (correct) {
       dispatch(unlockLevel("level5"));
+      dispatch(lockLevel("level4"));
       navigate('/index.html')
     } else {
       setShowError(true)

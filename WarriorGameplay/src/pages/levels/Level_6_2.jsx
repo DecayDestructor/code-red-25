@@ -4,7 +4,7 @@ import LayoutPage from '../interfaces/LayoutPage'
 import checkAnswers from '../../../utils/checkAnswers'
 import bgImg from "../../assets/levels/Level_6_2.png"
 import { useDispatch } from 'react-redux';
-import { unlockLevel  } from '../../protectedRoutes/store';
+import { lockLevel, unlockLevel  } from '../../protectedRoutes/store';
 
 const BackstoryLevelComponent = () => {
   const [userInput, setUserInput] = useState('')
@@ -17,6 +17,7 @@ const BackstoryLevelComponent = () => {
       setResultMessage('Correct! Well done!')
       setTimeout(() => {
         dispatch(unlockLevel("jumpscare_6_2"));
+        dispatch(lockLevel("level_6_2"));
         navigate('/jumpscare_6_2')
       }, 1500)
     } else {

@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import LayoutPage from '../../components/Layout'
 import checkAnswer from '../../utils/checkAnswer.js'
 import { useDispatch } from 'react-redux';
-import { unlockLevel  } from '../../protectedRoutes/store';
+import { lockLevel, unlockLevel  } from '../../protectedRoutes/store';
 
 const Level6_Puzzle = () => {
   const [answer, setAnswer] = useState('')
@@ -17,6 +17,7 @@ const Level6_Puzzle = () => {
 
     if (correct) {
       dispatch(unlockLevel("level7_1"));
+      dispatch(lockLevel("level6"));
       navigate('/level7_1')
     } else {
       setShowError(true)

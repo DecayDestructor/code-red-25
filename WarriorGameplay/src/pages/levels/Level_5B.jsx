@@ -3,7 +3,7 @@ import LayoutPage from '../interfaces/LayoutPage'
 import { useNavigate } from 'react-router-dom'
 import checkAnswers from '../../../utils/checkAnswers'
 import { useDispatch } from 'react-redux';
-import { unlockLevel  } from '../../protectedRoutes/store';
+import { lockLevel, unlockLevel  } from '../../protectedRoutes/store';
 const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 const Hyperplexed = ({ id, link }) => {
@@ -77,6 +77,7 @@ const App = () => {
       setResultMessage('Correct! Well done!')
       setTimeout(() => {
         dispatch(unlockLevel("options_level_5b"));
+        dispatch(lockLevel("level_5b"));
         navigate('/options_level_5b')
       }, 1500)
     } else {
