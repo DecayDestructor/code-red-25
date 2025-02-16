@@ -37,7 +37,7 @@ function updateGameProgress(levelToUnlock) {
 
   // Unlock the level
   gameProgress.unlockedLevels[levelToUnlock] = true;
-  gameProgress.unlockedLevels["level5a"] = false;
+  // gameProgress.unlockedLevels["level5a"] = false;
   gameProgress.latestUnlockedLevel = levelToUnlock;
 
   // Encrypt and store in cookies

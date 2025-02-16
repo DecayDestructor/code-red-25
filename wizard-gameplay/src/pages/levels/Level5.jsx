@@ -1,6 +1,8 @@
 import React from 'react'
 import level5_1 from "../../assets/level5_1.webp"
 import TextDisplayComponent from '../../components/TextDisplayComponent'
+import { useDispatch } from 'react-redux'
+import { lockLevel, unlockLevel } from '../../protectedRoutes/store'
 
 const Level5 = () => {
 
@@ -15,7 +17,8 @@ const Level5 = () => {
     ] 
 
     const handleTextComplete = () => window.location.href = "/index.html"
-
+    const dispatch = useDispatch()
+    dispatch(lockLevel('level4'))
   return (
 
     <TextDisplayComponent 

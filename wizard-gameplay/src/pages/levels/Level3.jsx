@@ -1,6 +1,8 @@
 import level3_1 from '../../assets/level3_1.webp'; 
 import { useNavigate } from "react-router-dom";
 import TextDisplayComponent from "../../components/TextDisplayComponent";
+import { useDispatch } from 'react-redux'
+import { lockLevel, unlockLevel } from '../../protectedRoutes/store'
 
 const Level3 = () => {
   const level3_texts = [
@@ -12,7 +14,8 @@ const Level3 = () => {
 ];
 
   const navigate = useNavigate();
-
+  const dispatch = useDispatch()
+  dispatch(lockLevel('level2'))
   const handleTextComplete = () => navigate("/level3_puzzle");
   return (
 <TextDisplayComponent 

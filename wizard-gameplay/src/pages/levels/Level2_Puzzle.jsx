@@ -26,7 +26,7 @@ const Level2_Puzzle = () => {
     if (isSolved) {
       const { correct } = await checkAnswers('3', '2')
       dispatch(unlockLevel('level3'))
-      dispatch(lockLevel('level2'))
+
       navigate('/level3')
     }
   }

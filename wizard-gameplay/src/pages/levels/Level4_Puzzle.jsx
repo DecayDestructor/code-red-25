@@ -16,7 +16,7 @@ const Level4_Puzzle = () => {
 
     if (correct) {
       dispatch(unlockLevel('level5'))
-      dispatch(lockLevel('level4'))
+
       navigate('/index.html')
     } else {
       setShowError(true)

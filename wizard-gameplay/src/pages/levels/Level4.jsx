@@ -1,6 +1,8 @@
 import level4_1 from '../../assets/level4_1.webp'; 
 import { useNavigate } from "react-router-dom";
 import TextDisplayComponent from "../../components/TextDisplayComponent";
+import { useDispatch } from 'react-redux'
+import { lockLevel, unlockLevel } from '../../protectedRoutes/store'
 
 const Level4 = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -9,7 +11,8 @@ const Level4 = () => {
   ];
 
   const navigate = useNavigate();
-
+  const dispatch = useDispatch()
+  dispatch(lockLevel('level3'))
   const handleTextComplete = () => navigate("/level4_puzzle");
 
   return (

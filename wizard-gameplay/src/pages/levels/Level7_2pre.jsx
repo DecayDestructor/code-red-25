@@ -1,6 +1,8 @@
 import level7_2 from '../../assets/level7_2pre.webp'; 
 import { useNavigate } from "react-router-dom";
 import TextDisplayComponent from "../../components/TextDisplayComponent";
+import { useDispatch } from 'react-redux'
+import { lockLevel } from '../../protectedRoutes/store'
 
 const Level7_2pre = () => {
   const Level7_2pre_texts = [
@@ -11,7 +13,8 @@ const Level7_2pre = () => {
 
 
   const navigate = useNavigate();
-
+  const dispatch = useDispatch()
+  dispatch(lockLevel('level7_1'))
   const handleTextComplete = () => navigate("/Level7_2");
 
   return (

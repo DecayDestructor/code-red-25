@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import TextDisplayComponent from "../../components/TextDisplayComponent";
 import { useDispatch } from 'react-redux';
 import { unlockLevel  } from '../../protectedRoutes/store';
+import { useDispatch } from 'react-redux'
+import { lockLevel, unlockLevel } from '../../protectedRoutes/store'
 
 const level6_texts = [
   "The kraken’s heart is made of metal and you are supposed to take down the kraken by destroying its heart and indirectly destroying Malakaroth’s power."+
@@ -16,8 +18,9 @@ const level6_texts = [
 const Level6 = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  dispatch(lockLevel('level5'))
   const handleTextComplete = () => {
-    dispatch(unlockLevel("level6"));
+
     navigate("/level6_puzzle");
   };
 
