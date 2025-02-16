@@ -15,26 +15,26 @@ const Level1_Puzzle = () => {
   const dispatch = useDispatch()
 
   const handleSubmitAnswer = async () => {
-    if (loading) return
+    if (loading) return // Prevent multiple clicks
     setLoading(true)
+
     try {
       const { correct } = await checkAnswers(answer, '1')
+
       if (correct) {
-        setLoading(true)
         setTimeout(() => {
           dispatch(unlockLevel('level2'))
           navigate('/level2')
         }, 1500)
       } else {
         setShowError(true)
+        setLoading(false) // Allow user to retry immediately
       }
     } catch (e) {
       console.error(e)
-    } finally {
-      setLoading(false)
+      setLoading(false) // Reset loading on error
     }
   }
-  
 
   return (
     <div

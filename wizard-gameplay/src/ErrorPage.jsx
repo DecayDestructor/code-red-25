@@ -1,7 +1,12 @@
 import React from 'react'
 import { Sparkles, Skull, Scroll } from 'lucide-react'
-
+import { useEffect } from 'react'
 const LockedPage = () => {
+  useEffect(() => {
+    if (window.location.pathname === '/index.html') {
+      window.location.reload() // Forces a hard refresh
+    }
+  }, [])
   return (
     <div className="min-h-screen bg-gray-900 flex flex-col justify-center items-center p-4 bg-[url('/api/placeholder/800/600')] bg-cover bg-center">
       <div className="max-w-xl w-full space-y-8 text-center bg-gray-900/95 p-8 rounded-lg border-4 border-purple-600/50 shadow-2xl relative overflow-hidden">

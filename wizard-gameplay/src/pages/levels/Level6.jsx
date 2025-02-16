@@ -17,8 +17,8 @@ const level6_texts = [
 const Level6 = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  dispatch(lockLevel('level5'))
   const handleTextComplete = () => {
+    dispatch(lockLevel('level5'))
     navigate('/level6_puzzle')
   }
 
