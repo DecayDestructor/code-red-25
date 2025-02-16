@@ -41,7 +41,7 @@ const CombinedComponent = () => {
         className="object-cover w-full h-full absolute z-0"
         data-ANSWER-TO-QUESTION-3="colossalas"
       />
-      <LayoutPage level={3} />
+      <LayoutPage level={3} hintText={"Carefully inspect the page to get the answer from the elements hidden behind the screen. Ever heard of data- attributes?"}/>
 
       {/* Hidden answer in data attribute */}
       <div data-ANSWER-TO-QUESTION-3="colossalas" className="hidden"></div>

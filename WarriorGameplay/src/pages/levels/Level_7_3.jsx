@@ -41,7 +41,7 @@ const YourComponent = () => {
         alt="Background"
         className="object-cover w-full h-full absolute z-0"
       />
-      <LayoutPage level={'7_3'} />
+      <LayoutPage level={'7_3'} hintText={"Find the “link” from the console. Using the link, open a huge script wherein you shall navigate through the json using the given instructions."}/>
 
       <div className="bg-black bg-opacity-50 backdrop-blur-md shadow-lg rounded-lg p-8 w-11/12 sm:w-2/3 lg:w-1/3 text-white text-center">
         <h1 className="text-2xl font-bold mb-4">Enter Answer</h1>

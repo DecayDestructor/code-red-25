@@ -15,7 +15,7 @@ const Backstory_Level_1_3 = () => {
     First I diffrentiate myself with precision and grace,
     Then I integrate to a higher place.
     A sequence of steps both subtle and fleet,
-    Till convergence and logic finally meet.`;
+    Till convergence and binary finally meet.`;
 
     const [currentPassage, setCurrentPassage] = useState(firstPassage);
     const typingSpeed = 3;

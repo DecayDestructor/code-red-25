@@ -39,7 +39,7 @@ const Level_1A = () => {
         alt="Background"
         className="object-cover w-full h-full absolute z-0"
       />
-      <LayoutPage level={'1 A'} />
+      <LayoutPage level={'1 A'} hintText={"Atbash cipher had originated at around 600 BCE and was used by Leonardo DaVinci to take notes!  “Backwards shall you wind implies” that you have to reverse the order of the letters and also apply the atbash cipher to them."}/>
       <div className="bg-black bg-opacity-50 backdrop-blur-md shadow-lg rounded-lg p-8 w-11/12 sm:w-2/3 lg:w-1/3 text-white text-center">
         <h1 className="text-2xl font-bold mb-4">Enter Answer</h1>
         <input

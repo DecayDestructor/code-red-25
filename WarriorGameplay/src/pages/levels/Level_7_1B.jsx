@@ -44,7 +44,7 @@ const HiddenChallengeComponent = () => {
         alt="Background"
         className="object-cover w-full h-full absolute z-0"
       />
-      <LayoutPage level={'7_1 B'} />
+      <LayoutPage level={'7_1 B'} hintText={"Find the camouflaged text by changing the color of the panel. Later check all the corners to find a lonely textbox. In the textbox you shall enter the rgb color representation of magenta."}/>
       {/* Central panel */}
       <div
         className="w-2/3 h-2/3 flex flex-col justify-center items-center relative"

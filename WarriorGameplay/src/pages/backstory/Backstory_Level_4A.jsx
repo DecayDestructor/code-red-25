@@ -7,7 +7,7 @@ const Backstory_Level_1_1 = () => {
     const navigate = useNavigate();
 
     // Replace all newline characters with spaces
-    const sourceText = `  Symbols that dance, a rhythmic beat,
+    const sourceText = `  Symbols that hide, a rhythmic beat,
     Hermes' whispers, swift and fleet.
     A code of light, a tapping sound,
     Messages sent where none are around.`;

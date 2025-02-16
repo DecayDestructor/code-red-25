@@ -136,7 +136,7 @@ const Level_7_4 = () => {
   // Rest of the component remains the same...
   return (
     <div>
-      <LayoutPage level={'7_4'} />
+      <LayoutPage level={'7_4'} hintText={"Classes play a vital role in CSS styling. It can also change rate of health drop from 1 to 10!"}/>
       <div className="flex justify-center items-center min-h-screen relative bg-gray-900 p-4">
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">

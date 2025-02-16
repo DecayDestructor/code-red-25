@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-const LayoutPage = ({ level }) => {
+const LayoutPage = ({ level , hintText }) => {
   const [timeRemaining, setTimeRemaining] = useState('00:00:00')
   const [hintUnlocked, setHintUnlocked] = useState(false)
   const [showHintModal, setShowHintModal] = useState(false)
@@ -114,7 +114,7 @@ const LayoutPage = ({ level }) => {
               </button>
             </div>
             <div className="text-white">
-              Here's your hint: The answer lies in the pattern of the sequence.
+              Here's your hint: {hintText}
             </div>
           </div>
         </div>

@@ -47,7 +47,7 @@ const Level7_1 = () => {
         alt="Background"
         className="object-cover w-full h-full absolute z-0"
       />
-      <LayoutPage level={'7_1'} />
+      <LayoutPage level={'7_1'} hintText={"Differentiate and integrate the alternating terms. Take the powers and culminate them to form a combined number. What’s the binary form of that number?"}/>
 
       <div className="relative bg-gray-700 bg-opacity-70 w-11/12 max-w-4xl p-5 rounded-lg border-4 border-yellow-600 shadow-lg flex flex-col items-center">
         <div

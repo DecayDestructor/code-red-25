@@ -99,7 +99,7 @@ const App = () => {
         alt="Background"
         className="object-cover w-full h-full absolute z-0"
       />
-      <LayoutPage level={'5 B'} />
+      <LayoutPage level={'5 B'} hintText={"The dancing links... use the hidden tools to sto them from dancing."}/>
       <div className="relative flex flex-col items-center bg-black/75 rounded-2xl p-8 w-[90vw] max-w-7xl h-[70vh] overflow-hidden shadow-[0_0_30px_rgba(255,255,0,0.8)]">
         <div className="flex-1 w-full flex flex-col justify-evenly">
           <Hyperplexed

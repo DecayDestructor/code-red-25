@@ -41,7 +41,7 @@ const BackstoryLevelComponent = () => {
         alt="Background"
         className="object-cover w-full h-full absolute z-0"
       />
-      <LayoutPage level={'6_1'} />
+      <LayoutPage level={'6_1'} hintText={"“Blue-framed window” signifies that the screen of the IDE is of blue color. Which C IDE had a blue screen? “What was my age?” means the final version of this blue screened IDE."}/>
       <div className="bg-black bg-opacity-50 backdrop-blur-md shadow-lg rounded-lg p-8 w-11/12 sm:w-2/3 lg:w-1/3 text-white text-center">
         <h1 className="text-2xl font-bold mb-4">Enter Answer</h1>
         <input
