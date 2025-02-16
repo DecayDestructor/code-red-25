@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 
-const LayoutPage = ({ level }) => {
+const LayoutPage = ({ level, hint }) => {
   const [timeRemaining, setTimeRemaining] = useState('00:00:00')
   const [hintUnlocked, setHintUnlocked] = useState(false)
   const [showHintModal, setShowHintModal] = useState(false)
-  const [hintTimer, setHintTimer] = useState(300) // 5 minutes in seconds
+  const [hintTimer, setHintTimer] = useState(420) // 5 minutes in seconds
 
   // Game timer logic
   useEffect(() => {
@@ -114,9 +114,7 @@ const LayoutPage = ({ level }) => {
                 ✕
               </button>
             </div>
-            <div>
-              Here's your hint: The answer lies in the pattern of the sequence.
-            </div>
+            <div>{hint || 'NO HINT :('}</div>
           </div>
         </div>
       )}

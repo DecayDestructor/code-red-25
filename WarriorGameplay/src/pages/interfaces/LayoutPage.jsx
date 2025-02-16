@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 
-const LayoutPage = ({ level , hintText }) => {
+const LayoutPage = ({ level, hintText }) => {
   const [timeRemaining, setTimeRemaining] = useState('00:00:00')
   const [hintUnlocked, setHintUnlocked] = useState(false)
   const [showHintModal, setShowHintModal] = useState(false)
-  const [hintTimer, setHintTimer] = useState(300) // 5 minutes in seconds
+  const [hintTimer, setHintTimer] = useState(420)
 
   // Game timer logic
   useEffect(() => {
@@ -113,9 +113,7 @@ const LayoutPage = ({ level , hintText }) => {
                 ✕
               </button>
             </div>
-            <div className="text-white">
-              Here's your hint: {hintText}
-            </div>
+            <div className="text-white">Here's your hint: {hintText}</div>
           </div>
         </div>
       )}
