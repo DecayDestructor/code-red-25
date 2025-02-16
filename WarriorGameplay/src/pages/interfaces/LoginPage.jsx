@@ -9,7 +9,6 @@ const SignupPage = () => {
   const [success, setSuccess] = useState('')
 
   const navigate = useNavigate()
-  console.log(username)
 
   const handleSignup = async (e) => {
     e.preventDefault()
@@ -35,9 +34,9 @@ const SignupPage = () => {
         setError(data.error)
         return
       }
-      console.log(data)
 
       localStorage.setItem('id', data.id)
+      localStorage.setItem('name', data.name)
       setSuccess('User successfully registered!')
 
       setUsername('')

@@ -37,9 +37,11 @@ const SignupPage = () => {
         setError(data.error)
         return
       }
-      console.log(data)
 
       localStorage.setItem('id', data.id)
+      localStorage.setItem('name', data.name)
+      console.log(localStorage.getItem('name'))
+
       setSuccess('User successfully registered!')
 
       setUsername('')
