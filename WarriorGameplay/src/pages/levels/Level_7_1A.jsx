@@ -2,22 +2,22 @@ import React, { useEffect, useState } from 'react'
 import { isRouteErrorResponse, useNavigate } from 'react-router-dom' // Import useNavigate
 import LayoutPage from '../interfaces/LayoutPage'
 import checkAnswers from '../../../utils/checkAnswers'
-import { useDispatch } from 'react-redux';
-import { lockLevel, unlockLevel  } from '../../protectedRoutes/store';
+import { useDispatch } from 'react-redux'
+import { lockLevel, unlockLevel } from '../../protectedRoutes/store'
 
 const CombinedComponent = () => {
   const [userInput, setUserInput] = useState('')
   const [resultMessage, setResultMessage] = useState('')
 
   const navigate = useNavigate() // Initialize navigate
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const handleVerify = async () => {
     const { correct } = await checkAnswers(userInput, '7_1A')
     if (correct) {
       setResultMessage('Correct! Well done!')
       setTimeout(() => {
-        dispatch(unlockLevel("jumpscare_7_1a"));
-        dispatch(lockLevel("level_7_1a"));
+        dispatch(unlockLevel('jumpscare_7_1a'))
+        dispatch(lockLevel('level_7_1a'))
         navigate('/jumpscare_7_1A')
       }, 1500)
     } else {
@@ -39,7 +39,7 @@ const CombinedComponent = () => {
         alt="Background"
         className="object-cover w-full h-full absolute z-0"
       />
-      <LayoutPage />
+      <LayoutPage level={'7_1 A'} />
       <div className="bg-black bg-opacity-50 backdrop-blur-md shadow-lg rounded-lg p-8 w-11/12 sm:w-2/3 lg:w-1/3 text-white text-center">
         <h1 className="text-2xl font-bold mb-4">Enter Answer</h1>
         <input

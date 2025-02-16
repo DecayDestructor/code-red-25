@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react'
 import LayoutPage from '../interfaces/LayoutPage'
 import { useNavigate } from 'react-router-dom'
 import checkAnswers from '../../../utils/checkAnswers'
-import { useDispatch } from 'react-redux';
-import { lockLevel, unlockLevel  } from '../../protectedRoutes/store';
+import { useDispatch } from 'react-redux'
+import { lockLevel, unlockLevel } from '../../protectedRoutes/store'
 const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 const Hyperplexed = ({ id, link }) => {
@@ -70,14 +70,14 @@ const App = () => {
   const [userInput, setUserInput] = useState('')
   const [resultMessage, setResultMessage] = useState('')
   const navigate = useNavigate()
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const handleVerify = async () => {
     const { correct } = await checkAnswers(userInput, '5B')
     if (correct) {
       setResultMessage('Correct! Well done!')
       setTimeout(() => {
-        dispatch(unlockLevel("options_level_5b"));
-        dispatch(lockLevel("level_5b"));
+        dispatch(unlockLevel('options_level_5b'))
+        dispatch(lockLevel('level_5b'))
         navigate('/options_level_5b')
       }, 1500)
     } else {
@@ -98,7 +98,7 @@ const App = () => {
         alt="Background"
         className="object-cover w-full h-full absolute z-0"
       />
-      <LayoutPage />
+      <LayoutPage level={'5 B'} />
       <div className="relative flex flex-col items-center bg-black/75 rounded-2xl p-8 w-[90vw] max-w-7xl h-[70vh] overflow-hidden shadow-[0_0_30px_rgba(255,255,0,0.8)]">
         <div className="flex-1 w-full flex flex-col justify-evenly">
           <Hyperplexed

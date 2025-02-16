@@ -2,15 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import LayoutPage from '../interfaces/LayoutPage'
 import checkAnswers from '../../../utils/checkAnswers'
-import { useDispatch } from 'react-redux';
-import { lockLevel, unlockLevel  } from '../../protectedRoutes/store';
-
+import { useDispatch } from 'react-redux'
+import { lockLevel, unlockLevel } from '../../protectedRoutes/store'
 
 const CombinedComponent = () => {
   const [userInput, setUserInput] = useState('')
   const [resultMessage, setResultMessage] = useState('')
   const navigate = useNavigate()
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const typingSpeed = 3
 
   // Handle verification of user input
@@ -19,8 +18,8 @@ const CombinedComponent = () => {
     if (correct) {
       setResultMessage('Correct! Well done!')
       setTimeout(() => {
-        dispatch(unlockLevel("options_level_4"));
-        dispatch(lockLevel("level_3"));
+        dispatch(unlockLevel('options_level_4'))
+        dispatch(lockLevel('level_3'))
         navigate('/backstory_level_4')
       }, 1500)
     } else {
@@ -42,7 +41,7 @@ const CombinedComponent = () => {
         className="object-cover w-full h-full absolute z-0"
         data-ANSWER-TO-QUESTION-3="colossalas"
       />
-      <LayoutPage />
+      <LayoutPage level={3} />
 
       {/* Hidden answer in data attribute */}
       <div data-ANSWER-TO-QUESTION-3="colossalas" className="hidden"></div>

@@ -2,24 +2,24 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import LayoutPage from '../interfaces/LayoutPage'
 import checkAnswers from '../../../utils/checkAnswers'
-import bgImg from "../../assets/levels/Level_6_1.png"
+import bgImg from '../../assets/levels/Level_6_1.png'
 
-import { useDispatch } from 'react-redux';
-import { lockLevel, unlockLevel  } from '../../protectedRoutes/store';
+import { useDispatch } from 'react-redux'
+import { lockLevel, unlockLevel } from '../../protectedRoutes/store'
 const BackstoryLevelComponent = () => {
   const [userInput, setUserInput] = useState('')
   const [resultMessage, setResultMessage] = useState('')
   const navigate = useNavigate()
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   // Handle verification of user input
   const handleVerify = async () => {
     const { correct } = await checkAnswers(userInput, '6_1')
     if (correct) {
       setResultMessage('Correct! Well done!')
       setTimeout(() => {
-        dispatch(unlockLevel("level_7_1"));
-        dispatch(lockLevel("level_6_1"));
+        dispatch(unlockLevel('level_7_1'))
+        dispatch(lockLevel('level_6_1'))
         navigate('/backstory_level_7_1')
       }, 1500)
     } else {
@@ -41,7 +41,7 @@ const BackstoryLevelComponent = () => {
         alt="Background"
         className="object-cover w-full h-full absolute z-0"
       />
-      <LayoutPage />
+      <LayoutPage level={'6_1'} />
       <div className="bg-black bg-opacity-50 backdrop-blur-md shadow-lg rounded-lg p-8 w-11/12 sm:w-2/3 lg:w-1/3 text-white text-center">
         <h1 className="text-2xl font-bold mb-4">Enter Answer</h1>
         <input
