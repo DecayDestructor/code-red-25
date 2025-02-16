@@ -8,20 +8,30 @@ import { lockLevel, unlockLevel } from '../../protectedRoutes/store'
 const CombinedComponent = () => {
   const [userInput, setUserInput] = useState('')
   const [resultMessage, setResultMessage] = useState('')
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
   const dispatch = useDispatch()
   // Handle verification of user input
   const handleVerify = async () => {
-    const { correct } = await checkAnswers(userInput, '4A')
-    if (correct) {
-      setResultMessage('Correct! Well done!')
-      setTimeout(() => {
-        dispatch(unlockLevel('level_5a'))
-        dispatch(lockLevel('options_level_4'))
-        navigate('/backstory_level_5a')
-      }, 1500)
-    } else {
-      setResultMessage('Incorrect. Try again!')
+    if (loading) return
+    setLoading(true)
+    try {
+      const { correct } = await checkAnswers(userInput, '4A')
+      if (correct) {
+        setResultMessage('Correct! Well done!')
+        setTimeout(() => {
+          dispatch(unlockLevel('level_5a'))
+          dispatch(lockLevel('options_level_4'))
+          navigate('/backstory_level_5a')
+        }, 1500)
+      } else {
+        setResultMessage('Incorrect. Try again!')
+      }
+    } catch (err) {
+      console.error(err)
+      setResultMessage('An error occurred. Please try again later.')
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -39,7 +49,12 @@ const CombinedComponent = () => {
         alt="Background"
         className="object-cover w-full h-full absolute z-0"
       />
-      <LayoutPage hintText={"The background contains secrets that cannot be seen with the naked eye."}/>
+      <LayoutPage
+        hintText={
+          'The background contains secrets that cannot be seen with the naked eye.'
+        }
+        level={'4 A'}
+      />
       <div className="bg-black bg-opacity-50 backdrop-blur-md shadow-lg rounded-lg p-8 w-11/12 mt-6 sm:w-2/3 lg:w-1/3 text-white text-center">
         <h1 className="text-2xl font-bold mb-4">Enter Answer</h1>
         <input
@@ -55,6 +70,7 @@ const CombinedComponent = () => {
           id="verifyButton"
           onClick={handleVerify}
           className="mt-4 px-6 py-2 bg-blue-900 hover:bg-blue-700 text-white font-semibold rounded-md"
+          disabled={loading}
         >
           Verify
         </button>

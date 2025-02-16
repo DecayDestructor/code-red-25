@@ -10,6 +10,7 @@ const Level7_1 = () => {
   const [buttonsState, setButtonsState] = useState(Array(9).fill('0'))
   const [isCorrect, setIsCorrect] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -20,22 +21,30 @@ const Level7_1 = () => {
   }
 
   const handleSubmit = async () => {
-    const currentPattern = buttonsState.join('')
-    setSubmitted(true)
-    const isPatternCorrect = await checkAnswers(currentPattern, '7_1')
-    setIsCorrect(isPatternCorrect)
+    if (loading) return
+    setLoading(true)
+    try {
+      const currentPattern = buttonsState.join('')
+      setSubmitted(true)
+      const isPatternCorrect = await checkAnswers(currentPattern, '7_1').correct
+      setIsCorrect(isPatternCorrect)
 
-    if (isPatternCorrect) {
-      setTimeout(() => {
-        dispatch(unlockLevel('options_level_7a'))
+      if (isPatternCorrect) {
+        setTimeout(() => {
+          dispatch(unlockLevel('options_level_7a'))
 
-        dispatch(lockLevel('level_6_1'))
-        navigate('/options_level_7a')
-      }, 1000)
-    } else {
-      setTimeout(() => {
-        setSubmitted(false)
-      }, 900)
+          dispatch(lockLevel('level_6_1'))
+          navigate('/options_level_7a')
+        }, 1000)
+      } else {
+        setTimeout(() => {
+          setSubmitted(false)
+        }, 900)
+      }
+    } catch (error) {
+      console.error(error)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -47,7 +56,12 @@ const Level7_1 = () => {
         alt="Background"
         className="object-cover w-full h-full absolute z-0"
       />
-      <LayoutPage level={'7_1'} hintText={"Differentiate and integrate the alternating terms. Take the powers and culminate them to form a combined number. What’s the binary form of that number?"}/>
+      <LayoutPage
+        level={'7_1'}
+        hintText={
+          'Differentiate and integrate the alternating terms. Take the powers and culminate them to form a combined number. What’s the binary form of that number?'
+        }
+      />
 
       <div className="relative bg-gray-700 bg-opacity-70 w-11/12 max-w-4xl p-5 rounded-lg border-4 border-yellow-600 shadow-lg flex flex-col items-center">
         <div
@@ -86,6 +100,7 @@ const Level7_1 = () => {
               ? 'bg-green-500'
               : 'bg-gradient-to-r from-pink-500 to-orange-400'
           }`}
+          disabled={loading}
         >
           Submit Code
         </button>

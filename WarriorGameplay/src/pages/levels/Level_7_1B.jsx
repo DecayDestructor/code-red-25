@@ -10,23 +10,33 @@ const HiddenChallengeComponent = () => {
   const [panelColor, setPanelColor] = useState('rgb(0,255,0)') // Default green
   const [colorChanged, setColorChanged] = useState(false)
   const [resultMessage, setResultMessage] = useState('')
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const handleVerify = async () => {
-    const { correct } = await checkAnswers(userInput, '7_1B')
-    console.log(colorChanged, correct)
+    if (loading) return
+    setLoading(true)
+    try {
+      const { correct } = await checkAnswers(userInput, '7_1B')
+      console.log(colorChanged, correct)
 
-    if (colorChanged && correct) {
-      setResultMessage('Correct! Proceeding to next level...')
-      setTimeout(() => {
-        dispatch(unlockLevel('level_7_3'))
+      if (colorChanged && correct) {
+        setResultMessage('Correct! Proceeding to next level...')
+        setTimeout(() => {
+          dispatch(unlockLevel('level_7_3'))
 
-        navigate('/backstory_level_7_3')
-      }, 1500)
-    } else if (!colorChanged) {
-      setResultMessage('Incomplete!')
-    } else {
-      setResultMessage('Incorrect. Try again!')
+          navigate('/backstory_level_7_3')
+        }, 1500)
+      } else if (!colorChanged) {
+        setResultMessage('Incomplete!')
+      } else {
+        setResultMessage('Incorrect. Try again!')
+      }
+    } catch (e) {
+      console.error(e)
+      setResultMessage('Failed to verify input. Please try again.')
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -44,7 +54,12 @@ const HiddenChallengeComponent = () => {
         alt="Background"
         className="object-cover w-full h-full absolute z-0"
       />
-      <LayoutPage level={'7_1 B'} hintText={"Find the camouflaged text by changing the color of the panel. Later check all the corners to find a lonely textbox. In the textbox you shall enter the rgb color representation of magenta."}/>
+      <LayoutPage
+        level={'7_1 B'}
+        hintText={
+          'Find the camouflaged text by changing the color of the panel. Later check all the corners to find a lonely textbox. In the textbox you shall enter the rgb color representation of magenta.'
+        }
+      />
       {/* Central panel */}
       <div
         className="w-2/3 h-2/3 flex flex-col justify-center items-center relative"
@@ -72,6 +87,7 @@ const HiddenChallengeComponent = () => {
         <button
           onClick={handleVerify}
           className="mt-4 px-6 py-2 bg-blue-900 text-white rounded-md"
+          disabled={loading}
         >
           Verify
         </button>

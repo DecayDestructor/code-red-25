@@ -8,22 +8,32 @@ import { lockLevel, unlockLevel } from '../../protectedRoutes/store'
 const CombinedComponent = () => {
   const [userInput, setUserInput] = useState('')
   const [resultMessage, setResultMessage] = useState('')
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const typingSpeed = 3
 
   // Handle verification of user input
   const handleVerify = async () => {
-    const { correct } = await checkAnswers(userInput, '3')
-    if (correct) {
-      setResultMessage('Correct! Well done!')
-      setTimeout(() => {
-        dispatch(unlockLevel('options_level_4'))
-        dispatch(lockLevel('level_2'))
-        navigate('/backstory_level_4')
-      }, 1500)
-    } else {
-      setResultMessage('Incorrect. Try again!')
+    if (loading) return
+    setLoading(true)
+    try {
+      const { correct } = await checkAnswers(userInput, '3')
+      if (correct) {
+        setResultMessage('Correct! Well done!')
+        setTimeout(() => {
+          dispatch(unlockLevel('options_level_4'))
+          dispatch(lockLevel('level_2'))
+          navigate('/backstory_level_4')
+        }, 1500)
+      } else {
+        setResultMessage('Incorrect. Try again!')
+      }
+    } catch (err) {
+      console.error(err)
+      setResultMessage('An error occurred while verifying your answer.')
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -41,7 +51,12 @@ const CombinedComponent = () => {
         className="object-cover w-full h-full absolute z-0"
         data-ANSWER-TO-QUESTION-3="colossalas"
       />
-      <LayoutPage level={3} hintText={"Carefully inspect the page to get the answer from the elements hidden behind the screen. Ever heard of data- attributes?"}/>
+      <LayoutPage
+        level={3}
+        hintText={
+          'Carefully inspect the page to get the answer from the elements hidden behind the screen. Ever heard of data- attributes?'
+        }
+      />
 
       {/* Hidden answer in data attribute */}
       <div data-ANSWER-TO-QUESTION-3="colossalas" className="hidden"></div>
@@ -61,6 +76,7 @@ const CombinedComponent = () => {
           id="verifyButton"
           onClick={handleVerify}
           className="mt-4 px-6 py-2 bg-blue-900 hover:bg-blue-700 text-white font-semibold rounded-md"
+          disabled={loading}
         >
           Verify
         </button>

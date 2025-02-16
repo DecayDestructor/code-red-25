@@ -11,18 +11,28 @@ const BackstoryLevelComponent = () => {
   const [resultMessage, setResultMessage] = useState('')
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const [loading, setLoading] = useState(false)
   const handleVerify = async () => {
-    const { correct } = await checkAnswers(userInput, '6_2')
-    if (correct) {
-      setResultMessage('Correct! Well done!')
-      setTimeout(() => {
-        dispatch(unlockLevel('jumpscare_6_2'))
+    if (loading) return
+    setLoading(true)
+    try {
+      const { correct } = await checkAnswers(userInput, '6_2')
+      if (correct) {
+        setResultMessage('Correct! Well done!')
+        setTimeout(() => {
+          dispatch(unlockLevel('jumpscare_6_2'))
 
-        navigate('/jumpscare_6_2')
-        dispatch(lockLevel('options_level_5b'))
-      }, 1500)
-    } else {
-      setResultMessage('Incorrect. Try again!')
+          navigate('/jumpscare_6_2')
+          dispatch(lockLevel('options_level_5b'))
+        }, 1500)
+      } else {
+        setResultMessage('Incorrect. Try again!')
+      }
+    } catch (e) {
+      console.error(e)
+      setResultMessage('An error occurred. Please try again!')
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -50,7 +60,10 @@ const BackstoryLevelComponent = () => {
         alt="Background"
         className="object-cover w-full h-full absolute z-0"
       />
-      <LayoutPage level={'6_2'} hintText={"Because of this tech, our laptops runs on mere seconds time"}/>
+      <LayoutPage
+        level={'6_2'}
+        hintText={'Because of this tech, our laptops runs on mere seconds time'}
+      />
       <div className="bg-black bg-opacity-50 backdrop-blur-md shadow-lg rounded-lg p-8 w-11/12 sm:w-2/3 lg:w-1/3 text-white text-center">
         <h1 className="text-2xl font-bold mb-4">Enter Answer</h1>
         <input
@@ -66,6 +79,7 @@ const BackstoryLevelComponent = () => {
           id="verifyButton"
           onClick={handleVerify}
           className="mt-4 px-6 py-2 bg-blue-900 hover:bg-blue-700 text-white font-semibold rounded-md"
+          disabled={loading}
         >
           Verify
         </button>

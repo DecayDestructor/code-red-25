@@ -69,20 +69,32 @@ const Hyperplexed = ({ id, link }) => {
 const App = () => {
   const [userInput, setUserInput] = useState('')
   const [resultMessage, setResultMessage] = useState('')
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const handleVerify = async () => {
-    const { correct } = await checkAnswers(userInput, '5B')
-    if (correct) {
-      setResultMessage('Correct! Well done!')
-      setTimeout(() => {
-        dispatch(unlockLevel('options_level_5b'))
-        // dispatch(lockLevel('level_5b'))
-        dispatch(lockLevel('options_level_4'))
-        navigate('/options_level_5b')
-      }, 1500)
-    } else {
-      setResultMessage('Incorrect. Try again!')
+    if (loading) return
+    setLoading(true)
+    try {
+      const { correct } = await checkAnswers(userInput, '5B')
+      if (correct) {
+        setResultMessage('Correct! Well done!')
+        setTimeout(() => {
+          dispatch(unlockLevel('options_level_5b'))
+          // dispatch(lockLevel('level_5b'))
+          dispatch(lockLevel('options_level_4'))
+          navigate('/options_level_5b')
+        }, 1500)
+      } else {
+        setResultMessage('Incorrect. Try again!')
+      }
+    } catch (e) {
+      console.error(e)
+      setResultMessage(
+        'Error occurred while verifying answers. Please try again.'
+      )
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -99,7 +111,12 @@ const App = () => {
         alt="Background"
         className="object-cover w-full h-full absolute z-0"
       />
-      <LayoutPage level={'5 B'} hintText={"The dancing links... use the hidden tools to sto them from dancing."}/>
+      <LayoutPage
+        level={'5 B'}
+        hintText={
+          'The dancing links... use the hidden tools to sto them from dancing.'
+        }
+      />
       <div className="relative flex flex-col items-center bg-black/75 rounded-2xl p-8 w-[90vw] max-w-7xl h-[70vh] overflow-hidden shadow-[0_0_30px_rgba(255,255,0,0.8)]">
         <div className="flex-1 w-full flex flex-col justify-evenly">
           <Hyperplexed
@@ -133,6 +150,7 @@ const App = () => {
             id="verifyButton"
             onClick={handleVerify}
             className="mt-4 px-6 py-2 bg-blue-900 hover:bg-blue-700 text-white font-semibold rounded-md"
+            disabled={loading}
           >
             Verify
           </button>
