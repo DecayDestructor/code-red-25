@@ -4,19 +4,19 @@ import level1_3 from '../../assets/level1_3.webp' // Ensure the correct image pa
 import { Link, useNavigate } from 'react-router-dom'
 import LayoutPage from '../../components/Layout'
 import checkAnswers from '../../utils/checkAnswer'
-import { useDispatch } from 'react-redux';
-import { lockLevel, unlockLevel  } from '../../protectedRoutes/store';
+import { useDispatch } from 'react-redux'
+import { lockLevel, unlockLevel } from '../../protectedRoutes/store'
 
 const Level1_Puzzle = () => {
   const [answer, setAnswer] = useState('')
   const [showError, setShowError] = useState(false)
   const navigate = useNavigate()
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const handleSubmitAnswer = async () => {
     const { correct } = await checkAnswers(answer, '1')
     if (correct) {
-      dispatch(unlockLevel("level2"));
-      dispatch(lockLevel("level1"));
+      dispatch(unlockLevel('level2'))
+      dispatch(lockLevel('level1'))
       navigate('/level2')
     } else {
       setShowError(true)
@@ -34,7 +34,7 @@ const Level1_Puzzle = () => {
         transition: 'background-image 0.8s ease-in-out',
       }}
     >
-      <LayoutPage />
+      <LayoutPage level={1} />
       <div className=" boundary">
         <div className="heading "> CRYPTOGRAPHY IS FUN</div>
 

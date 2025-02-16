@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-const LayoutPage = () => {
+const LayoutPage = ({ level }) => {
   const [timeRemaining, setTimeRemaining] = useState('00:00:00')
   const [hintUnlocked, setHintUnlocked] = useState(false)
   const [showHintModal, setShowHintModal] = useState(false)
@@ -62,28 +62,13 @@ const LayoutPage = () => {
       remainingSeconds
     ).padStart(2, '0')}`
   }
+  const name = localStorage.getItem('name')
 
   return (
     <div className="flex items-center justify-center">
       <div className="flex justify-center items-center text-black">
-        <div className="z-10 absolute w-14 h-14 top-8 left-8 flex justify-center items-center rounded-full text-3xl text-white bg-opacity-20 backdrop-filter backdrop-blur-[3px] border-[1px]">
-          <img
-            src="./src/assets/interfaces/Leaderboard.svg"
-            alt=""
-            className="w-6"
-          />
-        </div>
         <div className="z-10 absolute w-52 h-14 top-8 flex justify-center items-center rounded-full text-3xl text-white bg-opacity-20 backdrop-filter backdrop-blur-[3px] border-[1px]">
-          LEVEL 1
-        </div>
-        <div className="z-10 absolute w-52 h-14 top-8 flex justify-center items-center rounded-full text-3xl text-white bg-opacity-20 backdrop-filter backdrop-blur-[3px] border-[1px]">
-          LEVEL 1
-        </div>
-        <div className="z-10 absolute w-14 h-14 top-8 right-8 flex justify-center items-center rounded-full text-white bg-opacity-20 backdrop-filter backdrop-blur-[3px] border-[1px]">
-          <div className="flex items-center justify-center flex-col">
-            <div className="text-xs tracking-wide">Score</div>
-            <div className="text-2xl">69</div>
-          </div>
+          LEVEL {level}
         </div>
       </div>
       <div className="flex justify-center items-center">
@@ -106,7 +91,7 @@ const LayoutPage = () => {
           )}
         </button>
         <div className="z-10 absolute w-52 h-14 bottom-8 flex justify-center items-center rounded-full text-3xl text-white bg-opacity-20 backdrop-filter backdrop-blur-[3px] border-[1px]">
-          Sigma boy
+          {name}
         </div>
         <div className="z-10 absolute w-52 h-14 bottom-8 left-8 flex justify-center items-center rounded-full text-white bg-opacity-20 backdrop-filter backdrop-blur-[3px] border-[1px]">
           <div className="flex items-center justify-center flex-col">

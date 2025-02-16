@@ -47,7 +47,7 @@ const SignupPage = () => {
       setUsername('')
       setPassword('')
       setTimeout(() => {
-        navigate('/backstory_1')
+        navigate('/backstory')
       }, 4000)
       // navigate('/backstory_1')
     } catch (err) {

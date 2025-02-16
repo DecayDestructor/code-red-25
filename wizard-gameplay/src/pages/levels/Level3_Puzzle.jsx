@@ -3,8 +3,8 @@ import LayoutPage from '../../components/Layout'
 import level3_1 from '../../assets/level3_1.webp'
 import { Link, useNavigate } from 'react-router-dom'
 import checkAnswers from '../../utils/checkAnswer'
-import { useDispatch } from 'react-redux';
-import { lockLevel, unlockLevel  } from '../../protectedRoutes/store';
+import { useDispatch } from 'react-redux'
+import { lockLevel, unlockLevel } from '../../protectedRoutes/store'
 
 const Level3_Puzzle = () => {
   const [answer1, setAnswer1] = useState('')
@@ -12,7 +12,7 @@ const Level3_Puzzle = () => {
   const [answer2, setAnswer2] = useState('')
 
   const navigate = useNavigate()
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const handleSubmitAnswer = async () => {
     // const correctAnswer1 = '312211'
     // const correctAnswer2 = '3112221'
@@ -21,8 +21,8 @@ const Level3_Puzzle = () => {
     const { correct } = await checkAnswers(answer1.concat(answer2), '3')
 
     if (correct) {
-      dispatch(unlockLevel("level4"));
-      dispatch(lockLevel("level3"));
+      dispatch(unlockLevel('level4'))
+      dispatch(lockLevel('level3'))
       navigate('/level4')
     } else {
       setShowError(true)
@@ -40,7 +40,7 @@ const Level3_Puzzle = () => {
         transition: 'background-image 0.8s ease-in-out',
       }}
     >
-      <LayoutPage />
+      <LayoutPage level={3} />
       <div className=" boundary">
         <div className="heading"> Level 3</div>
 

@@ -5,15 +5,15 @@ import Orb from '../../assets/orb8.png'
 import level2_2 from '../../assets/level2_2.webp'
 import LayoutPage from '../../components/Layout'
 import checkAnswers from '../../utils/checkAnswer'
-import { useDispatch } from 'react-redux';
-import { lockLevel, unlockLevel  } from '../../protectedRoutes/store';
+import { useDispatch } from 'react-redux'
+import { lockLevel, unlockLevel } from '../../protectedRoutes/store'
 
 const Level2_Puzzle = () => {
   const [sliderValues, setSliderValues] = useState([8, 8, 8]) // Default mid-point
   const [activeOrb, setActiveOrb] = useState(null)
   const [solved, setSolved] = useState(false)
   const navigate = useNavigate()
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const targetPositions = [3, 12, 15]
 
   const handleSliderChange = async (index, value) => {
@@ -25,8 +25,8 @@ const Level2_Puzzle = () => {
     setSolved(isSolved)
     if (isSolved) {
       const { correct } = await checkAnswers('3', '2')
-      dispatch(unlockLevel("level3"));
-      dispatch(lockLevel("level2"));
+      dispatch(unlockLevel('level3'))
+      dispatch(lockLevel('level2'))
       navigate('/level3')
     }
   }
@@ -45,7 +45,7 @@ const Level2_Puzzle = () => {
         transition: 'background-image 0.8s ease-in-out',
       }}
     >
-      <LayoutPage />
+      <LayoutPage level={2} />
       <div className=" flex items-center boundary justify-center ">
         <div className="max-w-4xl w-full bg-gradient-to-b bg-zinc-50/10 p-4 rounded-lg border border-amber-900/800 shadow-2xl">
           <div className="grid md:grid-cols-2 gap-12 items-center">
