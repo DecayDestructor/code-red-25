@@ -10,20 +10,32 @@ import { lockLevel, unlockLevel } from '../../protectedRoutes/store'
 const Level6_Puzzle = () => {
   const [answer, setAnswer] = useState('')
   const [showError, setShowError] = useState(false)
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
   const dispatch = useDispatch()
+
   const handleSubmitAnswer = async () => {
-    const { correct } = await checkAnswer(answer, '6')
+    if (loading) return
+    setLoading(true)
+    try {
+      const { correct } = await checkAnswer(answer, '6')
 
     if (correct) {
-      dispatch(unlockLevel('level7_1'))
+      setLoading(true)
+        setTimeout(() => {
+        dispatch(unlockLevel('level7_1'))
 
-      navigate('/level7_1')
+        navigate('/level7_1')
+      }, 1500)
     } else {
       setShowError(true)
     }
+  } catch (e) {
+    console.error(e)
+  } finally {
+    setLoading(false)
   }
-
+}
   return (
     <div
       className="flex justify-center items-center flex-col imageContainer"
@@ -66,6 +78,7 @@ const Level6_Puzzle = () => {
           <button
             onClick={handleSubmitAnswer}
             className="btn bg-green-500 hover:bg-green-700 text-white"
+            disabled={loading}
           >
             Submit
           </button>

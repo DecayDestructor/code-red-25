@@ -11,6 +11,7 @@ const Level7_1 = () => {
   const [isSudo, setIsSudo] = useState(false)
   const [defeatedMalevoryx, setDefeatedMalevoryx] = useState(false)
   const [blurPx, setBlurPx] = useState(3)
+  const [loading, setLoading] = useState(false)
   const [finalCommand, setFinalCommand] = useState('Find me out')
   const [commandHistory, setCommandHistory] = useState([])
   const [historyIndex, setHistoryIndex] = useState(-1)
@@ -114,129 +115,141 @@ const Level7_1 = () => {
 
   const commandEntered = (event) => {
     if (event.key === 'Enter') {
-      //Enter is pressed after a command is typed
-      // console.log(textRef.current.value);
-      let command = textRef.current.value
-      command = command.trim()
-      setCommandHistory((prev) => [...prev, command])
-      setHistoryIndex(-1)
+      if (loading) return
+        setLoading(true)
+      try {
+        //Enter is pressed after a command is typed
+        // console.log(textRef.current.value);
+        let command = textRef.current.value
+        command = command.trim()
+        setCommandHistory((prev) => [...prev, command])
+        setHistoryIndex(-1)
 
-      contentRef.current.innerHTML += `<br>${HOSTNAME_HTML} ${textRef.current.value} `
-      textRef.current.value = ''
+        contentRef.current.innerHTML += `<br>${HOSTNAME_HTML} ${textRef.current.value} `
+        textRef.current.value = ''
 
-      //Find if entered text is a command
-      var command_split = command.split(' ')
-      var command_names = commands.map((command) => command.name)
-      const fileNames = fileInfo.map((file) => file.name)
-      if (command === commands[2].name) {
-        contentRef.current.innerHTML += commands[2].text
-        setFoundPassword(true)
-      } else if (command_split[0] === command_names[0]) {
-        //If first word is sudo
-        // console.log(foundPassword ? commands[0].textIfPasswordAdded : commands[0].textIfPasswordNotAdded);
-        contentRef.current.innerHTML += foundPassword
-          ? commands[0].textIfPasswordAdded
-          : commands[0].textIfPasswordNotAdded
-        if (foundPassword) {
-          setIsSudo(true)
-        }
-      } else if (command === command_names[1]) {
-        // console.log(foundPassword ? (isSudo ? commands[1].textIfPasswordAddedAndSudo : commands[1].textIfPasswordAddedAndNotSudo) : commands[1].textIfPasswordNotAdded );
-        contentRef.current.innerHTML += foundPassword
-          ? isSudo
-            ? commands[1].textIfPasswordAddedAndSudo
-            : commands[1].textIfPasswordAddedAndNotSudo
-          : commands[1].textIfPasswordNotAdded
-      } else if (command === command_names[3]) {
-        if (!isSudo || !foundPassword) {
-          contentRef.current.innerHTML +=
-            commands[3].textIfPasswordNotAddedAndNotSudo
-        } else {
-          contentRef.current.innerHTML += commands[3].textIfPasswordAddedAndSudo
-        }
-      } else if (command === command_names[4]) {
-        if (!isSudo || !foundPassword) {
-          contentRef.current.innerHTML +=
-            commands[4].textIfPasswordNotAddedAndNotSudo
-        } else {
-          contentRef.current.innerHTML += commands[4].textIfPasswordAddedAndSudo
-        }
-      } else if (command_split[0] === command_names[5]) {
-        if (!isSudo || !foundPassword) {
-          contentRef.current.innerHTML +=
-            commands[5].textIfPasswordNotAddedAndNotSudo
-        } else {
-          if (fileNames.includes(command_split[1])) {
-            const content = fileInfo.filter((file) => {
-              if (file.name === command_split[1]) {
-                return file.content
-              }
-            })[0].content
-            // console.log(content);
-
-            contentRef.current.innerHTML += `<br> ${content}`
+        //Find if entered text is a command
+        var command_split = command.split(' ')
+        var command_names = commands.map((command) => command.name)
+        const fileNames = fileInfo.map((file) => file.name)
+        if (command === commands[2].name) {
+          contentRef.current.innerHTML += commands[2].text
+          setFoundPassword(true)
+        } else if (command_split[0] === command_names[0]) {
+          //If first word is sudo
+          // console.log(foundPassword ? commands[0].textIfPasswordAdded : commands[0].textIfPasswordNotAdded);
+          contentRef.current.innerHTML += foundPassword
+            ? commands[0].textIfPasswordAdded
+            : commands[0].textIfPasswordNotAdded
+          if (foundPassword) {
+            setIsSudo(true)
+          }
+        } else if (command === command_names[1]) {
+          // console.log(foundPassword ? (isSudo ? commands[1].textIfPasswordAddedAndSudo : commands[1].textIfPasswordAddedAndNotSudo) : commands[1].textIfPasswordNotAdded );
+          contentRef.current.innerHTML += foundPassword
+            ? isSudo
+              ? commands[1].textIfPasswordAddedAndSudo
+              : commands[1].textIfPasswordAddedAndNotSudo
+            : commands[1].textIfPasswordNotAdded
+        } else if (command === command_names[3]) {
+          if (!isSudo || !foundPassword) {
+            contentRef.current.innerHTML +=
+              commands[3].textIfPasswordNotAddedAndNotSudo
           } else {
-            contentRef.current.innerHTML += `<br> Invalid file name <br>`
+            contentRef.current.innerHTML += commands[3].textIfPasswordAddedAndSudo
           }
-        }
-      } else if (command.startsWith(command_names[6])) {
-        if (
-          !isSudo ||
-          !foundPassword ||
-          blurPx != 0 ||
-          finalCommand !== 'set death --[NAME]'
-        ) {
-          contentRef.current.innerHTML +=
-            commands[6].textIfPasswordNotAddedAndNotSudo
-        } else {
-          const name = command_split[2]
-          if (
-            name === '--Malevoryx' ||
-            name === '--MALEVORYX' ||
-            name === '--malevoryx'
-          ) {
-            contentRef.current.innerHTML += `<br> Congrats! You have defeated the evil mage Malevoryx. <br>
-                You may now proceed to the next level. Simply type "next level" as a command to do so!!!<br>`
-            dispatch(unlockLevel('level7_2'))
-            
-            navigate('/level7_2')
-            setDefeatedMalevoryx(true)
-            // navigate("/Level7_2");
+        } else if (command === command_names[4]) {
+          if (!isSudo || !foundPassword) {
+            contentRef.current.innerHTML +=
+              commands[4].textIfPasswordNotAddedAndNotSudo
+          } else {
+            contentRef.current.innerHTML += commands[4].textIfPasswordAddedAndSudo
           }
-        }
-      } else if (command === command_names[7]) {
-        if (!isSudo || !foundPassword || !defeatedMalevoryx) {
-          contentRef.current.innerHTML +=
-            commands[7].textIfPasswordNotAddedAndNotSudoAndNotDefeatedMaleVoryx
-        } else {
-          // setTimeout(() => {
-          //navigate("/levels/Level7_2pre");
-          // }, 1000);
-        }
-      } else {
-        contentRef.current.innerHTML += `<br> <span style="margin-left:1rem;"> Invalid command </span> <br>`
-      }
-    } else if (event.key === 'ArrowUp') {
-      console.log(commandHistory, historyIndex)
+        } else if (command_split[0] === command_names[5]) {
+          if (!isSudo || !foundPassword) {
+            contentRef.current.innerHTML +=
+              commands[5].textIfPasswordNotAddedAndNotSudo
+          } else {
+            if (fileNames.includes(command_split[1])) {
+              const content = fileInfo.filter((file) => {
+                if (file.name === command_split[1]) {
+                  return file.content
+                }
+              })[0].content
+              // console.log(content);
 
-      if (commandHistory.length > 0) {
-        const newIndex =
-          historyIndex === -1
-            ? commandHistory.length - 1
-            : Math.max(0, historyIndex - 1)
-        setHistoryIndex(newIndex)
-        textRef.current.value = commandHistory[newIndex]
+              contentRef.current.innerHTML += `<br> ${content}`
+            } else {
+              contentRef.current.innerHTML += `<br> Invalid file name <br>`
+            }
+          }
+        } else if (command.startsWith(command_names[6])) {
+          if (
+            !isSudo ||
+            !foundPassword ||
+            blurPx != 0 ||
+            finalCommand !== 'set death --[NAME]'
+          ) {
+            contentRef.current.innerHTML +=
+              commands[6].textIfPasswordNotAddedAndNotSudo
+          } else {
+            const name = command_split[2]
+            if (
+              name === '--Malevoryx' ||
+              name === '--MALEVORYX' ||
+              name === '--malevoryx'
+            ) {
+
+              contentRef.current.innerHTML += `<br> Congrats! You have defeated the evil mage Malevoryx. <br>
+                  You may now proceed to the next level. Simply type "next level" as a command to do so!!!<br>`
+              setLoading(true)
+              setTimeout(() => {
+                dispatch(unlockLevel('level7_2'))
+                navigate('/level7_2')
+                setDefeatedMalevoryx(true)
+            }, 1500)
+              // navigate("/Level7_2");
+            }
+          }
+        } else if (command === command_names[7]) {
+          if (!isSudo || !foundPassword || !defeatedMalevoryx) {
+            contentRef.current.innerHTML +=
+              commands[7].textIfPasswordNotAddedAndNotSudoAndNotDefeatedMaleVoryx
+          } else {
+            // setTimeout(() => {
+            //navigate("/levels/Level7_2pre");
+            // }, 1000);
+          }
+        } else {
+          contentRef.current.innerHTML += `<br> <span style="margin-left:1rem;"> Invalid command </span> <br>`
+        }
+      } catch (e) {
+        console.error(e)
+      } finally {
+        setLoading(false)
       }
-    } else if (event.key === 'ArrowDown') {
-      if (commandHistory.length > 0) {
-        const newIndex =
-          historyIndex === -1
-            ? -1
-            : Math.min(commandHistory.length - 1, historyIndex + 1)
-        setHistoryIndex(newIndex)
-        textRef.current.value = newIndex === -1 ? '' : commandHistory[newIndex]
+      } else if (event.key === 'ArrowUp') {
+        console.log(commandHistory, historyIndex)
+
+        if (commandHistory.length > 0) {
+          const newIndex =
+            historyIndex === -1
+              ? commandHistory.length - 1
+              : Math.max(0, historyIndex - 1)
+          setHistoryIndex(newIndex)
+          textRef.current.value = commandHistory[newIndex]
+        }
+      } else if (event.key === 'ArrowDown') {
+        if (commandHistory.length > 0) {
+          const newIndex =
+            historyIndex === -1
+              ? -1
+              : Math.min(commandHistory.length - 1, historyIndex + 1)
+          setHistoryIndex(newIndex)
+          textRef.current.value = newIndex === -1 ? '' : commandHistory[newIndex]
+        }
       }
-    }
+    
   }
 
   useEffect(() => {
@@ -276,6 +289,7 @@ const Level7_1 = () => {
           id="curr_command"
           defaultValue={''}
           onKeyDown={commandEntered}
+          disabled={loading}
         ></input>
       </div>
     </>

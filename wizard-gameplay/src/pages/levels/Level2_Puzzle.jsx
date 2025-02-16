@@ -12,24 +12,38 @@ const Level2_Puzzle = () => {
   const [sliderValues, setSliderValues] = useState([8, 8, 8]) // Default mid-point
   const [activeOrb, setActiveOrb] = useState(null)
   const [solved, setSolved] = useState(false)
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const targetPositions = [3, 12, 15]
 
   const handleSliderChange = async (index, value) => {
-    const newValues = [...sliderValues]
-    newValues[index] = value
-    setSliderValues(newValues)
+    // if (loading) return;
 
-    const isSolved = newValues.every((val, i) => val === targetPositions[i])
-    setSolved(isSolved)
-    if (isSolved) {
-      const { correct } = await checkAnswers('3', '2')
-      dispatch(unlockLevel('level3'))
+    try {
+        const newValues = [...sliderValues];
+        newValues[index] = value;
+        setSliderValues(newValues);
 
-      navigate('/level3')
+        const isSolved = newValues.every((val, i) => val === targetPositions[i]);
+        setSolved(isSolved);
+
+        if (isSolved) {
+          const { correct } = await checkAnswers('3', '2');
+          if (correct) {
+              // setLoading(true)
+                setTimeout(() => {
+                    dispatch(unlockLevel('level3'));
+                    navigate('/level3');
+                }, 1500);
+            }
+        }
+    } catch (e) {
+        console.error(e);
+    } finally {
+        // setLoading(false);
     }
-  }
+};
 
   const getRandomSpeed = () => Math.random() * 2 + 1 // Random speed between 1 and 3 seconds
   const getRandomAmplitude = () => Math.random() * 70 + 30 // Random range (30-100px)
@@ -99,6 +113,7 @@ const Level2_Puzzle = () => {
                         onChange={(e) =>
                           handleSliderChange(index, parseInt(e.target.value))
                         }
+                        // disabled={loading}
                         className="w-full h-2 bg-slate-100/30 rounded-full appearance-none cursor-pointer relative"
                       />
                       <div className="text-center text-amber-200/80 tracking-normal mt-1 font-medieval">

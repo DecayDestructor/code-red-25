@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router'
 import LayoutPage from '../interfaces/LayoutPage'
 import { Shield, Sword } from 'lucide-react'
 
@@ -11,7 +12,7 @@ const Level_7_4 = () => {
   const [battleLog, setBattleLog] = useState([])
   const healthDecrementClassRef = useRef('decrease_by_1')
   const logRef = useRef(null)
-
+  const navigate = useNavigate()
   useEffect(() => {
     if (logRef.current) {
       logRef.current.scrollTop = logRef.current.scrollHeight
@@ -62,6 +63,8 @@ const Level_7_4 = () => {
             addToBattleLog(
               'Victory! Malakaroth has been defeated by the passage of time!'
             )
+            navigate('/win')
+            
           }
           return newHp
         })

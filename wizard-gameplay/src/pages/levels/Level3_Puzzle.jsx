@@ -13,19 +13,32 @@ const Level3_Puzzle = () => {
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const [loading, setLoading] = useState(false)
+
   const handleSubmitAnswer = async () => {
     // const correctAnswer1 = '312211'
     // const correctAnswer2 = '3112221'
     // const userAnswer1 = answer1
     // const userAnswer2 = answer2
-    const { correct } = await checkAnswers(answer1.concat(answer2), '3')
+    if (loading) return
+    setLoading(true)
+    try {
+      const { correct } = await checkAnswers(answer1.concat(answer2), '3')
 
-    if (correct) {
-      dispatch(unlockLevel('level4'))
+      if (correct) {
+        setLoading(true)
+        setTimeout(() => {
+          dispatch(unlockLevel('level4'))
 
-      navigate('/level4')
-    } else {
-      setShowError(true)
+          navigate('/level4')
+        }, 1500)
+      } else {
+        setShowError(true)
+      }
+    } catch (e) {
+      console.error(e)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -75,6 +88,7 @@ const Level3_Puzzle = () => {
           <button
             onClick={handleSubmitAnswer}
             className="btn bg-green-500 hover:bg-green-700 text-white"
+            disabled={loading}
           >
             Submit
           </button>

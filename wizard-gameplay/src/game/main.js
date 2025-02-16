@@ -53,11 +53,11 @@ let coins = 100;
 let round = 1;
 let enemyCount = 4;
 let spawnInProgress = false;
-
+let loading = false; // Added loading state
 let baseBuildingCost = 45; 
 
 function startRound() {
-  if (spawnInProgress) return;
+  if (spawnInProgress || loading) return;
   spawnInProgress = true;
   document.querySelector('#round').innerHTML = `Round: ${round}`;
 
@@ -83,8 +83,12 @@ function startRound() {
     spawnInProgress = false;
 
     if (round > 10) {
-      window.location.href = '/win';
-    }
+      loading = true;
+      setTimeout(() => {
+          window.location.href = '/win';
+          loading = false;
+      }, 1500);
+  }
 
   }, roundTime);
 }

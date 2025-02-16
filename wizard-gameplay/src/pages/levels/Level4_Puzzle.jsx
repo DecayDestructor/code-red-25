@@ -10,16 +10,29 @@ const Level4_Puzzle = () => {
   const navigate = useNavigate()
   const [answer, setAnswer] = useState('')
   const [showError, setShowError] = useState(false)
+  const [loading, setLoading] = useState(false)
   const dispatch = useDispatch()
+
   const handleSubmitAnswer = async () => {
-    const { correct } = await checkAnswers(answer, '4')
+    if (loading) return
+    setLoading(true)
+    try {
+      const { correct } = await checkAnswers(answer, '4')
 
-    if (correct) {
-      dispatch(unlockLevel('level5'))
+      if (correct) {
+        setLoading(true)
+        setTimeout(() => {
+          dispatch(unlockLevel('level5'))
 
-      navigate('/index.html')
-    } else {
-      setShowError(true)
+          navigate('/index.html')
+        }, 1500)
+      } else {
+        setShowError(true)
+      }
+    } catch (e) {
+      console.error(e)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -59,6 +72,7 @@ const Level4_Puzzle = () => {
           <button
             onClick={handleSubmitAnswer}
             className="btn bg-green-500 hover:bg-green-700 text-white"
+            disabled={loading}
           >
             Submit
           </button>
