@@ -1,65 +1,66 @@
-import React, { useState } from 'react';
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from 'react-redux';
-import { lockLevel, unlockLevel  } from '../../protectedRoutes/store';
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { lockLevel, unlockLevel } from '../../protectedRoutes/store'
 
 const Level5_2 = () => {
-  const [hoveredButton, setHoveredButton] = useState(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  
+  const [hoveredButton, setHoveredButton] = useState(null)
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
   const handleOption1Click = () => {
     setTimeout(() => {
-      dispatch(unlockLevel("level_7_1a"));
-      dispatch(lockLevel("options_level_7a"));
-      navigate("/backstory_level_7_1A");
-    }, 500);
-  };
+      dispatch(unlockLevel('level_7_1a'))
+
+      dispatch(lockLevel('level_7_1'))
+      navigate('/backstory_level_7_1A')
+    }, 500)
+  }
 
   const handleOption2Click = () => {
     setTimeout(() => {
-      dispatch(unlockLevel("level_7_1b"));
-      dispatch(lockLevel("options_level_7a"));
-      navigate("/backstory_level_7_1B");
-    }, 500);
-  };
+      dispatch(unlockLevel('level_7_1b'))
+      dispatch(lockLevel('level_7_1'))
+      navigate('/backstory_level_7_1B')
+    }, 500)
+  }
 
   // Calculate evasive movement for the first button
   const calculateEvasiveMovement = (e, buttonRect) => {
-    if (!buttonRect) return { x: 0, y: 0 };
+    if (!buttonRect) return { x: 0, y: 0 }
 
-    const buttonCenterX = buttonRect.left + buttonRect.width / 2;
-    const buttonCenterY = buttonRect.top + buttonRect.height / 2;
+    const buttonCenterX = buttonRect.left + buttonRect.width / 2
+    const buttonCenterY = buttonRect.top + buttonRect.height / 2
 
     // Calculate direction from mouse to button center
-    const dirX = e.clientX - buttonCenterX;
-    const dirY = e.clientY - buttonCenterY;
+    const dirX = e.clientX - buttonCenterX
+    const dirY = e.clientY - buttonCenterY
 
     // Normalize and inverse the direction
-    const length = Math.sqrt(dirX * dirX + dirY * dirY);
-    const normalizedX = dirX / length;
-    const normalizedY = dirY / length;
+    const length = Math.sqrt(dirX * dirX + dirY * dirY)
+    const normalizedX = dirX / length
+    const normalizedY = dirY / length
 
     // Movement strength decreases as distance increases
-    const distanceFactor = Math.min(1, 100 / length);
+    const distanceFactor = Math.min(1, 100 / length)
 
     return {
       x: -normalizedX * 1000 * distanceFactor,
-      y: -normalizedY * 1000 * distanceFactor
-    };
-  };
+      y: -normalizedY * 1000 * distanceFactor,
+    }
+  }
 
   const handleMouseMove = (e) => {
     if (hoveredButton === 1) {
-      const buttonElement = document.getElementById('evasiveButton');
+      const buttonElement = document.getElementById('evasiveButton')
       if (buttonElement) {
-        const buttonRect = buttonElement.getBoundingClientRect();
-        const movement = calculateEvasiveMovement(e, buttonRect);
-        setMousePosition(movement);
+        const buttonRect = buttonElement.getBoundingClientRect()
+        const movement = calculateEvasiveMovement(e, buttonRect)
+        setMousePosition(movement)
       }
     }
-  };
+  }
 
   return (
     <div
@@ -89,14 +90,18 @@ const Level5_2 = () => {
             onClick={handleOption1Click}
             onMouseEnter={() => setHoveredButton(1)}
             onMouseLeave={() => {
-              setHoveredButton(null);
-              setMousePosition({ x: 0, y: 0 });
+              setHoveredButton(null)
+              setMousePosition({ x: 0, y: 0 })
             }}
             style={{
-              transform: hoveredButton === 1 ?
-                `translate(${mousePosition.x}px, ${mousePosition.y}px)` :
-                'translate(0, 0)',
-              transition: hoveredButton === 1 ? 'transform 0.1s ease-out' : 'transform 0.3s ease-out'
+              transform:
+                hoveredButton === 1
+                  ? `translate(${mousePosition.x}px, ${mousePosition.y}px)`
+                  : 'translate(0, 0)',
+              transition:
+                hoveredButton === 1
+                  ? 'transform 0.1s ease-out'
+                  : 'transform 0.3s ease-out',
             }}
           >
             <div className="relative h-full w-full transition-all duration-500 transform-gpu group-hover:scale-105 group-hover:rotate-x-12">
@@ -140,7 +145,7 @@ const Level5_2 = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Level5_2;
+export default Level5_2

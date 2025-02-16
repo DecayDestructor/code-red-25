@@ -17,8 +17,9 @@ const BackstoryLevelComponent = () => {
       setResultMessage('Correct! Well done!')
       setTimeout(() => {
         dispatch(unlockLevel('jumpscare_6_2'))
-        dispatch(lockLevel('level_6_2'))
+
         navigate('/jumpscare_6_2')
+        dispatch(lockLevel('options_level_5b'))
       }, 1500)
     } else {
       setResultMessage('Incorrect. Try again!')

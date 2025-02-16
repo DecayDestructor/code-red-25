@@ -1,26 +1,28 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux';
-import { lockLevel, unlockLevel  } from '../../protectedRoutes/store';
+import { useDispatch } from 'react-redux'
+import { lockLevel, unlockLevel } from '../../protectedRoutes/store'
 
 const Level5_2 = () => {
   const [hoveredButton, setHoveredButton] = useState(null)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const navigate = useNavigate()
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const handleOption1Click = () => {
     setTimeout(() => {
-      dispatch(unlockLevel("level_4a"));
-      dispatch(lockLevel("options_level_4"));
+      dispatch(unlockLevel('level_4a'))
+      dispatch(lockLevel('level_3'))
+      dispatch(lockLevel('jumpscares_level_6_2'))
       navigate('/backstory_level_4A')
     }, 500)
   }
 
   const handleOption2Click = () => {
     setTimeout(() => {
-      dispatch(unlockLevel("level_5b"));
-      dispatch(lockLevel("options_level_4"));
+      dispatch(unlockLevel('level_5b'))
+
       navigate('/backstory_level_5B')
+      dispatch(lockLevel('level_3'))
     }, 500)
   }
 

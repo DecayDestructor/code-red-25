@@ -19,7 +19,7 @@ const CombinedComponent = () => {
       setResultMessage('Correct! Well done!')
       setTimeout(() => {
         dispatch(unlockLevel('options_level_4'))
-        dispatch(lockLevel('level_3'))
+        dispatch(lockLevel('level_2'))
         navigate('/backstory_level_4')
       }, 1500)
     } else {

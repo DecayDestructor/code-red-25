@@ -17,7 +17,8 @@ const CombinedComponent = () => {
       setResultMessage('Correct! Well done!')
       setTimeout(() => {
         dispatch(unlockLevel('jumpscare_7_1a'))
-        dispatch(lockLevel('level_7_1a'))
+        dispatch(lockLevel('options_level_7a'))
+
         navigate('/jumpscare_7_1A')
       }, 1500)
     } else {

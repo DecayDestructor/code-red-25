@@ -77,7 +77,8 @@ const App = () => {
       setResultMessage('Correct! Well done!')
       setTimeout(() => {
         dispatch(unlockLevel('options_level_5b'))
-        dispatch(lockLevel('level_5b'))
+        // dispatch(lockLevel('level_5b'))
+        dispatch(lockLevel('options_level_4'))
         navigate('/options_level_5b')
       }, 1500)
     } else {

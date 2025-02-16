@@ -21,7 +21,7 @@ const YourComponent = () => {
       setTimeout(() => {
         navigate('/level_7_4')
         dispatch(unlockLevel('level_7_4'))
-        dispatch(lockLevel('level_7_3'))
+        dispatch(lockLevel('level_7_1b'))
       }, 1500)
     } else {
       setResultMessage('Incorrect. Try again!')

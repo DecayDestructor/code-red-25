@@ -13,12 +13,14 @@ const HiddenChallengeComponent = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const handleVerify = async () => {
-    const { correct } = checkAnswers(userInput, '7_1B')
+    const { correct } = await checkAnswers(userInput, '7_1B')
+    console.log(colorChanged, correct)
+
     if (colorChanged && correct) {
       setResultMessage('Correct! Proceeding to next level...')
       setTimeout(() => {
         dispatch(unlockLevel('level_7_3'))
-        dispatch(lockLevel('level_7_1b'))
+
         navigate('/backstory_level_7_3')
       }, 1500)
     } else if (!colorChanged) {

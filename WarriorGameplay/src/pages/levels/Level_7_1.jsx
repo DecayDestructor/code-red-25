@@ -28,7 +28,8 @@ const Level7_1 = () => {
     if (isPatternCorrect) {
       setTimeout(() => {
         dispatch(unlockLevel('options_level_7a'))
-        dispatch(lockLevel('level_7_1'))
+
+        dispatch(lockLevel('level_6_1'))
         navigate('/options_level_7a')
       }, 1000)
     } else {

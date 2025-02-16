@@ -3,20 +3,20 @@ import LayoutPage from '../../components/Layout'
 import level4_1 from '../../assets/level4_1.webp' // Ensure the correct image path
 import { Link, useNavigate } from 'react-router-dom'
 import checkAnswers from '../../utils/checkAnswer.js'
-import { useDispatch } from 'react-redux';
-import { lockLevel, unlockLevel  } from '../../protectedRoutes/store';
+import { useDispatch } from 'react-redux'
+import { lockLevel, unlockLevel } from '../../protectedRoutes/store'
 
 const Level4_Puzzle = () => {
   const navigate = useNavigate()
   const [answer, setAnswer] = useState('')
   const [showError, setShowError] = useState(false)
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const handleSubmitAnswer = async () => {
     const { correct } = await checkAnswers(answer, '4')
 
     if (correct) {
-      dispatch(unlockLevel("level5"));
-      dispatch(lockLevel("level4"));
+      dispatch(unlockLevel('level5'))
+      dispatch(lockLevel('level4'))
       navigate('/index.html')
     } else {
       setShowError(true)
@@ -34,7 +34,7 @@ const Level4_Puzzle = () => {
         transition: 'background-image 0.8s ease-in-out',
       }}
     >
-      <LayoutPage />
+      <LayoutPage level={4} />
       <div className=" boundary">
         <div className="heading">Level 4</div>
 

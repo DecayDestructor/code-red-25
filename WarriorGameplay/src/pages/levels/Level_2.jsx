@@ -17,7 +17,9 @@ const Level_2 = () => {
       setResultMessage('Correct! Well done!')
       setTimeout(() => {
         dispatch(unlockLevel('level_3'))
-        dispatch(lockLevel('level_2'))
+
+        dispatch(lockLevel('level_1a'))
+
         navigate('/backstory_level_3')
       }, 1500)
     } else {
