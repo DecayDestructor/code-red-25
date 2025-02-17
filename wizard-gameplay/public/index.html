@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+
+<html manifest="compass.manifest">
+  <!--
+Written by Christian Cantrell
+http://www.livingdigitally.net
+christian.cantrell@gmail.com
+
+Copyright (c) 2011 Christian Cantrell
+Released under The MIT License (MIT):
+http://www.opensource.org/licenses/mit-license.php
+-->
+
+  <head>
+    <title>Compass</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+
+    <!-- Home screen icons -->
+    <link
+      rel="apple-touch-icon"
+      sizes="57x57"
+      href="icons/apple-touch-icon-57x57.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="72x72"
+      href="icons/apple-touch-icon-72x72.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="114x114"
+      href="icons/apple-touch-icon-114x114.png"
+    />
+
+    <!-- Start-up images -->
+
+    <!-- iPad -->
+    <link
+      rel="apple-touch-startup-image"
+      href="starts/ipad-landscape.jpg"
+      media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)"
+    />
+    <link
+      rel="apple-touch-startup-image"
+      href="starts/ipad-portrait.jpg"
+      media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)"
+    />
+    <!-- iPhone (retina) -->
+    <link
+      rel="apple-touch-startup-image"
+      href="starts/iphone-retina.jpg"
+      media="screen and (max-device-width: 640px)"
+    />
+
+    <link rel="icon" type="image/png" href="icons/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Catamaran:wght@100..900&family=MedievalSharp&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+        margin: 0;
+        overflow-x: hidden;
+        background: rgb(10, 7, 59);
+        background: linear-gradient(
+          90deg,
+          rgba(10, 7, 59, 1) 0%,
+          rgba(9, 9, 121, 1) 100%,
+          rgba(0, 212, 255, 1) 100%
+        );
+      }
+
+      #needleCanvas {
+        position: absolute;
+        -webkit-transition-property: -webkit-transform;
+        -webkit-transition-duration: 0.5s;
+        -webkit-transition-timing-function: ease-out;
+      }
+
+      .label {
+        font-family: sans-serif;
+        color: #ccc;
+        text-shadow: 2px 2px 5px #000;
+        text-align: center;
+        padding: 0;
+        margin: 0;
+        position: absolute;
+      }
+
+      .answers {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        /* border: 2px solid goldenrod; */
+        margin-top: 2rem;
+      }
+
+      .answer {
+        height: 100px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: rgb(72, 2, 74);
+        background: linear-gradient(
+          90deg,
+          rgba(72, 2, 74, 1) 0%,
+          rgba(71, 0, 20, 1) 23%,
+          rgba(114, 4, 49, 1) 55%,
+          rgba(149, 6, 28, 1) 100%,
+          rgba(172, 0, 36, 1) 100%
+        );
+        margin-bottom: 1rem;
+        margin-top: 1rem;
+        padding: 2rem;
+        border-radius: 1rem;
+      }
+
+      .answer p {
+        font-size: large;
+        color: aliceblue;
+        font-family: 'MedievalSharp', serif;
+        font-weight: 600;
+        font-style: normal;
+      }
+
+      .answer input {
+        border-radius: 0.5rem;
+        height: 20%;
+      }
+
+      /* From Uiverse.io by Ali-Tahmazi99 */
+      /* From uiverse.io by @Ali-Tahmazi99 */
+      button {
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+        display: inline-block;
+        width: 150px;
+        height: 50px;
+        border-radius: 10px;
+        border: 1px solid #03045e;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.5s ease-in;
+        z-index: 1;
+        font-family: 'Catamaran', serif;
+        font-optical-sizing: auto;
+        font-weight: 600;
+        font-style: normal;
+      }
+
+      button::before,
+      button::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        width: 0;
+        height: 100%;
+        transform: skew(15deg);
+        transition: all 0.5s;
+        overflow: hidden;
+        z-index: -1;
+      }
+
+      button::before {
+        left: -10px;
+        background: #240046;
+      }
+
+      button::after {
+        right: -10px;
+        background: #5a189a;
+      }
+
+      button:hover::before,
+      button:hover::after {
+        width: 58%;
+      }
+
+      button:hover span {
+        color: #e0aaff;
+        transition: 0.3s;
+      }
+
+      button span {
+        color: #03045e;
+        font-size: 18px;
+        transition: all 0.3s ease-in;
+      }
+    </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script type="module" src="/src/access.js"></script>
+  </head>
+
+  <body>
+    <script type="text/javascript">
+      var w, h, faceRadius, faceDiameter
+      var needleAngle,
+        needleWidth,
+        needleLength,
+        crossLength,
+        faceShapeLength,
+        faceShapeLengthShort,
+        faceShapeWidth,
+        ringWidth
+      var renderingInterval = -1
+      var simulationInterval = -1
+      var currentHeading
+      var hasCompass
+      var faceFontSize, faceFontSizeSmall, dataFontSize
+      var mouseX, mouseY
+
+      var NEEDLE_ANIMATION_UPDATE_INTERVAL = 2000
+      var SIMULATION_INTERVAL = 2000
+
+      var MARGINS = {
+        DATA_TEXT_MARGIN: 5,
+        FACE_TEXT_MARGIN: 20,
+      }
+
+      var COLORS = {
+        FACE_COLOR: '#fff',
+        FACE_SHAPE_COLOR: '#ddd',
+        FACE_TEXT_COLOR: '#000',
+        NORTH_NEEDLE_COLOR_DARK: '#990000',
+        NORTH_NEEDLE_COLOR_LIGHT: '#cc0000',
+        SOUTH_NEEDLE_COLOR_DARK: '#3465a4',
+        SOUTH_NEEDLE_COLOR_LIGHT: '#193966',
+        PIN_COLOR: '#ddd',
+        CENTER_CROSS_COLOR: '#333',
+      }
+
+      function init() {
+        checkForUpdate()
+        currentHeading = 0
+        needleAngle = 0
+        measure()
+        drawFace()
+        drawNeedle()
+        drawLabels()
+        mouseX = w / 2
+        mouseY = 0
+        testForCompass()
+      }
+
+      function checkForUpdate() {
+        if (
+          window.applicationCache != undefined &&
+          window.applicationCache != null
+        ) {
+          window.applicationCache.addEventListener(
+            'updateready',
+            updateApplication
+          )
+        }
+      }
+
+      function updateApplication(event) {
+        if (window.applicationCache.status != 4) return
+        window.applicationCache.removeEventListener(
+          'updateready',
+          updateApplication
+        )
+        window.applicationCache.swapCache()
+        window.location.reload()
+      }
+
+      function onResize(event) {
+        stop()
+        if (!measure()) return
+        drawFace()
+        drawNeedle()
+        drawLabels()
+        start()
+      }
+
+      function measure() {
+        w = window.innerWidth
+        h = window.innerHeight
+
+        if (w <= 10 || h <= 10) return false
+
+        faceDiameter = Math.min(w, h) - 20
+        faceRadius = faceDiameter / 2
+
+        needleLength = faceDiameter - 10
+        needleWidth = needleLength / 10
+
+        ringWidth = faceDiameter / 75
+
+        faceShapeLength = (needleLength * 0.95) / 2
+        faceShapeLengthShort = faceShapeLength / 2
+        faceShapeWidth = needleWidth * 0.75
+
+        crossLength = needleWidth / 8
+
+        faceFontSize = needleWidth * 1.5
+        faceFontSizeSmall = faceFontSize * 0.75
+        dataFontSize = needleWidth
+
+        return true
+      }
+
+      function drawFace() {
+        var canvas = document.getElementById('faceCanvas')
+
+        canvas.width = w
+        canvas.height = h
+
+        faceContext = canvas.getContext('2d')
+
+        faceContext.clearRect(0, 0, w, h)
+
+        // Radial gradient
+        var faceGradient = faceContext.createRadialGradient(
+          w / 2,
+          h / 2,
+          faceRadius,
+          w / 2,
+          h / 2,
+          faceDiameter / 3
+        )
+        faceGradient.addColorStop(0.3, '#ccc')
+        faceGradient.addColorStop(0.7, '#fff')
+        faceGradient.addColorStop(0, '#fff')
+
+        // Background
+        faceContext.fillStyle = COLORS.FACE_COLOR
+        faceContext.beginPath()
+        faceContext.arc(w / 2, h / 2, faceRadius, 0, degToRad(360), false)
+        faceContext.fillStyle = faceGradient
+        faceContext.fill()
+
+        // Outer border
+        faceContext.strokeStyle = '#000'
+        faceContext.beginPath()
+        faceContext.arc(w / 2, h / 2, faceRadius, 0, degToRad(360), false)
+        faceContext.stroke()
+
+        // Ticks
+        var xOffset = w / 2
+        var yOffset = h / 2
+        for (var i = 0; i < 360; ++i) {
+          var x = faceRadius * Math.cos(degToRad(i)) + xOffset
+          var y = faceRadius * Math.sin(degToRad(i)) + yOffset
+
+          var x2 = (faceRadius - ringWidth) * Math.cos(degToRad(i)) + xOffset
+          var y2 = (faceRadius - ringWidth) * Math.sin(degToRad(i)) + yOffset
+
+          faceContext.beginPath()
+          faceContext.moveTo(x, y)
+
+          faceContext.lineTo(x2, y2)
+          faceContext.closePath()
+          faceContext.stroke()
+        }
+
+        // Inner border
+        faceContext.beginPath()
+        faceContext.arc(
+          w / 2,
+          h / 2,
+          faceRadius - ringWidth,
+          0,
+          degToRad(360),
+          false
+        )
+        faceContext.stroke()
+
+        // Shapes (N, S, W, E)
+        faceContext.beginPath()
+        faceContext.fillStyle = COLORS.FACE_SHAPE_COLOR
+        faceContext.moveTo(w / 2 - faceShapeWidth / 2, h / 2)
+        faceContext.lineTo(w / 2, h / 2 - faceShapeLength)
+        faceContext.lineTo(w / 2 + faceShapeWidth / 2, h / 2)
+        faceContext.fill()
+
+        faceContext.beginPath()
+        faceContext.moveTo(w / 2 - faceShapeWidth / 2, h / 2)
+        faceContext.lineTo(w / 2, h / 2 + faceShapeLength)
+        faceContext.lineTo(w / 2 + faceShapeWidth / 2, h / 2)
+        faceContext.fill()
+
+        faceContext.beginPath()
+        faceContext.moveTo(w / 2, h / 2 + faceShapeWidth / 2)
+        faceContext.lineTo(w / 2 - faceShapeLength, h / 2)
+        faceContext.lineTo(w / 2, h / 2 - faceShapeWidth / 2)
+        faceContext.fill()
+
+        faceContext.beginPath()
+        faceContext.moveTo(w / 2, h / 2 + faceShapeWidth / 2)
+        faceContext.lineTo(w / 2 + faceShapeLength, h / 2)
+        faceContext.lineTo(w / 2, h / 2 - faceShapeWidth / 2)
+        faceContext.fill()
+
+        // Shapes (NW, SE, SW, NE)
+        faceContext.beginPath()
+        faceContext.moveTo(
+          w / 2 - faceShapeWidth / 2,
+          h / 2 + faceShapeWidth / 2
+        )
+        faceContext.lineTo(
+          w / 2 - faceShapeLengthShort,
+          h / 2 - faceShapeLengthShort
+        )
+        faceContext.lineTo(
+          w / 2 + faceShapeWidth / 2,
+          h / 2 - faceShapeWidth / 2
+        )
+        faceContext.fill()
+
+        faceContext.beginPath()
+        faceContext.moveTo(
+          w / 2 - faceShapeWidth / 2,
+          h / 2 + faceShapeWidth / 2
+        )
+        faceContext.lineTo(
+          w / 2 + faceShapeLengthShort,
+          h / 2 + faceShapeLengthShort
+        )
+        faceContext.lineTo(
+          w / 2 + faceShapeWidth / 2,
+          h / 2 - faceShapeWidth / 2
+        )
+        faceContext.fill()
+
+        faceContext.beginPath()
+        faceContext.moveTo(
+          w / 2 - faceShapeWidth / 2,
+          h / 2 - faceShapeWidth / 2
+        )
+        faceContext.lineTo(
+          w / 2 + faceShapeLengthShort,
+          h / 2 - faceShapeLengthShort
+        )
+        faceContext.lineTo(
+          w / 2 + faceShapeWidth / 2,
+          h / 2 + faceShapeWidth / 2
+        )
+        faceContext.fill()
+
+        faceContext.beginPath()
+        faceContext.moveTo(
+          w / 2 - faceShapeWidth / 2,
+          h / 2 - faceShapeWidth / 2
+        )
+        faceContext.lineTo(
+          w / 2 - faceShapeLengthShort,
+          h / 2 + faceShapeLengthShort
+        )
+        faceContext.lineTo(
+          w / 2 + faceShapeWidth / 2,
+          h / 2 + faceShapeWidth / 2
+        )
+        faceContext.fill()
+
+        // Text
+        faceContext.font = faceFontSize + 'px serif'
+        faceContext.fillStyle = COLORS.FACE_TEXT_COLOR
+
+        // N
+        faceContext.textBaseline = 'alphabetic'
+        var metrics = faceContext.measureText('N')
+        faceContext.fillText(
+          'N',
+          w / 2 - metrics.width / 2,
+          h / 2 - faceRadius + needleWidth + MARGINS.FACE_TEXT_MARGIN
+        )
+
+        // S
+        metrics = faceContext.measureText('S')
+        faceContext.fillText(
+          'S',
+          w / 2 - metrics.width / 2,
+          h / 2 + faceRadius - MARGINS.FACE_TEXT_MARGIN
+        )
+
+        // W
+        faceContext.fillText(
+          'W',
+          w / 2 - faceRadius + MARGINS.FACE_TEXT_MARGIN,
+          h / 2 + needleWidth / 2
+        )
+
+        // E
+        metrics = faceContext.measureText('E')
+        faceContext.fillText(
+          'E',
+          w / 2 + (faceRadius - metrics.width) - MARGINS.FACE_TEXT_MARGIN,
+          h / 2 + needleWidth / 2
+        )
+
+        faceContext.font = faceFontSizeSmall * 0.5 + 'px serif'
+
+        // NW
+        var metrics = faceContext.measureText('NW')
+        faceContext.fillText(
+          'NW',
+          w / 2 - faceShapeLengthShort - metrics.width / 2,
+          h / 2 - faceShapeLengthShort
+        )
+
+        // NE
+        var metrics = faceContext.measureText('NE')
+        faceContext.fillText(
+          'NE',
+          w / 2 + faceShapeLengthShort - metrics.width / 2,
+          h / 2 - faceShapeLengthShort
+        )
+
+        // SE
+        var metrics = faceContext.measureText('SE')
+        faceContext.fillText(
+          'SE',
+          w / 2 + faceShapeLengthShort - metrics.width / 2,
+          h / 2 + faceShapeLengthShort + faceFontSizeSmall / 3
+        )
+
+        // SW
+        var metrics = faceContext.measureText('SW')
+        faceContext.fillText(
+          'SW',
+          w / 2 - faceShapeLengthShort - metrics.width / 2,
+          h / 2 + faceShapeLengthShort + faceFontSizeSmall / 3
+        )
+      }
+
+      function drawNeedle() {
+        var needleCanvas = document.getElementById('needleCanvas')
+
+        needleCanvas.width = faceDiameter
+        needleCanvas.height = faceDiameter
+
+        needleCanvas.style.left = w / 2 - faceDiameter / 2 + 'px'
+        needleCanvas.style.top = h / 2 - faceDiameter / 2 + 'px'
+
+        needleContext = needleCanvas.getContext('2d')
+        needleContext.translate(faceDiameter / 2, faceDiameter / 2)
+
+        needleContext.clearRect(
+          (needleContext.canvas.width / 2) * -1,
+          (needleContext.canvas.height / 2) * -1,
+          needleContext.canvas.width,
+          needleContext.canvas.height
+        )
+
+        // Set up the drop shadow.
+        needleContext.shadowOffsetX = 5
+        needleContext.shadowOffsetY = 5
+        needleContext.shadowBlur = 10
+        needleContext.shadowColor = '#000'
+
+        needleContext.beginPath()
+        needleContext.fillStyle = COLORS.SOUTH_NEEDLE_COLOR_LIGHT
+        needleContext.moveTo(0, 0)
+        needleContext.lineTo(0, needleLength / 2)
+        needleContext.lineTo((needleWidth / 2) * -1, 0)
+        needleContext.fill()
+
+        needleContext.beginPath()
+        needleContext.fillStyle = COLORS.SOUTH_NEEDLE_COLOR_DARK
+        needleContext.moveTo(0, 0)
+        needleContext.lineTo(0, needleLength / 2)
+        needleContext.lineTo(needleWidth / 2, 0)
+        needleContext.fill()
+
+        needleContext.beginPath()
+        needleContext.fillStyle = COLORS.NORTH_NEEDLE_COLOR_LIGHT
+        needleContext.moveTo(0, 0)
+        needleContext.lineTo(0, (needleLength / 2) * -1)
+        needleContext.lineTo((needleWidth / 2) * -1, 0)
+        needleContext.fill()
+
+        needleContext.beginPath()
+        needleContext.fillStyle = COLORS.NORTH_NEEDLE_COLOR_DARK
+        needleContext.moveTo(0, 0)
+        needleContext.lineTo(0, (needleLength / 2) * -1)
+        needleContext.lineTo(needleWidth / 2, 0)
+        needleContext.fill()
+
+        needleContext.beginPath()
+        needleContext.moveTo(0, 0)
+        needleContext.arc(0, 0, needleWidth / 3, 0, degToRad(360), false)
+        needleContext.fillStyle = COLORS.PIN_COLOR
+        needleContext.fill()
+
+        needleContext.beginPath()
+        needleContext.strokeStyle = COLORS.CENTER_CROSS_COLOR
+        needleContext.moveTo(crossLength * -1, crossLength * -1)
+        needleContext.lineTo(crossLength, crossLength)
+        needleContext.closePath()
+        needleContext.stroke()
+
+        needleContext.beginPath()
+        needleContext.strokeStyle = COLORS.CENTER_CROSS_COLOR
+        needleContext.moveTo(crossLength, crossLength * -1)
+        needleContext.lineTo(crossLength * -1, crossLength)
+        needleContext.closePath()
+        needleContext.stroke()
+      }
+
+      function drawLabels() {
+        var degrees = document.getElementById('degrees')
+        var direction = document.getElementById('direction')
+
+        degrees.style.fontSize = dataFontSize + 'px'
+        direction.style.fontSize = dataFontSize + 'px'
+
+        if (h > w) {
+          // Portrait
+          var gap = (h - faceDiameter) / 2
+
+          degrees.style.width = w - MARGINS.DATA_TEXT_MARGIN * 2 + 'px'
+          degrees.style.left = MARGINS.DATA_TEXT_MARGIN + 'px'
+
+          if (gap > needleWidth) {
+            degrees.style.textAlign = 'center'
+            degrees.style.top =
+              h - needleWidth / 2 - gap / 2 - MARGINS.DATA_TEXT_MARGIN + 'px'
+            direction.style.textAlign = 'center'
+            direction.style.top = gap / 2 - needleWidth / 2 + 'px'
+          } else {
+            degrees.style.textAlign = 'right'
+            degrees.style.top =
+              h - needleWidth - MARGINS.DATA_TEXT_MARGIN * 2 + 'px'
+            direction.style.textAlign = 'left'
+            direction.style.top = MARGINS.DATA_TEXT_MARGIN + 'px'
+          }
+
+          direction.style.width = w - MARGINS.DATA_TEXT_MARGIN * 2 + 'px'
+          direction.style.left = MARGINS.DATA_TEXT_MARGIN + 'px'
+        } // Landscape
+        else {
+          var gap = (w - faceDiameter) / 2
+
+          direction.style.width = w / 2 - MARGINS.DATA_TEXT_MARGIN + 'px'
+          direction.style.left = MARGINS.DATA_TEXT_MARGIN + 'px'
+          direction.style.top = MARGINS.DATA_TEXT_MARGIN + 'px'
+          direction.style.textAlign = 'left'
+
+          degrees.style.width = w / 2 - MARGINS.DATA_TEXT_MARGIN + 'px'
+          degrees.style.right = MARGINS.DATA_TEXT_MARGIN + 'px'
+          degrees.style.left = null
+          degrees.style.top = MARGINS.DATA_TEXT_MARGIN + 'px'
+          degrees.style.textAlign = 'right'
+        }
+      }
+
+      function start() {
+        window.addEventListener('deviceorientation', onDeviceOrientationChange)
+
+        if (hasCompass) {
+          if (
+            navigator.userAgent.toLowerCase().indexOf('android') != -1 ||
+            navigator.userAgent.startsWith(
+              'Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
+            )
+          ) {
+            // Android
+            // On Android, we have to listen for resize events. That's how you get
+            // the correct innerWidth and innerHeight.
+            window.addEventListener('resize', onResize)
+
+            // Use a rendering loop to smooth out the erratic gyroscope values.
+            renderingInterval = setInterval(
+              animateNeedle,
+              NEEDLE_ANIMATION_UPDATE_INTERVAL
+            )
+          } // iOS
+          else {
+            // On iOS, we can't use resize events because they fire every time innerHTML
+            // is set. Instead, we'll use 'orientationchange' events.
+            window.addEventListener('orientationchange', onResize)
+          }
+        } else {
+          setupDesktop()
+        }
+      }
+
+      function testForCompass() {
+        var ua = navigator.userAgent.toLowerCase()
+        // Let's do _something_ for unsupported browsers.
+        if (
+          ua.indexOf('firefox') != -1 ||
+          ua.indexOf('opera') != -1 ||
+          ua.indexOf('msie') != -1
+        ) {
+          hasCompass = false
+          start()
+          alert('Only WebKit-based browsers are supported at this time.')
+        } else if (ua.indexOf('iphone os 4') != -1) {
+          hasCompass = false
+          start()
+          alert('This application requires iOS 5 or higher.')
+        } else if (window.DeviceOrientationEvent) {
+          window.addEventListener('deviceorientation', compassTest)
+        } else {
+          hasCompass = false
+          start()
+        }
+      }
+
+      function compassTest(event) {
+        window.removeEventListener('click', compassTest)
+        if (event.webkitCompassHeading != undefined || event.alpha != null) {
+          // Device does have a compass
+          hasCompass = true
+        } else {
+          hasCompass = false
+        }
+        start()
+      }
+
+      function setupDesktop() {
+        window.orientation = 0
+        window.addEventListener('resize', onResize)
+        document.onmousemove = function (e) {
+          mouseX = e.clientX
+          mouseY = e.clientY
+        }
+        simulationInterval = setInterval(simulateGyroscope, SIMULATION_INTERVAL)
+      }
+
+      function simulateGyroscope() {
+        var event = document.createEvent('Event')
+        event.initEvent('deviceorientation', true, true)
+        var mouseAngle = getMouseAngle(mouseX, mouseY)
+        event.webkitCompassHeading = 360 - mouseAngle
+        window.dispatchEvent(event)
+      }
+
+      function stop() {
+        if (renderingInterval) clearInterval(renderingInterval)
+        if (simulationInterval) clearInterval(simulationInterval)
+        window.removeEventListener(
+          'deviceorientation',
+          onDeviceOrientationChange
+        )
+        window.removeEventListener('resize', onResize)
+        window.removeEventListener('orientationchange', onResize)
+        document.onmousemove = null
+      }
+
+      function animateNeedle() {
+        var multiplier = Math.floor(needleAngle / 360)
+        var adjustedNeedleAngle = needleAngle - 360 * multiplier
+        var delta = currentHeading - adjustedNeedleAngle
+        if (Math.abs(delta) > 180) {
+          if (delta < 0) {
+            delta += 360
+          } else {
+            delta -= 360
+          }
+        }
+
+        delta /= 5 // Add a little additional easing (for devices only).
+        needleAngle = needleAngle + delta
+        // Rotate _to_ the number indicated, not _by_ the number indicated
+        var finalNeedleAngle = needleAngle - window.orientation
+        document.getElementById('needleCanvas').style.webkitTransform =
+          'rotate(' + finalNeedleAngle + 'deg)'
+        updateLabels()
+      }
+
+      function updateLabels() {
+        var degrees = document.getElementById('degrees')
+        var direction = document.getElementById('direction')
+
+        var degreeValue = Math.round(currentHeading - window.orientation)
+        // console.log(degreeValue);
+        if (degreeValue < 0) {
+          degreeValue += Math.ceil(Math.abs(degreeValue) / 360) * 360
+        } else if (degreeValue > 360) {
+          degreeValue -= 360
+        }
+
+        if (degreeValue === 160) {
+          console.log(
+            `Answer 1 : efc6c8c8de1929382723cc31814a1880119e6f8b32b52b910ec0b84e7920d6b1`
+          )
+        }
+
+        if (degreeValue === 316 || degreeValue === 317) {
+          console.log(
+            `Answer 3 : f9088bf8e4d49bdaada41c7c3ba691f4b345af3d520f7f05e487dceb1e81c429`
+          )
+        }
+
+        if (degreeValue === 295 || degreeValue === 296) {
+          console.log(`Answer 2 : ANSWER-2-HEHE`)
+        }
+
+        degrees.innerHTML = degreeValue + '&deg;'
+
+        if (degreeValue >= 337.5 || (degreeValue >= 0 && degreeValue < 22.5)) {
+          direction.innerHTML = 'N'
+        } else if (degreeValue >= 22.5 && degreeValue < 67.5) {
+          direction.innerHTML = 'NE'
+        } else if (degreeValue >= 67.5 && degreeValue < 112.5) {
+          direction.innerHTML = 'E'
+        } else if (degreeValue >= 112.5 && degreeValue < 157.5) {
+          direction.innerHTML = 'SE'
+        } else if (degreeValue >= 157.5 && degreeValue < 202.5) {
+          direction.innerHTML = 'S'
+        } else if (degreeValue >= 202.5 && degreeValue < 247.5) {
+          direction.innerHTML = 'SW'
+        } else if (degreeValue >= 247.5 && degreeValue < 292.5) {
+          direction.innerHTML = 'W'
+        } else if (degreeValue >= 292.5 && degreeValue < 337.5) {
+          direction.innerHTML = 'NW'
+        }
+      }
+
+      function getMouseAngle(x, y) {
+        var A = [faceRadius, faceRadius]
+        var B = [x - (w / 2 - faceRadius), y - (h / 2 - faceRadius)]
+        var C = [faceRadius, 0]
+
+        var a = Math.sqrt(Math.pow(B[0] - C[0], 2) + Math.pow(B[1] - C[1], 2))
+        var b = Math.sqrt(Math.pow(A[0] - C[0], 2) + Math.pow(A[1] - C[1], 2))
+        var c = Math.sqrt(Math.pow(B[0] - A[0], 2) + Math.pow(B[1] - A[1], 2))
+
+        var cosA =
+          (Math.pow(b, 2) + Math.pow(c, 2) - Math.pow(a, 2)) / (2 * b * c)
+        var angle = radToDeg(Math.acos(cosA))
+
+        if (B[0] < A[0]) {
+          angle = 180 + (180 - angle)
+        }
+        return angle
+      }
+
+      function onDeviceOrientationChange(event) {
+        if (event.webkitCompassHeading != undefined) {
+          currentHeading = 360 - event.webkitCompassHeading
+        } else if (event.alpha != null) {
+          currentHeading = (270 - event.alpha) * -1
+        }
+        if (renderingInterval == -1) animateNeedle()
+      }
+
+      // Utility functions -- not app specific.
+
+      function degToRad(deg) {
+        return (deg * Math.PI) / 180
+      }
+
+      function radToDeg(rad) {
+        return (rad * 180) / Math.PI
+      }
+
+      function dump(obj, filter) {
+        for (key in obj) {
+          if (filter && key.indexOf(filter) != 0) continue
+          console.log(key + ': ' + obj[key])
+        }
+      }
+
+      window.onload = init
+    </script>
+
+    <canvas id="faceCanvas"></canvas>
+    <canvas id="needleCanvas"></canvas>
+    <div>
+      <div id="degrees" class="label">---</div>
+      <div id="direction" class="label">--</div>
+    </div>
+
+    <div class="answers">
+      <div class="answer">
+        <p>Answer 1</p>
+        <input class="ans_1" />
+      </div>
+
+      <div class="answer">
+        <p>Answer 2</p>
+        <input class="ans_2" />
+      </div>
+
+      <div class="answer">
+        <p>Answer 3</p>
+        <input class="ans_3" />
+      </div>
+    </div>
+    <div class="answers">
+      <button class="ans_btn">
+        <span> SUBMIT </span>
+      </button>
+    </div>
+
+    <script src="./index.js" type="module"></script>
+  </body>
+</html>
