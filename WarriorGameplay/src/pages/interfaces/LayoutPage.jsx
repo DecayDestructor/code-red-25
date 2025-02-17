@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import hintsvg from "../../assets/interfaces/Hint.svg"
 
 const LayoutPage = ({ level, hintText }) => {
   const [timeRemaining, setTimeRemaining] = useState('00:00:00')
@@ -78,7 +79,7 @@ const LayoutPage = ({ level, hintText }) => {
         >
           {hintUnlocked ? (
             <img
-              src="./src/assets/interfaces/Hint.svg"
+              src={hintsvg}
               alt=""
               className="w-5"
             />

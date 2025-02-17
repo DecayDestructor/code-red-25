@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { lockLevel, unlockLevel } from '../../protectedRoutes/store'
+import bg from "../../assets/options/Options_Level_4.png"
 
 const Level5_2 = () => {
   const [hoveredButton, setHoveredButton] = useState(null)
@@ -65,7 +66,7 @@ const Level5_2 = () => {
     <div
       className="flex justify-center items-center min-h-screen bg-cover bg-center bg-fixed relative overflow-hidden"
       style={{
-        backgroundImage: "url('src/assets/options/Options_Level_4.png')",
+        backgroundImage: `url(${bg})`,
       }}
       onMouseMove={handleMouseMove}
     >

@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { lockLevel, unlockLevel } from '../../protectedRoutes/store'
+import vid from "../../assets/jumpscares/Jumpscare_7_1A.mp4"
 
 const Jumpscare_7_1A = () => {
   const videoRef = useRef(null)
@@ -40,7 +41,7 @@ const Jumpscare_7_1A = () => {
     >
       <video
         ref={videoRef}
-        src="src/assets/jumpscares/Jumpscare_7_1A.mp4"
+        src={vid}
         autoPlay
         muted
         style={{ width: '100%', height: '100%', objectFit: 'cover' }}
