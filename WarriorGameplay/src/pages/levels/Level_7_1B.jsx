@@ -4,7 +4,7 @@ import LayoutPage from '../interfaces/LayoutPage'
 import checkAnswers from '../../utils/checkAnswers'
 import { useDispatch } from 'react-redux'
 import { lockLevel, unlockLevel } from '../../protectedRoutes/store'
-import bg from '../../../src/assets/levels/Level_7_1B.png'
+import bg from '../../../src/assets/levels/Level_7_1B.jpg'
 
 const HiddenChallengeComponent = () => {
   const [userInput, setUserInput] = useState('')

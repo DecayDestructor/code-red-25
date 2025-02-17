@@ -5,7 +5,7 @@ import checkAnswers from '../../utils/checkAnswers'
 import { useDispatch } from 'react-redux'
 import { lockLevel, unlockLevel } from '../../protectedRoutes/store'
 const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-import bg from '../../../src/assets/levels/Level_5B.png'
+import bg from '../../../src/assets/levels/Level_5B.jpg'
 
 const Hyperplexed = ({ id, link }) => {
   const [text, setText] = useState('HYPERPLEXED')

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import bg from '../../assets/backstory/Backstory_Level_1_2'
+import bg from '../../assets/backstory/Backstory_Level_1_2.png'
 
 const Backstory_Level_1_2 = () => {
   const [text, setText] = useState('')
