@@ -4,7 +4,6 @@ import LayoutPage from '../interfaces/LayoutPage'
 import checkAnswers from '../../utils/checkAnswers'
 import { useDispatch } from 'react-redux'
 import { lockLevel, unlockLevel } from '../../protectedRoutes/store'
-import { unlock } from '../../../../server/routes/seed'
 import bg from '../../../src/assets/levels/Level_4A.png'
 
 const CombinedComponent = () => {
