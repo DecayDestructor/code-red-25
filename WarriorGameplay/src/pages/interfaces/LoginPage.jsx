@@ -1,6 +1,11 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from '../../utils/api.jsx'
+import loginPage from '../../assets/interfaces/LoginPageBackground.jpg'
+import userImage from '../../assets/interfaces/Users.svg'
+import EyeOpenIcon from '../../assets/interfaces/EyeOpen.svg'
+import EyeCloseIcon from '../../assets/interfaces/EyeClose.svg'
+
 const SignupPage = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -54,7 +59,7 @@ const SignupPage = () => {
   return (
     <div className="flex justify-center items-center h-screen relative">
       <img
-        src="/src/assets/interfaces/LoginPage Background.jpg"
+        src={loginPage}
         alt="Background"
         className="object-cover w-full h-full absolute z-0"
       />
@@ -86,7 +91,7 @@ const SignupPage = () => {
               className="w-full pb-2 rounded-none border-b-[1px] border-gray-200 text-white bg-transparent focus:outline-none focus:border-blue-500 tracking-wider placeholder:text-white"
             />
             <img
-              src="/src/assets/interfaces/Users.svg"
+              src={userImage}
               alt="User Icon"
               className="absolute pb-2 right-0 w-8 h-8 text-white"
             />
@@ -107,11 +112,7 @@ const SignupPage = () => {
               onClick={() => setShowPassword(!showPassword)}
             >
               <img
-                src={
-                  showPassword
-                    ? '/src/assets/interfaces/EyeOpen.svg'
-                    : '/src/assets/interfaces/EyeClose.svg'
-                }
+                src={showPassword ? EyeOpenIcon : EyeCloseIcon}
                 alt={showPassword ? 'Hide Password' : 'Show Password'}
                 className="w-full h-full text-white"
               />
