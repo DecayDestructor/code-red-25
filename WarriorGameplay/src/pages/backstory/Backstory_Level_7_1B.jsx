@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Backstory from "../../assets/backstory/Backstory.png"
+import bg from "../../assets/backstory/Backstory.png"
 
 const Backstory_Level_1_1 = () => {
     const [text, setText] = useState("");
@@ -37,7 +37,7 @@ And let your magenta hand gently guide."
         <div className="flex justify-center items-center flex-col h-screen relative">
             {/* Background Image */}
             <img
-                src={Backstory}
+                src={bg}
                 alt="Background"
                 className="object-cover w-full h-full absolute z-0"
             />
