@@ -30,7 +30,7 @@ submitBtn.addEventListener('click', async (e) => {
   try {
     // Pass concatenated string
     const response = await fetch(
-      'http://localhost:5000/answers/check-answer/wizard/5',
+      'https://code-red-25.onrender.com/answers/check-answer/wizard/5',
       {
         method: 'POST',
         headers: {
