@@ -4,6 +4,7 @@ import LayoutPage from '../interfaces/LayoutPage'
 import checkAnswers from '../../utils/checkAnswers'
 import { useDispatch } from 'react-redux'
 import { lockLevel, unlockLevel } from '../../protectedRoutes/store'
+import bg from '../../../src/assets/levels/Level_7_1B.png'
 
 const HiddenChallengeComponent = () => {
   const [userInput, setUserInput] = useState('')
@@ -50,7 +51,7 @@ const HiddenChallengeComponent = () => {
     <div className="flex justify-center items-center flex-col h-screen relative">
       {/* Hidden instruction */}
       <img
-        src="src/assets/levels/Level_7_1B.jpg"
+        src={bg}
         alt="Background"
         className="object-cover w-full h-full absolute z-0"
       />

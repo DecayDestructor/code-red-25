@@ -5,6 +5,7 @@ import checkAnswers from '../../utils/checkAnswers'
 import { useDispatch } from 'react-redux'
 import { lockLevel, unlockLevel } from '../../protectedRoutes/store'
 const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+import bg from '../../../src/assets/levels/Level_5B.png'
 
 const Hyperplexed = ({ id, link }) => {
   const [text, setText] = useState('HYPERPLEXED')
@@ -107,7 +108,7 @@ const App = () => {
   return (
     <div className="flex justify-center items-center flex-col h-screen relative">
       <img
-        src="src/assets/levels/Level_5_2.jpg"
+        src={bg}
         alt="Background"
         className="object-cover w-full h-full absolute z-0"
       />

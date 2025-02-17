@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router'
 import LayoutPage from '../interfaces/LayoutPage'
 import { Shield, Sword } from 'lucide-react'
+import bg from '../../../src/assets/levels/Level_7_4.png'
 
 const Level_7_4 = () => {
   const [gavinHp, setGavinHp] = useState(100)
@@ -144,7 +145,7 @@ const Level_7_4 = () => {
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
           <img
-            src="src/assets/levels/Level_7_4.png"
+            src={bg}
             alt="Background"
             className="object-cover w-full h-full"
           />
