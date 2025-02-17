@@ -60,7 +60,7 @@ const getDataFromPostgres = async () => {
   }
 }
 
-getDataFromPostgres()
+// getDataFromPostgres()
 // Run backup job every 30 seconds
-cron.schedule('*/7 * * * *', backupDataToPostgres) // Runs every 7 minutes
-cron.schedule('*/5 * * * *', getDataFromPostgres) // Runs every 5 minutes
+// cron.schedule('*/7 * * * *', backupDataToPostgres) // Runs every 7 minutes
+// cron.schedule('*/5 * * * *', getDataFromPostgres) // Runs every 5 minutes

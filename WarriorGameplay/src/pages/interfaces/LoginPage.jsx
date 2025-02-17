@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import axios from '../../utils/api.jsx'
 const SignupPage = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')

@@ -4,7 +4,7 @@ const router = express.Router()
 const pool = require('../lib/db.js')
 
 router.post('/login', async (req, res) => {
-  console.log('hello world')
+  // console.log('hello world')
 
   const { id } = req.body
   const query = `

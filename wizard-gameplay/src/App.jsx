@@ -5,12 +5,11 @@ import HomePage from './components/Homepage'
 
 function App() {
   const [count, setCount] = useState(0)
-  axios.defaults.baseURL = 'http://localhost:5000'
   return (
     <>
-      <HomePage/>
+      <HomePage />
       {/* <div> */}
-        {/* <a href="https://vite.dev" target="_blank">
+      {/* <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
         <a href="https://react.dev" target="_blank">
