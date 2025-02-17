@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Backstory_1 from "../../assets/backstory/Backstory_1.png"
+
 const Backstory_Level_1_3 = () => {
   const [text, setText] = useState('')
   const [isTypingComplete, setIsTypingComplete] = useState(false)
@@ -43,31 +45,31 @@ const Backstory_Level_1_3 = () => {
     }
   }
 
-  return (
-    <div className="flex justify-center items-center flex-col h-screen relative">
-      {/* Background Image */}
-      <img
-        src="src/assets/backstory/Backstory_1.png"
-        alt="Background"
-        className="object-cover w-full h-full absolute z-0"
-      />
-      {/* Text Container */}
-      <div className="relative bg-white bg-opacity-70 p-6 rounded-lg w-[58%] z-10 h-[76%]">
-        <h1 className={`text-2xl tracking-wide whitespace-pre-line`}>
-          {text}
-          {!isTypingComplete && <span className="animate-pulse">|</span>}
-        </h1>
-        {isTypingComplete && (
-          <button
-            onClick={handleNextClick}
-            className="absolute bottom-[-4rem] right-0 px-6 py-3 bg-white bg-opacity-70 text-2xl tracking-wide rounded-lg hover:bg-opacity-90 transition-transform transform hover:scale-105"
-          >
-            {currentPassage === firstPassage ? 'Continue' : 'Next'}
-          </button>
-        )}
-      </div>
-    </div>
-  )
-}
+    return (
+        <div className="flex justify-center items-center flex-col h-screen relative">
+            {/* Background Image */}
+            <img
+                src={Backstory_1}
+                alt="Background"
+                className="object-cover w-full h-full absolute z-0"
+            />
+            {/* Text Container */}
+            <div className="relative bg-white bg-opacity-70 p-6 rounded-lg w-[58%] z-10 h-[76%]">
+                <h1 className={`text-2xl tracking-wide whitespace-pre-line`}>
+                    {text}
+                    {!isTypingComplete && <span className="animate-pulse">|</span>}
+                </h1>
+                {isTypingComplete && (
+                    <button
+                        onClick={handleNextClick}
+                        className="absolute bottom-[-4rem] right-0 px-6 py-3 bg-white bg-opacity-70 text-2xl tracking-wide rounded-lg hover:bg-opacity-90 transition-transform transform hover:scale-105"
+                    >
+                        {currentPassage === firstPassage ? "Continue" : "Next"}
+                    </button>
+                )}
+            </div>
+        </div>
+    );
+};
 
 export default Backstory_Level_1_3
