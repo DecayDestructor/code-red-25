@@ -1,4 +1,4 @@
-import level1_3 from '../assets/levels/Win2.webp'
+import level1_3 from './assets/levels/Win2.webp'
 import { Link } from 'react-router-dom'
 
 const Win = () => {

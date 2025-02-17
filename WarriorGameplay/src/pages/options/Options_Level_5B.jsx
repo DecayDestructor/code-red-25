@@ -12,6 +12,7 @@ const Level5_2 = () => {
   const handleOption1Click = () => {
     setTimeout(() => {
       dispatch(unlockLevel('level_5a'))
+      dispatch(unlockLevel('level_6_1'))
       // dispatch(lockLevel('options_level_5b'))
       dispatch(lockLevel('level_5b'))
       navigate('/backstory_level_5A')

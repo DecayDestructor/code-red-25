@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 const LockedPage = () => {
   useEffect(() => {
     if (window.location.pathname === '/index.html') {
-      window.location.reload() // Forces a hard refresh
+      // window.location.reload() // Forces a hard refresh
     }
   }, [])
   return (

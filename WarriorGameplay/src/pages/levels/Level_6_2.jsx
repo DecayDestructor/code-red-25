@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import LayoutPage from '../interfaces/LayoutPage'
-import checkAnswers from '../../../utils/checkAnswers'
+import checkAnswers from '../../utils/checkAnswers'
 import bgImg from '../../assets/levels/Level_6_2.png'
 import { useDispatch } from 'react-redux'
 import { lockLevel, unlockLevel } from '../../protectedRoutes/store'

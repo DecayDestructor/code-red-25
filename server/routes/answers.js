@@ -72,6 +72,15 @@ router.get('/get-answer/wizard/:level', async (req, res) => {
 })
 
 router.post('/check-answer/warrior/:level', async (req, res) => {
+  // const dbSize=await redis.dbsize()
+  const memoryInfo = await redis.info('memory')
+  const usedMemoryMatch = memoryInfo.match(/used_memory:(\d+)/)
+
+  if (usedMemoryMatch) {
+    const usedMemory = parseInt(usedMemoryMatch[1], 10)
+    console.log(`Memory Usage: ${usedMemory / 1024} KB`)
+    console.log(`Memory Usage: ${usedMemory / 1024 / 1024} MB`)
+  }
   const { level } = req.params
   const { answer, teamId } = req.body
   // const redisKey = `warrior:level:${level}`
@@ -96,6 +105,7 @@ router.post('/check-answer/warrior/:level', async (req, res) => {
 router.post('/check-answer/wizard/:level', async (req, res) => {
   const { level } = req.params
   const { answer, teamId } = req.body
+  // console.log(answer)
   // const redisKey = `warrior:level:${level}`
   const teamKey = `team:${teamId}`
   // console.log(wizardAnswers)

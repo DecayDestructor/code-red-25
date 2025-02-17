@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import LayoutPage from '../interfaces/LayoutPage'
-import checkAnswers from '../../../utils/checkAnswers'
+import checkAnswers from '../../utils/checkAnswers'
 import { useDispatch } from 'react-redux'
 import { lockLevel, unlockLevel } from '../../protectedRoutes/store'
+import { unlock } from '../../../../server/routes/seed'
 
 const CombinedComponent = () => {
   const [userInput, setUserInput] = useState('')
@@ -20,7 +21,7 @@ const CombinedComponent = () => {
       if (correct) {
         setResultMessage('Correct! Well done!')
         setTimeout(() => {
-          dispatch(unlockLevel('level_5a'))
+          dispatch(unlockLevel('level_6_1'))
           dispatch(lockLevel('options_level_4'))
           navigate('/backstory_level_5a')
         }, 1500)

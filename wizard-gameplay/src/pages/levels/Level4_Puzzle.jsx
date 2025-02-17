@@ -22,7 +22,8 @@ const Level4_Puzzle = () => {
       if (correct) {
         setLoading(true)
         setTimeout(() => {
-          dispatch(unlockLevel('level5'))
+          // dispatch(unlockLevel('level5'))
+          dispatch(unlockLevel('level6'))
 
           navigate('/index.html')
         }, 1500)
@@ -47,7 +48,11 @@ const Level4_Puzzle = () => {
         transition: 'background-image 0.8s ease-in-out',
       }}
     >
-      <LayoutPage level={4} />
+      <LayoutPage
+        level={4}
+        hint="Open the sea for Wizard’s NFT market and look for Cassandra!
+"
+      />
       <div className=" boundary">
         <div className="heading">Level 4</div>
 

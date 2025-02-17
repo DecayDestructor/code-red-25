@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import LayoutPage from '../interfaces/LayoutPage'
-import checkAnswers from '../../../utils/checkAnswers'
+import checkAnswers from '../../utils/checkAnswers'
 import bgImg from '../../assets/levels/Level_7_1.png'
 
 import { useDispatch } from 'react-redux'
@@ -26,10 +26,9 @@ const Level7_1 = () => {
     try {
       const currentPattern = buttonsState.join('')
       setSubmitted(true)
-      const isPatternCorrect = await checkAnswers(currentPattern, '7_1').correct
-      setIsCorrect(isPatternCorrect)
+      const { correct } = await checkAnswers(currentPattern, '7_1')
 
-      if (isPatternCorrect) {
+      if (correct) {
         setTimeout(() => {
           dispatch(unlockLevel('options_level_7a'))
 

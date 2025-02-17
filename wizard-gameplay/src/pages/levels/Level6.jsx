@@ -21,6 +21,7 @@ const Level6 = () => {
     dispatch(lockLevel('level5'))
     navigate('/level6_puzzle')
   }
+  console.log('on level 6')
 
   return (
     <TextDisplayComponent

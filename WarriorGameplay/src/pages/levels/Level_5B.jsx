@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import LayoutPage from '../interfaces/LayoutPage'
 import { useNavigate } from 'react-router-dom'
-import checkAnswers from '../../../utils/checkAnswers'
+import checkAnswers from '../../utils/checkAnswers'
 import { useDispatch } from 'react-redux'
 import { lockLevel, unlockLevel } from '../../protectedRoutes/store'
 const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'

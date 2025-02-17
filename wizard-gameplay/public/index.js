@@ -1,86 +1,57 @@
 const submitBtn = document.querySelector('.ans_btn')
-// console.log(submitBtn);
+// console.log(submitBtn)
+console.log('hello')
+
+//log a message after 420 seconds
+
+setTimeout(() => {
+  console.log(
+    'If none is displayed in CSS then that element in site is broken!'
+  )
+}, 420000) // 420 seconds
+
 // import axios from '../src/utils/api'
-import checkAnswer from '../src/utils/checkAnswer.js'
+// import axios from '../src/utils/api'
+// import checkAnswer from '../src/utils/checkAnswer.js'
+// import CryptoJS from '../src/utils/crpyto.js'
 
-
-const SECRET_KEY = "default-secret-key"; // Same key as in store.js
-
-function decryptData(encryptedData) {
-  try {
-    const bytes = CryptoJS.AES.decrypt(encryptedData, SECRET_KEY);
-    return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-  } catch (error) {
-    console.error("Error decrypting cookie:", error);
-    return null;
-  }
-}
-
-function encryptData(data) {
-  return CryptoJS.AES.encrypt(JSON.stringify(data), SECRET_KEY).toString();
-}
-
-function getGameProgress() {
-  const cookies = document.cookie.split("; ");
-  const gameProgressCookie = cookies.find((row) => row.startsWith("gameProgress="));
-
-  if (gameProgressCookie) {
-    const encryptedValue = gameProgressCookie.split("=")[1];
-    return decryptData(decodeURIComponent(encryptedValue)) || {};
-  }
-  return { unlockedLevels: {}, latestUnlockedLevel: "level1" };
-}
-
-function updateGameProgress(levelToUnlock) {
-  const gameProgress = getGameProgress();
-
-  // Unlock the level
-  gameProgress.unlockedLevels[levelToUnlock] = true;
-  // gameProgress.unlockedLevels["level5"] = false;
-  gameProgress.latestUnlockedLevel = levelToUnlock;
-
-  // Encrypt and store in cookies
-  const encryptedData = encryptData(gameProgress);
-  document.cookie = `gameProgress=${encodeURIComponent(encryptedData)}; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/; Secure; SameSite=Strict`;
-
-  console.log(`Unlocked level: ${levelToUnlock}`);
-}
+const SECRET_KEY = 'default-secret-key' // Same key as in store.js
 
 submitBtn.addEventListener('click', async (e) => {
-  const answer1 = document.querySelector('.ans_1')
-  const answer2 = document.querySelector('.ans_2')
-  const answer3 = document.querySelector('.ans_3')
+  e.preventDefault() // Prevents unwanted form submission
 
-  /////Sending the post request to the API//////
-  //   const id = localStorage.getItem('id') || 1
-  //   try {
-  //     const response = await fetch(`answers/check-answer/wizard/5`, {
-  //       method: 'POST',
-  //       body: {
-  //         teamId: id,
-  //         //The elements of the answer array should be in the same order:
-  //         //answer1 , answer2 and then answer3
-  //         answer: [answer1, answer2, answer3],
-  //       },
-  //     })
+  // Get text values and concatenate them
+  const answer1 = document.querySelector('.ans_1').value.trim()
+  const answer2 = document.querySelector('.ans_2').value.trim()
+  const answer3 = document.querySelector('.ans_3').value.trim()
 
-  //     if (!response.ok) {
-  //       throw new Error(`Response status: ${response.status}`)
-  //     }
+  const concatenatedAnswer = answer1 + answer2 + answer3
 
-  //     const json = await response.json()
-
-  //     //Routing to next level is answer is correct otherwise not
   try {
-    const { correct } = await checkAnswer(
-      answer1.append(answer2.append(answer3)),
-      '5'
+    // Pass concatenated string
+    const response = await fetch(
+      'http://localhost:5000/answers/check-answer/wizard/5',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ answer: concatenatedAnswer }),
+      }
     )
-    if (correct) {
-      updateGameProgress("level6");
+
+    // Wait for the response to be converted to JSON
+    const data = await response.json()
+
+    // Access the 'correct' attribute from the response
+    console.log(data.correct)
+
+    if (data.correct) {
+      // Redirect to the next level if the answer is correct
       window.location.href = '/level6'
+      // console.log(data.correct)
     }
   } catch (e) {
-    console.log(`Error while sending request : ${e}`)
+    console.log(`Error while sending request: ${e}`)
   }
 })

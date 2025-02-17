@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { isRouteErrorResponse, useNavigate } from 'react-router-dom' // Import useNavigate
 import LayoutPage from '../interfaces/LayoutPage'
-import checkAnswers from '../../../utils/checkAnswers'
+import checkAnswers from '../../utils/checkAnswers'
 import { useDispatch } from 'react-redux'
 import { lockLevel, unlockLevel } from '../../protectedRoutes/store'
 

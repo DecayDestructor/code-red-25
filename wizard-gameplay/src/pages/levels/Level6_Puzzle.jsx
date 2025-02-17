@@ -6,36 +6,38 @@ import LayoutPage from '../../components/Layout'
 import checkAnswer from '../../utils/checkAnswer.js'
 import { useDispatch } from 'react-redux'
 import { lockLevel, unlockLevel } from '../../protectedRoutes/store'
-
+import { useEffect } from 'react'
 const Level6_Puzzle = () => {
   const [answer, setAnswer] = useState('')
   const [showError, setShowError] = useState(false)
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
   const dispatch = useDispatch()
-
+  useEffect(() => {
+    dispatch(unlockLevel('level6'))
+  }, [])
   const handleSubmitAnswer = async () => {
     if (loading) return
     setLoading(true)
     try {
       const { correct } = await checkAnswer(answer, '6')
 
-    if (correct) {
-      setLoading(true)
+      if (correct) {
+        setLoading(true)
         setTimeout(() => {
-        dispatch(unlockLevel('level7_1'))
+          dispatch(unlockLevel('level7_1'))
 
-        navigate('/level7_1')
-      }, 1500)
-    } else {
-      setShowError(true)
+          navigate('/level7_1')
+        }, 1500)
+      } else {
+        setShowError(true)
+      }
+    } catch (e) {
+      console.error(e)
+    } finally {
+      setLoading(false)
     }
-  } catch (e) {
-    console.error(e)
-  } finally {
-    setLoading(false)
   }
-}
   return (
     <div
       className="flex justify-center items-center flex-col imageContainer"
@@ -47,7 +49,10 @@ const Level6_Puzzle = () => {
         transition: 'background-image 0.8s ease-in-out',
       }}
     >
-      <LayoutPage level={6} />
+      <LayoutPage
+        level={6}
+        hint="The wizard's code is hidden in a script of ancients, a language not of words, but of symbols and numbers only—where even mere letters take on weird forms. Seek for power divided into six, yet complete in four."
+      />
       <div className="boundary">
         <div className="heading">Level 6</div>
         {/* <div

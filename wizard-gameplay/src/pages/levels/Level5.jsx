@@ -16,8 +16,10 @@ const Level5 = () => {
   ]
 
   const dispatch = useDispatch()
-  const handleTextComplete = () => {
+  const handleTextComplete = async () => {
     dispatch(lockLevel('level4'))
+
+    dispatch(unlockLevel('level6'))
     window.location.replace(window.location.origin + '/index.html')
   }
 

@@ -53,7 +53,11 @@ const Level3_Puzzle = () => {
         transition: 'background-image 0.8s ease-in-out',
       }}
     >
-      <LayoutPage level={3} />
+      <LayoutPage
+        level={3}
+        hint="A playful mathematician once ‘listened’ to numbers and found they spoke their own sequence. Follow the rhythm, and you'll hear the answer.
+"
+      />
       <div className=" boundary">
         <div className="heading"> Level 3</div>
 

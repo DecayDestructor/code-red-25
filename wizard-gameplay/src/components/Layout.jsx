@@ -4,7 +4,7 @@ const LayoutPage = ({ level, hint }) => {
   const [timeRemaining, setTimeRemaining] = useState('00:00:00')
   const [hintUnlocked, setHintUnlocked] = useState(false)
   const [showHintModal, setShowHintModal] = useState(false)
-  const [hintTimer, setHintTimer] = useState(420) // 5 minutes in seconds
+  const [hintTimer, setHintTimer] = useState(4) // 5 minutes in seconds
 
   // Game timer logic
   useEffect(() => {
@@ -75,7 +75,11 @@ const LayoutPage = ({ level, hint }) => {
         {/* Hint Button */}
         <button
           onClick={() => hintUnlocked && setShowHintModal(true)}
-          className="z-10 absolute w-14 h-14 bottom-8 right-8 flex justify-center items-center rounded-full text-3xl text-white bg-opacity-20 backdrop-filter backdrop-blur-[3px] border-[1px]"
+          className={`z-10 absolute w-14 h-14 bottom-8 right-8 flex justify-center items-center rounded-full text-3xl text-white backdrop-filter backdrop-blur-[3px] border-[1px] ${
+            hintUnlocked
+              ? 'bg-blue-500 bg-opacity-20 hover:bg-opacity-30'
+              : 'bg-opacity-20'
+          }`}
         >
           {hintUnlocked ? (
             <img
@@ -103,18 +107,24 @@ const LayoutPage = ({ level, hint }) => {
 
       {/* Hint Modal */}
       {showHintModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="text-white bg-opacity-20 backdrop-filter backdrop-blur-[3px] border-[1px] p-6 rounded-lg max-w-md w-full mx-4">
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-xl font-semibold">Hint</h3>
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div
+            className="absolute inset-0 bg-black/30 backdrop-blur-sm"
+            onClick={() => setShowHintModal(false)}
+          />
+          <div className="relative bg-gray-900 border-[1px] border-gray-700 p-8 rounded-lg max-w-md w-full mx-4 shadow-xl">
+            <div className="flex justify-between items-center mb-6">
+              <h3 className="text-xl font-semibold text-white">Hint</h3>
               <button
                 onClick={() => setShowHintModal(false)}
-                className="hover:text-gray-300"
+                className="text-gray-400 hover:text-white transition-colors"
               >
                 ✕
               </button>
             </div>
-            <div>{hint || 'NO HINT :('}</div>
+            <div className="text-gray-200 leading-relaxed space-y-4 tracking-widest">
+              {hint || 'NO HINT :('}
+            </div>
           </div>
         </div>
       )}
