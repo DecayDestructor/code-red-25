@@ -4,7 +4,7 @@ import LayoutPage from '../interfaces/LayoutPage'
 import checkAnswers from '../../utils/checkAnswers'
 import { useDispatch } from 'react-redux'
 import { lockLevel, unlockLevel } from '../../protectedRoutes/store'
-import bg from '../../../src/assets/levels/Level_1.jpg+'
+import bg from '../../../src/assets/levels/Level_1.jpg'
 
 const Level_1A = () => {
   const [userInput, setUserInput] = useState('')
