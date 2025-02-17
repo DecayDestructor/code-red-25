@@ -28,6 +28,7 @@ import ProtectedRoute from './protectedRoutes/ProtectedRoute.jsx'
 import ErrorPage from './ErrorPage.jsx'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    <title>Wizard</title>
     <Provider store={store}>
       <BrowserRouter>
         <Routes>
