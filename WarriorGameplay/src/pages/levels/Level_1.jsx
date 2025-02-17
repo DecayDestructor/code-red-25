@@ -4,6 +4,7 @@ import LayoutPage from '../interfaces/LayoutPage'
 import checkAnswers from '../../utils/checkAnswers'
 import { useDispatch } from 'react-redux'
 import { lockLevel, unlockLevel } from '../../protectedRoutes/store'
+import bg from '../../../src/assets/levels/Level_1.jpg+'
 
 const Level_1A = () => {
   const [userInput, setUserInput] = useState('')
@@ -43,7 +44,7 @@ const Level_1A = () => {
   return (
     <div className="flex justify-center items-center flex-col h-screen relative">
       <img
-        src="src/assets/levels/Level_1.jpg"
+        src={bg}
         alt="Background"
         className="object-cover w-full h-full absolute z-0"
       />
