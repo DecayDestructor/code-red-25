@@ -20,7 +20,6 @@ const Level5_2 = () => {
   const handleOption2Click = () => {
     setTimeout(() => {
       dispatch(unlockLevel('level_5b'))
-
       navigate('/backstory_level_5B')
       dispatch(lockLevel('level_3'))
     }, 500)
