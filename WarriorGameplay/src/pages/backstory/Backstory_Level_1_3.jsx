@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Backstory_Level_1_3 from "../../assets/backstory/Backstory_Level_1_3"
 
 const Backstory_Level_1_3 = () => {
     const [text, setText] = useState("");
@@ -51,7 +52,7 @@ is the place you seek where EXIF hides."`;
         <div className="flex justify-center items-center flex-col h-screen relative">
             {/* Background Image */}
             <img
-                src="src/assets/backstory/Backstory_Level_1_3.png"
+                src={Backstory_Level_1_3}
                 alt="Background"
                 className="object-cover w-full h-full absolute z-0"
             />
