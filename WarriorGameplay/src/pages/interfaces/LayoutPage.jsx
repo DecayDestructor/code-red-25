@@ -1,15 +1,25 @@
 import React, { useState, useEffect } from 'react'
-import hintsvg from "../../assets/interfaces/Hint.svg"
+import hintsvg from '../../assets/interfaces/Hint.svg'
+import ThanksPage from './ThanksForPlaying'
+import { useNavigate } from 'react-router-dom'
 
 const LayoutPage = ({ level, hintText }) => {
   const [timeRemaining, setTimeRemaining] = useState('00:00:00')
+  const [gameOver, setGameOver] = useState(false)
   const [hintUnlocked, setHintUnlocked] = useState(false)
   const [showHintModal, setShowHintModal] = useState(false)
   const [hintTimer, setHintTimer] = useState(420)
-
+  const navigate = useNavigate()
   // Game timer logic
   useEffect(() => {
     let endTime = localStorage.getItem('gameEndTime')
+    let isGameOver = localStorage.getItem('gameOver') === 'true' // Check if game is already over
+
+    if (isGameOver) {
+      setGameOver(true)
+      setTimeRemaining('00:00:00')
+      return
+    }
 
     if (!endTime) {
       endTime = new Date().getTime() + 60 * 60 * 1000 * 3
@@ -23,7 +33,8 @@ const LayoutPage = ({ level, hintText }) => {
       if (distance < 0) {
         clearInterval(timer)
         setTimeRemaining('00:00:00')
-        localStorage.removeItem('gameEndTime')
+        setGameOver(true)
+        localStorage.setItem('gameOver', 'true') // Set game over flag
         return
       }
 
@@ -63,7 +74,14 @@ const LayoutPage = ({ level, hintText }) => {
       remainingSeconds
     ).padStart(2, '0')}`
   }
+
   const name = localStorage.getItem('name')
+
+  // Render ThanksPage if game is over
+  if (gameOver) {
+    navigate('/thanks')
+  }
+
   return (
     <div className="flex items-center justify-center">
       <div className="flex justify-center items-center">
@@ -78,11 +96,7 @@ const LayoutPage = ({ level, hintText }) => {
           className="z-10 absolute w-14 h-14 bottom-8 right-8 flex justify-center items-center rounded-full text-3xl bg-white text-white bg-opacity-20 backdrop-filter backdrop-blur-[3px] border-[1px]"
         >
           {hintUnlocked ? (
-            <img
-              src={hintsvg}
-              alt=""
-              className="w-5"
-            />
+            <img src={hintsvg} alt="" className="w-5" />
           ) : (
             <div className="flex flex-col items-center justify-center text-xs">
               <span className="text-lg">🔒</span>

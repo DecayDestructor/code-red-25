@@ -26,6 +26,7 @@
     "react-helmet": "^6.1.0",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.1.5",
+    "react-spring": "^9.7.5",
     "react-timer-hook": "^3.0.8",
     "redux": "^5.0.1"
   },

@@ -6,6 +6,7 @@ import axios from 'axios'
 import ProtectedRoute from './protectedRoutes/ProtectedRoute'
 import ErrorPage from './ErrorPage'
 import Win from './Win'
+import ThanksPage from './pages/interfaces/ThanksForPlaying'
 axios.defaults.baseURL = 'http://localhost:5000'
 
 const HomePage = lazy(() => import('./pages/interfaces/HomePage'))
@@ -333,6 +334,7 @@ const App = () => {
             }
           />
           {/* route for all other routes */}
+          <Route path="thanks" element={<ThanksPage />} />
           <Route path="*" element={<ErrorPage />} />
         </Route>
       </Routes>
