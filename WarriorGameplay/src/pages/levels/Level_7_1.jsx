@@ -28,6 +28,7 @@ const Level7_1 = () => {
       setSubmitted(true)
       const { correct } = await checkAnswers(currentPattern, '7_1')
       setIsCorrect(correct)
+
       if (correct) {
         setTimeout(() => {
           dispatch(unlockLevel('options_level_7a'))

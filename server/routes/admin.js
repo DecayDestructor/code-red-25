@@ -13,6 +13,7 @@ router.get('/teams', async (req, res) => {
   try {
     const teams = await redis.keys('team:*') // Get all team keys
     const teamData = []
+    if (!teams.length) return res.json([]) // Return empty array if no teams found
 
     for (const teamKey of teams) {
       const teamInfo = await redis.hgetall(teamKey) // Fetch team data from Redis
@@ -72,6 +73,22 @@ router.delete('/clear-postgres', async (req, res) => {
   } catch (error) {
     console.error(error)
     res.status(500).json({ message: 'Error truncating PostgreSQL teams' })
+  }
+})
+//see all tables in postgres
+
+router.get('/tables', async (req, res) => {
+  try {
+    const client = await pool.connect()
+    const result = await client.query(
+      "SELECT table_name FROM information_schema.tables WHERE table_schema = 'public'"
+    )
+    client.release()
+
+    res.json(result.rows)
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ message: 'Error fetching table names' })
   }
 })
 

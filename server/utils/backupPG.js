@@ -35,6 +35,7 @@ const getDataFromPostgres = async () => {
   // await redis.flushall()
   const allKeys = await redis.keys('team:*')
   console.log(allKeys)
+
   try {
     const query = `SELECT id, warrior_level, wizard_level FROM team`
 
@@ -42,6 +43,10 @@ const getDataFromPostgres = async () => {
 
     if (redisDataExists == 0) {
       const result = await pool.query(query)
+      //check if no data exists in postgres
+      if (result.rows.length === 0) {
+        return
+      }
       console.log(result.rows)
 
       const promises = result.rows.map((row) =>
@@ -60,7 +65,7 @@ const getDataFromPostgres = async () => {
   }
 }
 
-// getDataFromPostgres()
+getDataFromPostgres()
 // Run backup job every 30 seconds
-// cron.schedule('*/7 * * * *', backupDataToPostgres) // Runs every 7 minutes
-// cron.schedule('*/5 * * * *', getDataFromPostgres) // Runs every 5 minutes
+cron.schedule('*/7 * * * *', backupDataToPostgres) // Runs every 7 minutes
+cron.schedule('*/5 * * * *', getDataFromPostgres) // Runs every 5 minutes
