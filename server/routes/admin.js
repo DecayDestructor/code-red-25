@@ -44,5 +44,35 @@ router.get('/teams/postgres', async (req, res) => {
     res.status(500).json({ message: 'Error fetching team data from postgres' })
   }
 })
+//route to clear all redis keys
+
+router.delete('/clear-redis', async (req, res) => {
+  try {
+    const teams = await redis.keys('team:*') // Get all team keys
+
+    for (const teamKey of teams) {
+      await redis.del(teamKey) // Delete team data from Redis
+    }
+
+    res.json({ message: 'All Redis keys deleted successfully' })
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ message: 'Error deleting Redis keys' })
+  }
+})
+//route to truncate all postgres teams
+
+router.delete('/clear-postgres', async (req, res) => {
+  try {
+    const client = await pool.connect()
+    await client.query('TRUNCATE TABLE team')
+    client.release()
+
+    res.json({ message: 'All PostgreSQL teams truncated successfully' })
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ message: 'Error truncating PostgreSQL teams' })
+  }
+})
 
 module.exports = router
