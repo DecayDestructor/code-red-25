@@ -25,7 +25,7 @@ const Level4_Puzzle = () => {
           // dispatch(unlockLevel('level5'))
           dispatch(unlockLevel('level6'))
 
-          navigate('/index.html')
+          navigate('/Level5.html')
         }, 1500)
       } else {
         setShowError(true)
