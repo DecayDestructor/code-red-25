@@ -52,7 +52,7 @@ const Level_2 = () => {
       <LayoutPage
         level={2}
         hintText={
-          'The given symbols are the text hidden behind our main keyboard…. Find the corresponding english symbols.'
+          'Unlock the mystery by shifting your phone’s keyboard—sometimes, a simple switch reveals a new set of letters'
         }
       />
 

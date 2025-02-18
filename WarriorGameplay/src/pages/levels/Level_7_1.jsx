@@ -59,7 +59,7 @@ const Level7_1 = () => {
       <LayoutPage
         level={'7_1'}
         hintText={
-          'Differentiate and integrate the alternating terms. Take the powers and culminate them to form a combined number. What’s the binary form of that number?'
+          'Channel Newton’s wisdom and let calculus shape your path—differentiate and integrate the alternating terms. Elevate the powers, merge them, and uncover what lies beneath in a new form.'
         }
       />
 

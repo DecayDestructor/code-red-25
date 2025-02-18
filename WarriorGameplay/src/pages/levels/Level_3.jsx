@@ -55,7 +55,7 @@ const CombinedComponent = () => {
       <LayoutPage
         level={3}
         hintText={
-          'Carefully inspect the page to get the answer from the elements hidden behind the screen. Ever heard of data- attributes?'
+          'Sometimes, delving into the elements can reveal what’s hidden beneath the surface. Have you ever paid attention to the subtle clues they hold?'
         }
       />
 

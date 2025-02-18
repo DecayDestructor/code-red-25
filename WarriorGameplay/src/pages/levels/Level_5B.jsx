@@ -115,7 +115,7 @@ const App = () => {
       <LayoutPage
         level={'5 B'}
         hintText={
-          'The dancing links... use the hidden tools to sto them from dancing.'
+          'The dancing links... use the hidden tools to stop them from dancing.'
         }
       />
       <div className="relative flex flex-col items-center bg-black/75 rounded-2xl p-8 w-[90vw] max-w-7xl h-[70vh] overflow-hidden shadow-[0_0_30px_rgba(255,255,0,0.8)]">

@@ -58,7 +58,7 @@ const HiddenChallengeComponent = () => {
       <LayoutPage
         level={'7_1 B'}
         hintText={
-          'Find the camouflaged text by changing the color of the panel. Later check all the corners to find a lonely textbox. In the textbox you shall enter the rgb color representation of magenta.'
+          "The text hides within the panel's color. Change it, and you'll find a lone textbox—where adjusting the color will reveal the shade that bridges red and blue."
         }
       />
       {/* Central panel */}

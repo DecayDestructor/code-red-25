@@ -9,7 +9,7 @@ const checkAnswers = async (answer, level) => {
     alert('User not logged in')
     setTimeout(() => {
       window.location.href = '/login' // Redirect to login page if user not logged in for 3 seconds
-    }, 3000)
+    }, 2500)
     return false
   }
   console.log(id)

@@ -55,7 +55,7 @@ const YourComponent = () => {
       <LayoutPage
         level={'7_3'}
         hintText={
-          'Find the “link” from the console. Using the link, open a huge script wherein you shall navigate through the json using the given instructions.'
+          "A clue lies waiting in the depths—uncover it, and you'll find yourself navigating a vast script, with a path to follow."
         }
       />
 

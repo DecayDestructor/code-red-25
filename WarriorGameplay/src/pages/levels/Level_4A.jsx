@@ -52,7 +52,7 @@ const CombinedComponent = () => {
       />
       <LayoutPage
         hintText={
-          'The background contains secrets that cannot be seen with the naked eye.'
+          'The background holds secrets hidden from plain sight, waiting for the keen-eyed to uncover them..'
         }
         level={'4 A'}
       />

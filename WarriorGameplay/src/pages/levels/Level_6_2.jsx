@@ -62,7 +62,9 @@ const BackstoryLevelComponent = () => {
       />
       <LayoutPage
         level={'6_2'}
-        hintText={'Because of this tech, our laptops runs on mere seconds time'}
+        hintText={
+          'Picture a place where data lives: one that’s swift and compact, another that’s reliable but a bit sluggish, and the last, vast but slower. What’s the name of these secret vaults?'
+        }
       />
       <div className="bg-black bg-opacity-50 backdrop-blur-md shadow-lg rounded-lg p-8 w-11/12 sm:w-2/3 lg:w-1/3 text-white text-center">
         <h1 className="text-2xl font-bold mb-4">Enter Answer</h1>
