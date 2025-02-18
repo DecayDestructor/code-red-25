@@ -20,7 +20,7 @@ const Level5 = () => {
     dispatch(lockLevel('level4'))
 
     dispatch(unlockLevel('level6'))
-    window.location.replace(window.location.origin + '/index.html')
+    window.location.replace(window.location.origin + '/Level5.html')
   }
 
   return (

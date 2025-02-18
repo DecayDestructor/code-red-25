@@ -3,8 +3,8 @@ import { Sparkles, Skull, Scroll } from 'lucide-react'
 import { useEffect } from 'react'
 const LockedPage = () => {
   useEffect(() => {
-    if (window.location.pathname === '/index.html') {
-      // window.location.reload() // Forces a hard refresh
+    if (window.location.pathname === '/Level5.html') {
+      window.location.reload() // Forces a hard refresh
     }
   }, [])
   return (
