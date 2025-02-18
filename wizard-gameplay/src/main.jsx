@@ -26,6 +26,7 @@ import { Provider } from 'react-redux'
 import store from './protectedRoutes/store.js'
 import ProtectedRoute from './protectedRoutes/ProtectedRoute.jsx'
 import ErrorPage from './ErrorPage.jsx'
+import ThanksPage from './components/ThanksForPlaying.jsx'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <title>Wizard</title>
@@ -122,7 +123,7 @@ createRoot(document.getElementById('root')).render(
           />
 
           <Route path="levels"></Route>
-
+          <Route path="/thanks" element={<ThanksPage />} />
           <Route path="/win" element={<Win />} />
           <Route path="/lose" element={<Lose />} />
           <Route path="*" element={<ErrorPage />} />

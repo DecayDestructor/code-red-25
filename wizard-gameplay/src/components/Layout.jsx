@@ -1,15 +1,24 @@
 import React, { useState, useEffect } from 'react'
-import hintsvg from "../assets/interfaces/Hint.svg"
-
+import hintsvg from '../assets/interfaces/Hint.svg'
+import { useNavigate } from 'react-router-dom'
 const LayoutPage = ({ level, hint }) => {
   const [timeRemaining, setTimeRemaining] = useState('00:00:00')
+  const [gameOver, setGameOver] = useState(false)
   const [hintUnlocked, setHintUnlocked] = useState(false)
   const [showHintModal, setShowHintModal] = useState(false)
-  const [hintTimer, setHintTimer] = useState(420) // 5 minutes in seconds
+  const [hintTimer, setHintTimer] = useState(420)
+  const navigate = useNavigate()
 
   // Game timer logic
   useEffect(() => {
     let endTime = localStorage.getItem('gameEndTime')
+    let isGameOver = localStorage.getItem('gameOver') === 'true' // Check if game is already over
+
+    if (isGameOver) {
+      setGameOver(true)
+      setTimeRemaining('00:00:00')
+      return
+    }
 
     if (!endTime) {
       endTime = new Date().getTime() + 60 * 60 * 1000 * 3
@@ -23,7 +32,8 @@ const LayoutPage = ({ level, hint }) => {
       if (distance < 0) {
         clearInterval(timer)
         setTimeRemaining('00:00:00')
-        localStorage.removeItem('gameEndTime')
+        setGameOver(true)
+        localStorage.setItem('gameOver', 'true') // Set game over flag
         return
       }
 
@@ -64,6 +74,9 @@ const LayoutPage = ({ level, hint }) => {
     ).padStart(2, '0')}`
   }
   const name = localStorage.getItem('name')
+  if (gameOver) {
+    navigate('/thanks')
+  }
 
   return (
     <div className="flex items-center justify-center">
@@ -83,11 +96,7 @@ const LayoutPage = ({ level, hint }) => {
           }`}
         >
           {hintUnlocked ? (
-            <img
-              src={hintsvg}
-              alt=""
-              className="w-5"
-            />
+            <img src={hintsvg} alt="" className="w-5" />
           ) : (
             <div className="flex flex-col items-center justify-center text-xs">
               <span className="text-lg">🔒</span>
