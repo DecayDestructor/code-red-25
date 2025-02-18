@@ -12,10 +12,13 @@ const SignupPage = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const navigate = useNavigate()
 
   const handleSignup = async (e) => {
+    if (loading) return
+    setLoading(true)
     e.preventDefault()
     setError('')
     setSuccess('')
@@ -53,6 +56,8 @@ const SignupPage = () => {
     } catch (err) {
       setError('Failed to save user. Please try again.')
       console.error('Signup error:', err)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -122,6 +127,7 @@ const SignupPage = () => {
           <button
             type="submit"
             className="w-52 h-16 mt-5 top-8 relative flex justify-center items-center rounded-xl text-3xl bg-black text-white bg-opacity-55 backdrop-filter backdrop-blur-[3px] border-[1px] hover:bg-opacity-75 transition-all duration-300"
+            disabled={loading}
           >
             Signup
           </button>
