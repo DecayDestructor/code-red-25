@@ -32,36 +32,47 @@ const backupDataToPostgres = async () => {
 }
 
 const getDataFromPostgres = async () => {
-  // await redis.flushall()
-  const allKeys = await redis.keys('team:*')
-  console.log(allKeys)
-
   try {
+    // Fetch existing keys in Redis
+    const allKeys = await redis.keys('team:*')
+    console.log('Existing Redis Keys:', allKeys)
+
     const query = `SELECT id, warrior_level, wizard_level FROM team`
+    const result = await pool.query(query)
 
-    const redisDataExists = (await redis.keys('team:*')).length
+    const teamsInPostgres = result.rows.map((row) => row.id) // Extract team IDs from Postgres
+    const redisTeamIds = allKeys.map((key) => key.split(':')[1]) // Extract IDs from Redis keys
 
-    if (redisDataExists == 0) {
-      const result = await pool.query(query)
-      //check if no data exists in postgres
-      if (result.rows.length === 0) {
-        return
-      }
-      console.log(result.rows)
+    // Find missing teams in Redis
+    const missingTeams = result.rows.filter(
+      (row) => !redisTeamIds.includes(row.id.toString())
+    )
 
-      const promises = result.rows.map((row) =>
-        redis.hset(
-          `team:${row.id}`,
-          'warrior:level',
-          row.warrior_level,
-          'wizard:level',
-          row.wizard_level
-        )
-      )
-      await Promise.all(promises)
+    if (missingTeams.length === 0) {
+      console.log('All teams are already in Redis.')
+      return
     }
+
+    console.log(
+      `Adding missing teams:`,
+      missingTeams.map((t) => t.id)
+    )
+
+    // Insert only missing teams into Redis
+    const promises = missingTeams.map((row) =>
+      redis.hset(
+        `team:${row.id}`,
+        'warrior:level',
+        row.warrior_level,
+        'wizard:level',
+        row.wizard_level
+      )
+    )
+
+    await Promise.all(promises)
+    console.log('Missing teams added to Redis.')
   } catch (err) {
-    console.error(err)
+    console.error('Error fetching data from Postgres:', err)
   }
 }
 

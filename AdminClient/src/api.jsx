@@ -1,3 +1,3 @@
 import axios from 'axios'
-axios.defaults.baseURL = 'https://code-red-25.onrender.com'
+axios.defaults.baseURL = 'http://localhost:3000'
 export default axios
