@@ -1,6 +1,5 @@
 import { useEffect, useRef } from "react";
-import './main.js';
-import './style.css'
+import './style.css';
 import coinImage from './coin.png';  
 import heartImage from './heart.png';  
 
@@ -9,8 +8,15 @@ const GameApp = () => {
 
   useEffect(() => {
     const canvas = canvasRef.current;
+    const c = canvas.getContext('2d');
+
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+
+    import('./main.js').then(() => {
+      window.c = c;
+      initGame(c, canvas);
+    });
 
     return () => {
     };

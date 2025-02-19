@@ -1,5 +1,5 @@
 const warriorAnswers = {
-  1: ['ATHENS GREECE', 'PARTHENON GREECE'], // Multiple answers for level 1
+  1: ['ATHENS GREECE', 'PARTHENON GREECE',"ATHENS, GREECE","ATHENS,GREECE","PARTHENON,GREECE","PARTHENON, GREECE"], // Multiple answers for level 1
   '1A': ['WHIZWPXZY WMRID GMKUIVHS VSG, VNVG UL HVLHIKRSD VSG MR'],
   2: ['tki', 'sgz'], // Multiple answers for level 2
   3: ['Colossalas'],
