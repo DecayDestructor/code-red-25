@@ -91,5 +91,23 @@ router.get('/tables', async (req, res) => {
     res.status(500).json({ message: 'Error fetching table names' })
   }
 })
+router.get('/redis-memory', async (req, res) => {
+  try {
+    const info = await redis.info('memory') // Get memory info
+    const usedMemory = info.match(/used_memory:(\d+)/)[1] // Extract used memory in bytes
+
+    const usedMemoryKB = (usedMemory / 1024).toFixed(2) // Convert to KB
+    const usedMemoryMB = (usedMemory / (1024 * 1024)).toFixed(2) // Convert to MB
+
+    res.json({
+      usedMemoryBytes: usedMemory,
+      usedMemoryKB,
+      usedMemoryMB,
+    })
+  } catch (error) {
+    console.error('Error fetching Redis memory usage:', error)
+    res.status(500).json({ error: 'Internal Server Error' })
+  }
+})
 
 module.exports = router

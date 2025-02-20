@@ -24,8 +24,7 @@ const Level4_Puzzle = () => {
         setTimeout(() => {
           // dispatch(unlockLevel('level5'))
           dispatch(unlockLevel('level6'))
-
-          navigate('/Level5.html')
+          navigate('/level5')
         }, 1500)
       } else {
         setShowError(true)
