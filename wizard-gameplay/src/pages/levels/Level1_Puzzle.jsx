@@ -49,7 +49,7 @@ const Level1_Puzzle = () => {
     >
       <LayoutPage level={1} />
       <div className=" boundary">
-        <div className="heading "> CRYPTOGRAPHY IS FUN</div>
+        <div className="heading "> " CRYPTOGRAPHY IS FUN "</div>
 
         <input
           type="text"

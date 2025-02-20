@@ -15,7 +15,8 @@ const Level2 = () => {
     ' The markings, previously dormant, now hum with power, responding to your presence. As you approach the center of the chamber, you feel an overwhelming force—a melding of magic and divine energy. A towering statue of a hooded figure dominates the space, its eyes hollow yet watching.',
     'Before you can proceed further, the statue speaks, its voice deep and resonant, shaking the very air:' +
       'To claim the legacy of Arthur, you must pass the Trials of Convergence. Only those who understand the resonance between magic and might are worthy.',
-    'In the ruined hallways of catacombs the crystalline structure hums with chaotic energy, and an intricate pattern of light and sound begins to emerge across its surface. To proceed, you must identify and amplify the crystal’s natural resonant frequency, harmonizing it with your magical aura.',
+    'In the ruined hallways of catacombs three crystalline structures hum with chaotic energy, and an intricate pattern of light and sound begins to emerge across their surfaces. To proceed, you must identify and amplify the crystal’s natural resonant frequency, harmonizing it with your magical aura.',
+    `One last piece of advice. The first crystal's resonance value is a common divisor for the next two crystals. Act accordingly.`
   ]
 
   const navigate = useNavigate()

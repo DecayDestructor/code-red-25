@@ -17,7 +17,7 @@ const level1_texts = [
   "However, the system's logic is highly complex, designed to test both intelligence and composure under pressure.",
 
   "“Ah, a challenger approaches! If you seek passage through these hallowed gates, you must solve a riddle of transformation and balance. Only those with keen minds and steady resolve may proceed.”",
-      "First, take this phrase and let it dance forward through the cycles of letters, shifting each one forward with the rhythm of seven steps. The spaces between words are sacred and shall remain untouched. When you have completed this transformation, you will hold a phrase of power in your grasp.",
+      "First, take this phrase (on the level page) and let it dance forward through the cycles of letters, shifting each one forward with the rhythm of seven steps. The spaces between words are sacred and shall remain untouched. When you have completed this transformation, you will hold a phrase of power in your grasp.",
       "But your task is not yet done. Each symbol in this new phrase carries its own weight, a value intrinsic to its nature. Ignore the voids between words, and instead, focus on the letters and convert them to numbers in the most obvious way possible. Find the balance—the average weight—of the entire phrase you have crafted."   
 
 ];
