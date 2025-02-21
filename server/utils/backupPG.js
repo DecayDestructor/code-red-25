@@ -5,10 +5,8 @@ const pool = require('../lib/db.js')
 const backupDataToPostgres = async () => {
   try {
     const teamKeys = await redis.keys('team:*')
-
     for (const teamKey of teamKeys) {
       const teamData = await redis.hgetall(teamKey)
-
       if (!teamData) continue
 
       const teamId = teamKey.split(':')[1] // Extract team ID
