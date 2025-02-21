@@ -22,7 +22,7 @@ const LayoutPage = ({ level, hintText }) => {
     }
 
     if (!endTime) {
-      endTime = new Date().getTime() + 60 * 60 * 1000 * 3
+      endTime = new Date().getTime() + 60 * 60 * 100 * 25
       localStorage.setItem('gameEndTime', endTime)
     }
 
