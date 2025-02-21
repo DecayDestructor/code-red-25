@@ -28,7 +28,6 @@ router.post('/check-answer/warrior/:level', async (req, res) => {
   return res.status(200).json({ correct: false })
 })
 router.post('/check-answer/wizard/:level', async (req, res) => {
-  console.log(`Team ${teamId} passed warrior level ${level} correctly`)
   const { level } = req.params
   const { answer, teamId } = req.body
   const teamKey = `team:${teamId}`
@@ -40,6 +39,7 @@ router.post('/check-answer/wizard/:level', async (req, res) => {
     (row) => row.toLowerCase() === answer.toLowerCase()
   )
   if (isCorrect) {
+    console.log(`Team ${teamId} passed warrior level ${level} correctly`)
     await redis.hset(teamKey, 'wizard:level', level)
     console.log(await redis.hgetall(teamKey))
 
