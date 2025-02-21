@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import './style.css';
 import coinImage from './coin.png';  
 import heartImage from './heart.png';  
+import { initGame } from "./main.js";
 
 const GameApp = () => {
   const canvasRef = useRef(null);
